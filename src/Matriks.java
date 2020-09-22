@@ -16,6 +16,8 @@ public class matriks {
     // Deklarasi Matriks
     float[][] Mat = new float[IdxMax][IdxMax];
     float[][] Temp = new float[IdxMax][IdxMax];
+    float[][] MatriksUtamaSPL = new float[IdxMax][IdxMax];
+    float[][] MatriksKonstantaSPL = new float[IdxMax][IdxMax];
 
     //Scanner
     Scanner input = new Scanner(System.in);
@@ -111,3 +113,8 @@ public class matriks {
             this.Mat[a][c] = temp;
         }
     }
+
+    void inverse(){
+        
+    }
+
