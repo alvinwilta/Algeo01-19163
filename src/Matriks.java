@@ -16,7 +16,6 @@ public class matriks {
     // Deklarasi Matriks
     float[][] Mat = new float[IdxMax][IdxMax];
     float[][] Temp = new float[IdxMax][IdxMax];
-    float[][] MatSPL = new float [IdxMax][IdxMin];
 
     //Scanner
     Scanner input = new Scanner(System.in);
