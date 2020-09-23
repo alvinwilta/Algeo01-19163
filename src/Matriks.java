@@ -150,6 +150,18 @@ public class matriks {
         }
     }
 
+    void bacaMatriksDeterminan() {
+        // Membaca matriks khusus untuk fungsi penghitungan Reduksi
+        int i, j;
+
+        void bacaUkuranMatriks ();
+        for (i = 1; i <= Brs; i++) {
+            for (j = 1; j <= Kol; j++) {
+                this.Mat[i][j] = input.nextFloat();
+            }
+        }
+    }
+
     void bacaMatriksSPLGaussJordan() {
         // Membaca matriks khusus untuk fungsi penghitungan Gauss-Jordan
         int i, j;

@@ -48,6 +48,8 @@ class DriverMatriks {
         System.out.println();
         System.out.println("1. Reduksi Baris");
         System.out.println("2. Ekspansi Kofaktor");
+        System.out.println("9. Kembali");
+        System.out.println("0. Menu Utama");
         System.out.println("Masukkan Input di bawah ini:\n");
         menu2 = input.nextInt();
     }
@@ -82,45 +84,39 @@ class DriverMatriks {
             MenuPilihanSPL();
             if (menu2 == 1){
                 MenuInput();
-                if (menu3 == 1){
+                if(menu3 == 1){
+                    M.bacaMatriksSPLGauss();
+                    M.Gauss();
+                    System.out.println();
+                    System.out.println("Matriks SPL Setelah dilakukan metode Gauss:");
+                    M.tulisMatriks();
+                    System.out.println();
+                    M.SolusiGauss();
+                }
+                else if(menu3 == 2){
+                    M.bacaFileExtSPL();
+                    System.out.println("Matriks SPL Awal:");
+                    M.tulisMatriks();
+                    M.Gauss();
+                    System.out.println();
+                    System.out.println("Matriks SPL Setelah dilakukan metode Gauss:");
+                    M.tulisMatriks();
+                    System.out.println();
+                    M.SolusiGauss();
+                }
+                else if (menu3 == 9){
+                    MenuPilihanSPL();
+                }
+                else if (menu3 == 0){
+                    MenuUtama();
+                }
+                else{
                     MenuInput();
-                    if(menu4 == 1){
-                        M.bacaMatriksSPLGauss();
-                        M.Gauss();
-                        System.out.println();
-                        System.out.println("Matriks SPL Setelah dilakukan metode Gauss:");
-                        M.tulisMatriks();
-                        System.out.println();
-                        M.SolusiGauss();
-                    }
-                    else if(menu4 == 2){
-                        M.bacaFileExtSPL();
-                        System.out.println("Matriks SPL Awal:");
-                        M.tulisMatriks();
-                        M.Gauss();
-                        System.out.println();
-                        System.out.println("Matriks SPL Setelah dilakukan metode Gauss:");
-                        M.tulisMatriks();
-                        System.out.println();
-                        M.SolusiGauss();
-                    }
-                    else if (menu4 == 9){
-                        MenuPilihanSPL();
-                    }
-                    else if (menu4 == 0){
-                        MenuUtama();
-                    }
-                    else{
-                        MenuInput();
-                    }
                 }
             }
-        }
-        else if (menu2 == 2){
-            MenuInput();
-            if (menu3 == 1){
+            else if (menu2 == 2){
                 MenuInput();
-                if(menu4 == 1){
+                if(menu3 == 1){
                     M.bacaMatriksSPLGauss();
                     M.GaussJordan();
                     System.out.println();
@@ -129,7 +125,7 @@ class DriverMatriks {
                     System.out.println();
                     M.SolusiGaussJordan();
                 }
-                else if(menu4 == 2){
+                else if(menu3 == 2){
                     M.bacaFileExtSPL();
                     System.out.println("Matriks SPL Awal:");
                     M.tulisMatriks();
@@ -140,22 +136,20 @@ class DriverMatriks {
                     System.out.println();
                     M.SolusiGaussJordan();
                 }
-                else if (menu4 == 9){
+                else if (menu3 == 9){
                     MenuPilihanSPL();
                 }
-                else if (menu4 == 0){
+                else if (menu3 == 0){
                     MenuUtama();
+                }
                 else{
                     MenuInput();
                 }
             }
-        }
-        else if (menu2 == 3){
-            MenuInput();
-            if (menu3 == 1){
+            else if (menu2 == 3){
                 MenuInput();
-                if(menu4 == 1){
-                    M.bacaMatriksSPLGauss();
+                if(menu3 == 1){
+                    M.bacaMatriksBalikanSPL();
                     M.InverseMatriksSPL();
                     System.out.println();
                     System.out.println("Matriks SPL Setelah dilakukan metode Inverse:");
@@ -163,7 +157,7 @@ class DriverMatriks {
                     System.out.println();
                     M.SolusiInverseMatriksSPL();
                 }
-                else if(menu4 == 2){
+                else if(menu3 == 2){
                     M.bacaFileExtSPL();
                     System.out.println("Matriks Awal:");
                     M.tulisMatriks();
@@ -174,28 +168,26 @@ class DriverMatriks {
                     System.out.println();
                     M.SolusiInverseMatriksSPL();
                 }
-                else if (menu4 == 9){
+                else if (menu3 == 9){
                     MenuPilihanSPL();
                 }
-                else if (menu4 == 0){
+                else if (menu3 == 0){
                     MenuUtama();
+                }
                 else{
                     MenuInput();
                 }
             }
-        }
-        else if (menu2 == 4){
-            MenuInput();
-            if (menu3 == 1){
+            else if (menu2 == 4){
                 MenuInput();
-                if(menu4 == 1){
+                if(menu3 == 1){
                     M.bacaMatriksSPLGauss();
                     M.Crammer();
                     M.tulisMatriks();
                     System.out.println();
                     M.SolusiCrammer();
                 }
-                else if(menu4 == 2){
+                else if(menu3 == 2){
                     M.bacaFileExtSPL();
                     System.out.println("Matriks Awal untuk Crammer:");
                     M.tulisMatriks();
@@ -204,21 +196,138 @@ class DriverMatriks {
                     System.out.println();
                     M.SolusiCrammer();
                 }
-                else if (menu4 == 9){
+                else if (menu3 == 9){
                     MenuPilihanSPL();
                 }
-                else if (menu4 == 0){
+                else if (menu3 == 0){
                     MenuUtama();
+                }
                 else{
                     MenuInput();
                 }
             }
+            else if ((menu2 == 9)||(menu2 == 0)){
+                MenuUtama();
+            }
+            else{
+                MenuPilihanSPL();
+            }
         }
-        else if ((menu3 == 9)||(menu3 == 0)){
-            MenuUtama();
+        else if (menu1 == 2){
+            MenuPilihanDeterminan();
+            if (menu2 == 1){
+                MenuInput();
+                if (menu3 == 1){
+                    M.bacaMatriksDeterminan();
+                    M.DeterminanReduksi();
+                    System.out.println();
+                    System.out.println("Determinan setelah telah dilakukan metode Reduksi:");
+                    M.SolusiDeterminanReduksi();
+                }
+                else if (menu3 == 2){
+                    M.bacaFileExtDeterminan();
+                    System.out.println("Matriks Awal untuk Hitung Determinan:");
+                    M.tulisMatriks();
+                    System.out.println();
+                    M.DeterminanReduksi();
+                    System.out.println();
+                    System.out.println("Determinan setelah telah dilakukan metode Reduksi:");
+                    M.SolusiDeterminanReduksi();
+                }
+                else if (menu3 == 9){
+                    MenuPilihanDeterminan();
+                }
+                else if (menu3 == 0){
+                    MenuUtama();
+                }
+                else{
+                    MenuInput();
+                }
+                else if (menu2 == 2){
+                    MenuInput();
+                    if (menu3 == 1){
+                        M.bacaMatriksDeterminan();
+                        M.DeterminanKofaktor();
+                        System.out.println();
+                        System.out.println("Determinan setelah telah dilakukan metode Kofaktor:");
+                        M.SolusiDeterminanKofaktor();
+                    }
+                    else if (menu3 == 2){
+                        M.bacaFileExtDeterminan();
+                        System.out.println("Matriks Awal untuk Hitung Determinan:");
+                        M.tulisMatriks();
+                        System.out.println();
+                        M.DeterminanKofaktor();
+                        System.out.println();
+                        System.out.println("Determinan setelah telah dilakukan metode Kofaktor:");
+                        M.SolusiDeterminanKofaktor();
+                    }
+                    else if (menu3 == 9){
+                        MenuPilihanDeterminan();
+                    }
+                    else if (menu3 == 0){
+                        MenuUtama();
+                    }
+                    else{
+                        MenuInput();
+                    }
+                }
+            else if ((menu2 == 9)||(menu2 == 0)){
+                MenuUtama();
+            }
+            else{
+                MenuPilihanDeterminan();
+            }
         }
-        else{
-            MenuPilihanSPL();
+        else if (menu1 == 3){
+            MenuPilihanInverse();
+            if (menu2 == 1){
+                MenuInput();
+                if (menu3 == 1){
+                    M.bacaMatriksBalikan();
+                    M.InverseReduksi();
+                    System.out.println();
+                    System.out.println("Inverse Matriks setelah telah dilakukan metode Reduksi:");
+                    M.SolusiInverseReduksi();
+                }
+                else if (menu3 == 2){
+                    M.bacaFileExtBalikan();
+                    System.out.println("Matriks Awal untuk Inverse Reduksi");
+                    M.tulisMatriks();
+                    System.out.println();
+                    M.InverseReduksi();
+                    System.out.println("Inverse Matriks setelah telah dilakukan metode Reduksi:");
+                    M.SolusiInverseReduksi();
+                }
+            }
+            else if (menu2 == 2){
+                MenuInput();
+                if (menu3 == 1){
+                    M.bacaMatriksBalikan();
+                    M.InverseKofaktor();
+                    System.out.println();
+                    System.out.println("Inverse Matriks setelah telah dilakukan metode Kofaktor:");
+                    M.SolusiInverseKofaktor();
+                }
+                else if (menu3 == 2){
+                    M.bacaFileExtBalikan();
+                    System.out.println("Matriks Awal untuk Inverse Kofaktor");
+                    M.tulisMatriks();
+                    System.out.println();
+                    M.InverseKofaktor();
+                    System.out.println("Inverse Matriks setelah telah dilakukan metode Kofaktor:");
+                    M.SolusiInverseKofaktor();
+                }
+                else if (menu3 == 9){
+                    MenuPilihanInverse();
+                }
+                else if (menu3 == 0){
+                    MenuUtama();
+                }
+                else{
+                    MenuInput();
+                }
+            }
         }
     }
 }
