@@ -13,6 +13,7 @@ public class matriks {
     //Atribut indeks
     int Brs;
     int Kol;
+    float Det;
     // Deklarasi Matriks
     float[][] Mat = new float[IdxMax][IdxMax];
     float[][] Temp = new float[IdxMax][IdxMax];
@@ -110,6 +111,7 @@ public class matriks {
             this.Mat[b][c] = this.Mat[a][c];
             this.Mat[a][c] = temp;
         }
+        this.Det = this.Det * (-1);
     }
 
     void inverse() {
@@ -136,7 +138,7 @@ public class matriks {
         }
     }
 
-    void bacaMatriksGauss() {
+    void bacaMatriksSPLGauss() {
         // Membaca matriks khusus untuk fungsi penghitungan Gauss
         int i, j;
 
@@ -148,7 +150,7 @@ public class matriks {
         }
     }
 
-    void bacaMatriksGaussJordan() {
+    void bacaMatriksSPLGaussJordan() {
         // Membaca matriks khusus untuk fungsi penghitungan Gauss-Jordan
         int i, j;
 
@@ -226,5 +228,4 @@ public class matriks {
             this.Mat[i][j] = this.Mat[i][j]/faktor;
         }
     }
-
 }
