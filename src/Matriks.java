@@ -111,7 +111,7 @@ public class matriks {
             this.Mat[b][c] = this.Mat[a][c];
             this.Mat[a][c] = temp;
         }
-        this.Det = this.Det * (-1);
+        Det = Det * (-1);
     }
 
     void inverse() {
