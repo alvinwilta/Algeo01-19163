@@ -122,7 +122,7 @@ class DriverMatriks {
                     M.SolusiGauss();
                 }
                 else if(menu3 == 2){
-                    M.bacaFileExtSPL();
+                    M.bacaMatriksSPLExt();
                     System.out.println("Matriks SPL Awal:");
                     M.tulisMatriks();
                     M.Gauss();
@@ -154,7 +154,7 @@ class DriverMatriks {
                     M.SolusiGaussJordan();
                 }
                 else if(menu3 == 2){
-                    M.bacaFileExtSPL();
+                    M.bacaMatriksSPLExt();
                     System.out.println("Matriks SPL Awal:");
                     M.tulisMatriks();
                     M.GaussJordan();
@@ -186,7 +186,7 @@ class DriverMatriks {
                     M.SolusiInverseMatriksSPL();
                 }
                 else if(menu3 == 2){
-                    M.bacaFileExtSPL();
+                    M.bacaMatriksSPLExt();
                     System.out.println("Matriks Awal:");
                     M.tulisMatriks();
                     M.InverseMatriksSPL();
@@ -216,7 +216,7 @@ class DriverMatriks {
                     M.SolusiCrammer();
                 }
                 else if(menu3 == 2){
-                    M.bacaFileExtSPL();
+                    M.bacaMatriksSPLExt();
                     System.out.println("Matriks Awal untuk Crammer:");
                     M.tulisMatriks();
                     System.out.println();

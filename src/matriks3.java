@@ -261,9 +261,10 @@ public class matriks3 {
                 }
             }
 
-    int indeksPivot(int i){
-    //Mengembalikan indeks pivot point pada baris i
-    //Dengan asumsi bukan baris yang berisi 0 semua (isBarisNol = false)
+	
+	int indeksPivot(int i){
+		//Mengembalikan indeks pivot point pada baris i
+		//Dengan asumsi bukan baris yang berisi 0 semua (isBarisNol = false)
         int k = 1;
         boolean cek = true;
 

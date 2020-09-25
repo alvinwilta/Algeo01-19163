@@ -38,16 +38,25 @@ public class matriks {
         Brs = 0;
         Kol = 0;
     }
-
     void bacaUkuranMatriks(){
         //Menerima input banyaknya baris dan banyaknya kolom dari suatu matriks
             System.out.print("Masukan banyaknya baris : ");
             Brs = keyboard.nextInt();
             System.out.print("Masukan banyaknya kolom : ");
             Kol = keyboard.nextInt();
-        }
+    }
+    void bacaMatriksSPLGauss() {
+        // Membaca matriks khusus untuk fungsi penghitungan SPL
+        int i, j;
 
-    void bacaFileExtSPL(){
+        void bacaUkuranMatriks ();
+        for (i = 1; i <= Brs; i++) {
+            for (j = 1; j <= Kol; j++) {
+                this.Mat[i][j] = input.nextFloat();
+            }
+        }
+    }
+    void bacaMatriksSPLExt(){
 		BufferedReader br = null;
 		FileReader fr = null;
 		int x,dgt,i,d,j;
@@ -260,6 +269,75 @@ public class matriks {
 			}
 
 		}
+    } 
+    void bacaMatriksBalikanSPL() {
+        int i, j;
+
+        void bacaUkuranMatriks ();
+        for (i = 1; i <= Brs; i++) {
+            for (j = 1; j <= Kol; j++) {
+                this.Mat[i][j] = input.nextFloat();
+            }
+        }
+    }
+    void bacaMatriksBalikan() {
+        int i, j;
+
+        void bacaUkuranMatriks ();
+        for (i = 1; i <= Brs; i++) {
+            for (j = 1; j <= Kol; j++) {
+                this.Mat[i][j] = input.nextFloat();
+            }
+        }
+    }
+    void bacaMatriksRegresi() {
+        int i, j;
+
+        void bacaUkuranMatriks ();
+        for (i = 1; i <= Brs; i++) {
+            for (j = 1; j <= Kol; j++) {
+                this.Mat[i][j] = input.nextFloat();
+            }
+        }
+    }
+    void bacaUkuranMatriksInterpolasi() {
+        // Menerima input jumlah titik yang ingin dimasukkan
+        System.out.print("Masukkan jumlah titik yang ingin diinterpolasikan: ");
+        Brs = input.nextInt();
+        Kol = 2;
+    }
+    void bacaMatriksInterpolasi(){
+        // Membaca matriks khusus untuk fungsi interpolasi
+        int i,j;
+
+        void bacaUkuranMatriksInterpolasi();
+        for (i = 1; i <= Brs; i++){
+            for (j = 1; j <= Kol; j++){
+                this.Mat[i][j] = input.nextFloat();
+            }
+        }
+    }
+    void bacaMatriksDeterminan() {
+        // Membaca matriks khusus untuk fungsi penghitungan Reduksi
+        int i, j;
+
+        void bacaUkuranMatriks ();
+        for (i = 1; i <= Brs; i++) {
+            for (j = 1; j <= Kol; j++) {
+                this.Mat[i][j] = input.nextFloat();
+            }
+        }
+    }
+    void bacaMatriksSPLGaussJordan() {
+        // Membaca matriks khusus untuk fungsi penghitungan Gauss-Jordan
+        int i, j;
+
+        void bacaUkuranMatriks ();
+        for (i = 1; i <= Brs; i++) {
+            for (j = 1; j <= Kol; j++) {
+                this.Mat[i][j] = input.nextFloat();
+            }
+        }
     }
     void buatKolomNolBawah(int j, int i){
         //Pivot di M[i][j]
@@ -275,7 +353,7 @@ public class matriks {
                 }
                 k += 1;
             }
-        }
+    }
     void buatKolomNolAtas(int i, int j){
         // Membuat kolom j berisi nol semua diatas indeks i
             int k = i - 1;
@@ -288,12 +366,11 @@ public class matriks {
                     this.Mat[k][l] = this.Mat[k][l] - factor*this.Mat[i][l];
                 }
                 k -= 1;
-                }
             }
-
+    } 
     int indeksPivot(int i){
-    //Mengembalikan indeks pivot point pada baris i
-    //Dengan asumsi bukan baris yang berisi 0 semua (isBarisNol = false)
+        //Mengembalikan indeks pivot point pada baris i
+        //Dengan asumsi bukan baris yang berisi 0 semua (isBarisNol = false)
         int k = 1;
         boolean cek = true;
 
@@ -306,40 +383,6 @@ public class matriks {
         } //
         return k;
     }
-    
-    void bacaMatriksBalikanSPL() {
-        int i, j;
-
-        void bacaUkuranMatriks ();
-        for (i = 1; i <= Brs; i++) {
-            for (j = 1; j <= Kol; j++) {
-                this.Mat[i][j] = input.nextFloat();
-            }
-        }
-    }
-
-    void bacaMatriksBalikan() {
-        int i, j;
-
-        void bacaUkuranMatriks ();
-        for (i = 1; i <= Brs; i++) {
-            for (j = 1; j <= Kol; j++) {
-                this.Mat[i][j] = input.nextFloat();
-            }
-        }
-    }
-
-    void bacaMatriksRegresi() {
-        int i, j;
-
-        void bacaUkuranMatriks ();
-        for (i = 1; i <= Brs; i++) {
-            for (j = 1; j <= Kol; j++) {
-                this.Mat[i][j] = input.nextFloat();
-            }
-        }
-    }
-
     float pangkat(float x, int i) {
         int j;
         float temp;
@@ -383,63 +426,6 @@ public class matriks {
     }
 
     void inverse() {
-
-    }
-
-    void bacaUkuranMatriksInterpolasi() {
-        // Menerima input jumlah titik yang ingin dimasukkan
-        System.out.print("Masukkan jumlah titik yang ingin diinterpolasikan: ");
-        Brs = input.nextInt();
-        Kol = 2;
-    }
-
-
-    void bacaMatriksInterpolasi(){
-        // Membaca matriks khusus untuk fungsi interpolasi
-        int i,j;
-
-        void bacaUkuranMatriks();
-        for (i = 1; i <= Brs; i++){
-            for (j = 1; j <= Kol; j++){
-                this.Mat[i][j] = input.nextFloat();
-            }
-        }
-    }
-
-    void bacaMatriksSPLGauss() {
-        // Membaca matriks khusus untuk fungsi penghitungan Gauss
-        int i, j;
-
-        void bacaUkuranMatriks ();
-        for (i = 1; i <= Brs; i++) {
-            for (j = 1; j <= Kol; j++) {
-                this.Mat[i][j] = input.nextFloat();
-            }
-        }
-    }
-
-    void bacaMatriksDeterminan() {
-        // Membaca matriks khusus untuk fungsi penghitungan Reduksi
-        int i, j;
-
-        void bacaUkuranMatriks ();
-        for (i = 1; i <= Brs; i++) {
-            for (j = 1; j <= Kol; j++) {
-                this.Mat[i][j] = input.nextFloat();
-            }
-        }
-    }
-
-    void bacaMatriksSPLGaussJordan() {
-        // Membaca matriks khusus untuk fungsi penghitungan Gauss-Jordan
-        int i, j;
-
-        void bacaUkuranMatriks ();
-        for (i = 1; i <= Brs; i++) {
-            for (j = 1; j <= Kol; j++) {
-                this.Mat[i][j] = input.nextFloat();
-            }
-        }
     }
 
     boolean isSquare() {
@@ -506,6 +492,8 @@ public class matriks {
         float faktor = Mat[i][kolom];
         for (j = kolom; kolom<=Kol; kolom++) {
             this.Mat[i][j] = this.Mat[i][j]/faktor;
+            
         }
+        det = det * faktor;
     }
 }
