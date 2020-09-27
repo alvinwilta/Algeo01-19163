@@ -13,7 +13,7 @@ public class matriks {
     //Atribut indeks
     int Brs;
     int Kol;
-    float Det;
+    float det;
     // Deklarasi Matriks
     float[][] Mat = new float[IdxMax][IdxMax];
     float[][] Temp = new float[IdxMax][IdxMax];
@@ -40,16 +40,16 @@ public class matriks {
     }
     void bacaUkuranMatriks(){
         //Menerima input banyaknya baris dan banyaknya kolom dari suatu matriks
-            System.out.print("Masukan banyaknya baris : ");
-            Brs = keyboard.nextInt();
-            System.out.print("Masukan banyaknya kolom : ");
-            Kol = keyboard.nextInt();
+        System.out.print("Masukan banyaknya baris : ");
+        Brs = input.nextInt();
+        System.out.print("Masukan banyaknya kolom : ");
+        Kol = input.nextInt();
     }
     void bacaMatriksSPLGauss() {
         // Membaca matriks khusus untuk fungsi penghitungan SPL
         int i, j;
 
-        void bacaUkuranMatriks ();
+        bacaUkuranMatriks ();
         for (i = 1; i <= Brs; i++) {
             for (j = 1; j <= Kol; j++) {
                 this.Mat[i][j] = input.nextFloat();
@@ -273,7 +273,7 @@ public class matriks {
     void bacaMatriksBalikanSPL() {
         int i, j;
 
-        void bacaUkuranMatriks ();
+        bacaUkuranMatriks ();
         for (i = 1; i <= Brs; i++) {
             for (j = 1; j <= Kol; j++) {
                 this.Mat[i][j] = input.nextFloat();
@@ -283,7 +283,7 @@ public class matriks {
     void bacaMatriksBalikan() {
         int i, j;
 
-        void bacaUkuranMatriks ();
+        bacaUkuranMatriks ();
         for (i = 1; i <= Brs; i++) {
             for (j = 1; j <= Kol; j++) {
                 this.Mat[i][j] = input.nextFloat();
@@ -293,7 +293,7 @@ public class matriks {
     void bacaMatriksRegresi() {
         int i, j;
 
-        void bacaUkuranMatriks ();
+        bacaUkuranMatriks ();
         for (i = 1; i <= Brs; i++) {
             for (j = 1; j <= Kol; j++) {
                 this.Mat[i][j] = input.nextFloat();
@@ -310,7 +310,7 @@ public class matriks {
         // Membaca matriks khusus untuk fungsi interpolasi
         int i,j;
 
-        void bacaUkuranMatriksInterpolasi();
+        bacaUkuranMatriksInterpolasi();
         for (i = 1; i <= Brs; i++){
             for (j = 1; j <= Kol; j++){
                 this.Mat[i][j] = input.nextFloat();
@@ -321,7 +321,7 @@ public class matriks {
         // Membaca matriks khusus untuk fungsi penghitungan Reduksi
         int i, j;
 
-        void bacaUkuranMatriks ();
+        bacaUkuranMatriks ();
         for (i = 1; i <= Brs; i++) {
             for (j = 1; j <= Kol; j++) {
                 this.Mat[i][j] = input.nextFloat();
@@ -332,7 +332,7 @@ public class matriks {
         // Membaca matriks khusus untuk fungsi penghitungan Gauss-Jordan
         int i, j;
 
-        void bacaUkuranMatriks ();
+        bacaUkuranMatriks ();
         for (i = 1; i <= Brs; i++) {
             for (j = 1; j <= Kol; j++) {
                 this.Mat[i][j] = input.nextFloat();
@@ -385,16 +385,15 @@ public class matriks {
     }
     float pangkat(float x, int i) {
         int j;
-        float temp;
         float xtemp = x;
         for (j = 1; j <= i - 1; j++) {
-            x = x * temp;
+            x = x * xtemp;
         }
         return x;
     }
 
     float kaliDiagonal() {
-        float hasil;
+        float hasil = Mat[0][0];
         int i;
         for (i = 1; i <= Kol; i++) {
             hasil = hasil * this.Mat[i][i];
@@ -422,7 +421,7 @@ public class matriks {
             this.Mat[b][c] = this.Mat[a][c];
             this.Mat[a][c] = temp;
         }
-        Det = Det * (-1);
+        det = det * (-1);
     }
 
     void inverse() {

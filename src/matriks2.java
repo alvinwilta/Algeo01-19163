@@ -46,7 +46,7 @@ public class matriks2 {
         // Membaca matriks khusus untuk fungsi interpolasi
         int i,j;
 
-        void bacaUkuranMatriks();
+        bacaUkuranMatriks();
         for (i = 1; i <= Brs; i++){
             for (j = 1; j <= Kol; j++){
                 this.Mat[i][j] = input.nextFloat();
@@ -58,7 +58,7 @@ public class matriks2 {
         // Membaca matriks khusus untuk fungsi penghitungan Gauss
         int i, j;
 
-        void bacaUkuranMatriks ();
+        bacaUkuranMatriks ();
         for (i = 1; i <= Brs; i++) {
             for (j = 1; j <= Kol; j++) {
                 this.Mat[i][j] = input.nextFloat();
@@ -70,7 +70,7 @@ public class matriks2 {
         // Membaca matriks khusus untuk fungsi penghitungan Gauss-Jordan
         int i, j;
 
-        void bacaUkuranMatriks ();
+        bacaUkuranMatriks ();
         for (i = 1; i <= Brs; i++) {
             for (j = 1; j <= Kol; j++) {
                 this.Mat[i][j] = input.nextFloat();

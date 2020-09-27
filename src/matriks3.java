@@ -12,9 +12,9 @@ public class matriks3 {
     void bacaUkuranMatriks(){
         //Menerima input banyaknya baris dan banyaknya kolom dari suatu matriks
             System.out.print("Masukan banyaknya baris : ");
-            Brs = keyboard.nextInt();
+            Brs = input.nextInt();
             System.out.print("Masukan banyaknya kolom : ");
-            Kol = keyboard.nextInt();
+            Kol = input.nextInt();
         }
 
     void bacaFileExtSPL(){

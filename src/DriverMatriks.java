@@ -2,9 +2,8 @@ import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import matriks.java;
 
-class DriverMatriks {
+public class DriverMatriks {
     static int menu1 = 0; //Menu utama
     static int menu2 = 0; //Metode penyelesaian menuSPL
     static int menu3 = 0; //Pilihan input
@@ -271,35 +270,36 @@ class DriverMatriks {
                 else{
                     MenuInput();
                 }
-                else if (menu2 == 2){
-                    MenuInput();
-                    if (menu3 == 1){
-                        M.bacaMatriksDeterminan();
-                        M.DeterminanKofaktor();
-                        System.out.println();
-                        System.out.println("Determinan setelah telah dilakukan metode Kofaktor:");
-                        M.SolusiDeterminanKofaktor();
-                    }
-                    else if (menu3 == 2){
-                        M.bacaFileExtDeterminan();
-                        System.out.println("Matriks Awal untuk Hitung Determinan:");
-                        M.tulisMatriks();
-                        System.out.println();
-                        M.DeterminanKofaktor();
-                        System.out.println();
-                        System.out.println("Determinan setelah telah dilakukan metode Kofaktor:");
-                        M.SolusiDeterminanKofaktor();
-                    }
-                    else if (menu3 == 9){
-                        MenuPilihanDeterminan();
-                    }
-                    else if (menu3 == 0){
-                        MenuUtama();
-                    }
-                    else{
-                        MenuInput();
-                    }
+            }
+            else if (menu2 == 2){
+                MenuInput();
+                if (menu3 == 1){
+                    M.bacaMatriksDeterminan();
+                    M.DeterminanKofaktor();
+                    System.out.println();
+                    System.out.println("Determinan setelah telah dilakukan metode Kofaktor:");
+                    M.SolusiDeterminanKofaktor();
                 }
+                else if (menu3 == 2){
+                    M.bacaFileExtDeterminan();
+                    System.out.println("Matriks Awal untuk Hitung Determinan:");
+                    M.tulisMatriks();
+                    System.out.println();
+                    M.DeterminanKofaktor();
+                    System.out.println();
+                    System.out.println("Determinan setelah telah dilakukan metode Kofaktor:");
+                    M.SolusiDeterminanKofaktor();
+                }
+                else if (menu3 == 9){
+                    MenuPilihanDeterminan();
+                }
+                else if (menu3 == 0){
+                    MenuUtama();
+                }
+                else{
+                    MenuInput();
+                }
+            }
             else if ((menu2 == 9)||(menu2 == 0)){
                 MenuUtama();
             }
