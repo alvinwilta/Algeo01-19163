@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+//Fungsi Utama
 public class matriks3 {
     int IdxMax = 15;
     int Brs;
@@ -10,11 +11,10 @@ public class matriks3 {
     float[][] Tampung = new float[IdxMax][IdxMax];
 
     void bacaUkuranMatriks(){
-        //Menerima input banyaknya baris dan banyaknya kolom dari suatu matriks
             System.out.print("Masukan banyaknya baris : ");
-            Brs = input.nextInt();
+            Brs = keyboard.nextInt();
             System.out.print("Masukan banyaknya kolom : ");
-            Kol = input.nextInt();
+            Kol = keyboard.nextInt();
         }
 
     void bacaFileExtSPL(){
@@ -25,9 +25,7 @@ public class matriks3 {
 		boolean dec,min;
 
 		try {
-
-			//br = new BufferedReader(new FileReader(FILENAME));
-			fr = new FileReader("matriksSPL.txt");
+			fr = new FileReader("MatriksSPL.txt");
 			br = new BufferedReader(fr);
 
 			String sCurrentLine;
@@ -43,7 +41,7 @@ public class matriks3 {
 				Kol = 0;
 				min=false;
 
-				while ((sCurrentLine) != null){						//asumsikan antar elemen matriks pada file eksternal hanya dipisahkan satu spasi
+				while ((sCurrentLine) != null){						
 					if (min){
 						this.Mat [i][j]=(this.Mat [i][j])*(-1);
 					}
@@ -101,29 +99,6 @@ public class matriks3 {
 			}
 
 		}
-
-		catch (IOException e) {
-
-			e.printStackTrace();
-			System.out.println("Ada kesalahan pada file eksternal.");
-
-		} finally {
-
-			try {
-
-				if (br != null)
-					br.close();
-
-				if (fr != null)
-					fr.close();
-
-			} catch (IOException ex) {
-
-				ex.printStackTrace();
-
-			}
-
-		}
 	}
     void bacaFileExtInterpolasi(){
 		BufferedReader br = null;
@@ -133,9 +108,7 @@ public class matriks3 {
 		boolean dec,min;
 
 		try {
-
-			//br = new BufferedReader(new FileReader(FILENAME));
-			fr = new FileReader("matriksInterpolasi.txt");
+			fr = new FileReader("MatriksInterpolasi.txt");
 			br = new BufferedReader(fr);
 
 			String sCurrentLine;
@@ -151,7 +124,7 @@ public class matriks3 {
 				Kol = 0;
 				min=false;
 
-				while ((sCurrentLine) != null){						//asumsikan antar elemen matriks pada file eksternal hanya dipisahkan satu spasi
+				while ((sCurrentLine) != null){						
 					if (min){
 						this.Mat [i][j]=(this.Mat [i][j])*(-1);
 					}
@@ -208,32 +181,8 @@ public class matriks3 {
 
 		}
 
-		catch (IOException e) {
-
-			e.printStackTrace();
-			System.out.println("Ada kesalahan pada file eksternal.");
-
-		} finally {
-
-			try {
-
-				if (br != null)
-					br.close();
-
-				if (fr != null)
-					fr.close();
-
-			} catch (IOException ex) {
-
-				ex.printStackTrace();
-
-			}
-
-		}
     }
     void buatKolomNolBawah(int j, int i){
-        //Pivot di M[i][j]
-        //Membuat kolom j nol dimulai dari baris ke i + 1
             int k = i+1;
             int l;
             float factor;
@@ -247,7 +196,6 @@ public class matriks3 {
             }
         }
     void buatKolomNolAtas(int i, int j){
-        // Membuat kolom j berisi nol semua diatas indeks i
             int k = i - 1;
             int l;
             float factor;
@@ -261,10 +209,7 @@ public class matriks3 {
                 }
             }
 
-	
-	int indeksPivot(int i){
-		//Mengembalikan indeks pivot point pada baris i
-		//Dengan asumsi bukan baris yang berisi 0 semua (isBarisNol = false)
+    int indeksPivot(int i){
         int k = 1;
         boolean cek = true;
 
