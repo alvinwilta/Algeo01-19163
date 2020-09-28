@@ -1,3 +1,4 @@
+package matriks;
 import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -9,22 +10,22 @@ import java.io.Writer;
 
 public class matriks {
 
-    int IdxMax = 15;
+    public int IdxMax = 15;
     //Atribut indeks
-    int Brs;
-    int Kol;
-    float det;
+    public int Brs;
+    public int Kol;
+    public float det;
     // Deklarasi Matriks
-    float[][] Mat = new float[IdxMax][IdxMax];
-    float[][] Temp = new float[IdxMax][IdxMax];
-    float[][] MatriksUtamaSPL = new float[IdxMax][IdxMax];
-    float[][] MatriksKonstantaSPL = new float[IdxMax][IdxMax];
+    public float[][] Mat = new float[IdxMax][IdxMax];
+    public float[][] Temp = new float[IdxMax][IdxMax];
+    public float[][] MatriksUtamaSPL = new float[IdxMax][IdxMax];
+    public float[][] MatriksKonstantaSPL = new float[IdxMax][IdxMax];
 
     //Scanner
     Scanner input = new Scanner(System.in);
 
     //Konstruktor Matriks
-    matriks() {
+    public matriks() {
     /* Konstruktor matriks, membuat matriks berukuran IdxMax x IdxMax,
     kemudian mengisinya dengan 0 dan inisialisasi Baris dan Kolom efektif*/
         int i, j;
@@ -38,14 +39,14 @@ public class matriks {
         Brs = 0;
         Kol = 0;
     }
-    void bacaUkuranMatriks(){
+    public void bacaUkuranMatriks(){
         //Menerima input banyaknya baris dan banyaknya kolom dari suatu matriks
         System.out.print("Masukan banyaknya baris : ");
         Brs = input.nextInt();
         System.out.print("Masukan banyaknya kolom : ");
         Kol = input.nextInt();
     }
-    void bacaMatriksSPLGauss() {
+    public void bacaMatriksSPLGauss() {
         // Membaca matriks khusus untuk fungsi penghitungan SPL
         int i, j;
 
@@ -56,12 +57,12 @@ public class matriks {
             }
         }
     }
-    void bacaMatriksSPLExt(){
+    public void bacaMatriksSPLExt(){
 		BufferedReader br = null;
 		FileReader fr = null;
 		int x,dgt,i,d,j;
 		float temp,dtemp;
-		boolean dec,min;
+		public boolean dec,min;
 
 		try {
 
@@ -164,12 +165,12 @@ public class matriks {
 
 		}
 	}
-    void bacaFileExtInterpolasi(){
+    public void bacaFileExtInterpolasi(){
 		BufferedReader br = null;
 		FileReader fr = null;
 		int x,dgt,i,d,j;
 		float temp,dtemp;
-		boolean dec,min;
+		public boolean dec,min;
 
 		try {
 
@@ -270,7 +271,7 @@ public class matriks {
 
 		}
     } 
-    void bacaMatriksBalikanSPL() {
+    public void bacaMatriksBalikanSPL() {
         int i, j;
 
         bacaUkuranMatriks ();
@@ -280,7 +281,7 @@ public class matriks {
             }
         }
     }
-    void bacaMatriksBalikan() {
+    public void bacaMatriksBalikan() {
         int i, j;
 
         bacaUkuranMatriks ();
@@ -290,7 +291,7 @@ public class matriks {
             }
         }
     }
-    void bacaMatriksRegresi() {
+    public void bacaMatriksRegresi() {
         int i, j;
 
         bacaUkuranMatriks ();
@@ -300,13 +301,13 @@ public class matriks {
             }
         }
     }
-    void bacaUkuranMatriksInterpolasi() {
+    public void bacaUkuranMatriksInterpolasi() {
         // Menerima input jumlah titik yang ingin dimasukkan
         System.out.print("Masukkan jumlah titik yang ingin diinterpolasikan: ");
         Brs = input.nextInt();
         Kol = 2;
     }
-    void bacaMatriksInterpolasi(){
+    public void bacaMatriksInterpolasi(){
         // Membaca matriks khusus untuk fungsi interpolasi
         int i,j;
 
@@ -317,7 +318,7 @@ public class matriks {
             }
         }
     }
-    void bacaMatriksDeterminan() {
+    public void bacaMatriksDeterminan() {
         // Membaca matriks khusus untuk fungsi penghitungan Reduksi
         int i, j;
 
@@ -328,7 +329,7 @@ public class matriks {
             }
         }
     }
-    void bacaMatriksSPLGaussJordan() {
+    public void bacaMatriksSPLGaussJordan() {
         // Membaca matriks khusus untuk fungsi penghitungan Gauss-Jordan
         int i, j;
 
@@ -339,7 +340,7 @@ public class matriks {
             }
         }
     }
-    void buatKolomNolBawah(int j, int i){
+    public void buatKolomNolBawah(int j, int i){
         //Pivot di M[i][j]
         //Membuat kolom j nol dimulai dari baris ke i + 1
             int k = i+1;
@@ -354,7 +355,7 @@ public class matriks {
                 k += 1;
             }
     }
-    void buatKolomNolAtas(int i, int j){
+    public void buatKolomNolAtas(int i, int j){
         // Membuat kolom j berisi nol semua diatas indeks i
             int k = i - 1;
             int l;
@@ -368,11 +369,11 @@ public class matriks {
                 k -= 1;
             }
     } 
-    int indeksPivot(int i){
+    public int indeksPivot(int i){
         //Mengembalikan indeks pivot point pada baris i
         //Dengan asumsi bukan baris yang berisi 0 semua (isBarisNol = false)
         int k = 1;
-        boolean cek = true;
+        public boolean cek = true;
 
         while (cek & k < Kol){
             if (this.Mat[i][k] == 0){
@@ -383,7 +384,7 @@ public class matriks {
         } //
         return k;
     }
-    float pangkat(float x, int i) {
+    public float pangkat(float x, int i) {
         int j;
         float xtemp = x;
         for (j = 1; j <= i - 1; j++) {
@@ -392,7 +393,7 @@ public class matriks {
         return x;
     }
 
-    float kaliDiagonal() {
+    public float kaliDiagonal() {
         float hasil = Mat[0][0];
         int i;
         for (i = 1; i <= Kol; i++) {
@@ -401,7 +402,7 @@ public class matriks {
         return hasil;
     }
 
-    void tulisMatriks() {
+    public void tulisMatriks() {
         int i, j;
 
         for (i = 1; i <= Brs; i++) {
@@ -412,7 +413,7 @@ public class matriks {
         }
     }
 
-    void TukarBaris(int a, int b) {
+    public void TukarBaris(int a, int b) {
         int c;
         float temp;
 
@@ -424,16 +425,16 @@ public class matriks {
         det = det * (-1);
     }
 
-    void inverse() {
+    public void inverse() {
     }
 
-    boolean isSquare() {
+    public boolean isSquare() {
         return (Brs==Kol);
     }
 
-    boolean isBarNol(int i) {
+    public boolean isBarNol(int i) {
         // Mengecek pada matriks apakah baris ke-i adalah nol semua
-        boolean nol = true;
+        public boolean nol = true;
         int j = 1;
         while (nol == true & j<=Brs) {
             if (this.Mat[i][j] != 0) {
@@ -445,10 +446,10 @@ public class matriks {
         return nol;
     }
 
-    boolean isKolNol(int i, int j) {
+    public boolean isKolNol(int i, int j) {
         // Mememeriksa apakah matriks pada kolom ke-j adalah nol semua
         // dimulai dari baris ke-i hingga ke baris ke-Brs (baris ke-i juga diperiksa)
-        boolean nol = true;
+        public boolean nol = true;
         while (nol == true & i<=Brs) {
             if (this.Mat[i][j] != 0) {
                 nol = false;
@@ -459,11 +460,11 @@ public class matriks {
         return nol;
     }
 
-    int indeksTakNol(int j, int i) {
+    public int indeksTakNol(int j, int i) {
         // Mengeluarkan indeks baris pada kolom j yang tidak bernilai 0 dari matriks
         // dimulai dari baris ke-i hingga baris ke-Brs (baris ke-i juga diperiksa)
         // ASUMSI MATRIKS BUKAN MATRIKS DENGAN ELEMEN 0 SEMUA
-        boolean nol = true;
+        public boolean nol = true;
         int k = i;
         while (nol == true & i<=Brs) {
             if (this.Mat[k][j] == 0) {
@@ -475,12 +476,12 @@ public class matriks {
         return k;
     }
 
-    void buatLeadingOne(int i) {
+    public void buatLeadingOne(int i) {
         // Mengubah matriks pada baris ke-i menjadi leading one
         // ASUMSI BARIS TERSEBUT TIDAK NOL SEMUA
         int kolom = 1;
         int j;
-        boolean nol = true;
+        public boolean nol = true;
         while (nol == true) {
             if (this.Mat[i][kolom] != 0) {
                 nol = false;
