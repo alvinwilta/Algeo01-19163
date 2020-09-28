@@ -62,7 +62,7 @@ public class matriks {
 		FileReader fr = null;
 		int x,dgt,i,d,j;
 		float temp,dtemp;
-		public boolean dec,min;
+		boolean dec,min;
 
 		try {
 
@@ -170,7 +170,7 @@ public class matriks {
 		FileReader fr = null;
 		int x,dgt,i,d,j;
 		float temp,dtemp;
-		public boolean dec,min;
+		boolean dec,min;
 
 		try {
 
@@ -373,7 +373,7 @@ public class matriks {
         //Mengembalikan indeks pivot point pada baris i
         //Dengan asumsi bukan baris yang berisi 0 semua (isBarisNol = false)
         int k = 1;
-        public boolean cek = true;
+        boolean cek = true;
 
         while (cek & k < Kol){
             if (this.Mat[i][k] == 0){
@@ -434,7 +434,7 @@ public class matriks {
 
     public boolean isBarNol(int i) {
         // Mengecek pada matriks apakah baris ke-i adalah nol semua
-        public boolean nol = true;
+        boolean nol = true;
         int j = 1;
         while (nol == true & j<=Brs) {
             if (this.Mat[i][j] != 0) {
@@ -449,7 +449,7 @@ public class matriks {
     public boolean isKolNol(int i, int j) {
         // Mememeriksa apakah matriks pada kolom ke-j adalah nol semua
         // dimulai dari baris ke-i hingga ke baris ke-Brs (baris ke-i juga diperiksa)
-        public boolean nol = true;
+        boolean nol = true;
         while (nol == true & i<=Brs) {
             if (this.Mat[i][j] != 0) {
                 nol = false;
@@ -464,7 +464,7 @@ public class matriks {
         // Mengeluarkan indeks baris pada kolom j yang tidak bernilai 0 dari matriks
         // dimulai dari baris ke-i hingga baris ke-Brs (baris ke-i juga diperiksa)
         // ASUMSI MATRIKS BUKAN MATRIKS DENGAN ELEMEN 0 SEMUA
-        public boolean nol = true;
+        boolean nol = true;
         int k = i;
         while (nol == true & i<=Brs) {
             if (this.Mat[k][j] == 0) {
@@ -481,7 +481,7 @@ public class matriks {
         // ASUMSI BARIS TERSEBUT TIDAK NOL SEMUA
         int kolom = 1;
         int j;
-        public boolean nol = true;
+        boolean nol = true;
         while (nol == true) {
             if (this.Mat[i][kolom] != 0) {
                 nol = false;
