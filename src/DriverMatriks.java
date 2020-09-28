@@ -118,7 +118,7 @@ public class DriverMatriks {
                     System.out.println("Matriks SPL Setelah dilakukan metode Gauss:");
                     M.tulisMatriks();
                     System.out.println();
-                    M.SolusiGauss();
+                    M.tulisGauss();
                 }
                 else if(menu3 == 2){
                     M.bacaMatriksSPLExt();
@@ -129,7 +129,7 @@ public class DriverMatriks {
                     System.out.println("Matriks SPL Setelah dilakukan metode Gauss:");
                     M.tulisMatriks();
                     System.out.println();
-                    M.SolusiGauss();
+                    M.tulisGauss();
                 }
                 else if (menu3 == 9){
                     MenuPilihanSPL();
@@ -150,7 +150,7 @@ public class DriverMatriks {
                     System.out.println("Matriks SPL Setelah dilakukan metode Gauss-Jordan:");
                     M.tulisMatriks();
                     System.out.println();
-                    M.SolusiGaussJordan();
+                    M.tulisGaussJordan();
                 }
                 else if(menu3 == 2){
                     M.bacaMatriksSPLExt();
@@ -161,7 +161,7 @@ public class DriverMatriks {
                     System.out.println("Matriks SPL Setelah dilakukan metode Gauss-Jordan:");
                     M.tulisMatriks();
                     System.out.println();
-                    M.SolusiGaussJordan();
+                    M.tulisGaussJordan();
                 }
                 else if (menu3 == 9){
                     MenuPilihanSPL();
@@ -182,7 +182,7 @@ public class DriverMatriks {
                     System.out.println("Matriks SPL Setelah dilakukan metode Inverse:");
                     M.tulisMatriks();
                     System.out.println();
-                    M.SolusiInverseMatriksSPL();
+                    M.tulisInverseMatriksSPL();
                 }
                 else if(menu3 == 2){
                     M.bacaMatriksSPLExt();
@@ -193,7 +193,7 @@ public class DriverMatriks {
                     System.out.println("Matriks SPL Setelah dilakukan metode Inverse:");
                     M.tulisMatriks();
                     System.out.println();
-                    M.SolusiInverseMatriksSPL();
+                    M.tulisInverseMatriksSPL();
                 }
                 else if (menu3 == 9){
                     MenuPilihanSPL();
@@ -212,7 +212,7 @@ public class DriverMatriks {
                     M.Crammer();
                     M.tulisMatriks();
                     System.out.println();
-                    M.SolusiCrammer();
+                    M.tulisCrammer();
                 }
                 else if(menu3 == 2){
                     M.bacaMatriksSPLExt();
@@ -221,7 +221,7 @@ public class DriverMatriks {
                     System.out.println();
                     M.Crammer();
                     System.out.println();
-                    M.SolusiCrammer();
+                    M.tulisCrammer();
                 }
                 else if (menu3 == 9){
                     MenuPilihanSPL();
@@ -249,7 +249,7 @@ public class DriverMatriks {
                     M.DeterminanReduksi();
                     System.out.println();
                     System.out.println("Determinan setelah telah dilakukan metode Reduksi:");
-                    M.SolusiDeterminanReduksi();
+                    M.tulisDeterminanReduksi();
                 }
                 else if (menu3 == 2){
                     M.bacaFileExtDeterminan();
@@ -259,7 +259,7 @@ public class DriverMatriks {
                     M.DeterminanReduksi();
                     System.out.println();
                     System.out.println("Determinan setelah telah dilakukan metode Reduksi:");
-                    M.SolusiDeterminanReduksi();
+                    M.tulisDeterminanReduksi();
                 }
                 else if (menu3 == 9){
                     MenuPilihanDeterminan();
@@ -278,7 +278,7 @@ public class DriverMatriks {
                     M.DeterminanKofaktor();
                     System.out.println();
                     System.out.println("Determinan setelah telah dilakukan metode Kofaktor:");
-                    M.SolusiDeterminanKofaktor();
+                    M.tulisDeterminanKofaktor();
                 }
                 else if (menu3 == 2){
                     M.bacaFileExtDeterminan();
@@ -288,7 +288,7 @@ public class DriverMatriks {
                     M.DeterminanKofaktor();
                     System.out.println();
                     System.out.println("Determinan setelah telah dilakukan metode Kofaktor:");
-                    M.SolusiDeterminanKofaktor();
+                    M.tulisDeterminanKofaktor();
                 }
                 else if (menu3 == 9){
                     MenuPilihanDeterminan();
@@ -316,7 +316,7 @@ public class DriverMatriks {
                     M.InverseReduksi();
                     System.out.println();
                     System.out.println("Inverse Matriks setelah telah dilakukan metode Reduksi:");
-                    M.SolusiInverseReduksi();
+                    M.tulisInverseReduksi();
                 }
                 else if (menu3 == 2){
                     M.bacaFileExtBalikan();
@@ -325,7 +325,7 @@ public class DriverMatriks {
                     System.out.println();
                     M.InverseReduksi();
                     System.out.println("Inverse Matriks setelah telah dilakukan metode Reduksi:");
-                    M.SolusiInverseReduksi();
+                    M.tulisInverseReduksi();
                 }
             }
             else if (menu2 == 2){
@@ -335,7 +335,7 @@ public class DriverMatriks {
                     M.InverseKofaktor();
                     System.out.println();
                     System.out.println("Inverse Matriks setelah telah dilakukan metode Kofaktor:");
-                    M.SolusiInverseKofaktor();
+                    M.tulisInverseKofaktor();
                 }
                 else if (menu3 == 2){
                     M.bacaFileExtBalikan();
@@ -344,7 +344,7 @@ public class DriverMatriks {
                     System.out.println();
                     M.InverseKofaktor();
                     System.out.println("Inverse Matriks setelah telah dilakukan metode Kofaktor:");
-                    M.SolusiInverseKofaktor();
+                    M.tulisInverseKofaktor();
                 }
                 else if (menu3 == 9){
                     MenuPilihanInverse();
@@ -370,7 +370,7 @@ public class DriverMatriks {
                 if(menu3 == 1){
                     M.bacaMatriksInterpolasi();
                     System.out.println("Matriks Interpolasi setelah telah dilakukan metode Gauss:");
-                    M.SolusiInterpolasiGauss();
+                    M.tulisInterpolasiGauss();
                     System.out.println();
                 }
                 else if (menu3 == 2){
@@ -379,7 +379,7 @@ public class DriverMatriks {
                     M.tulisMatriks();
                     System.out.println();
                     System.out.println("Matriks Interpolasi setelah telah dilakukan metode Gauss:");
-                    M.SolusiInterpolasiGauss();
+                    M.tulisInterpolasiGauss();
                     System.out.println();
                 }
             }
@@ -388,7 +388,7 @@ public class DriverMatriks {
                 if(menu3 == 1){
                     M.bacaMatriksInterpolasi();
                     System.out.println("Matriks Interpolasi setelah telah dilakukan metode Gauss-Jordan:");
-                    M.SolusiInterpolasiGaussJordan();
+                    M.tulisInterpolasiGaussJordan();
                     System.out.println();
                 }
                 else if (menu3 == 2){
@@ -396,7 +396,7 @@ public class DriverMatriks {
                     System.out.println("Matriks Awal untuk Interpolasi");
                     M.tulisMatriks();
                     System.out.println("Matriks Interpolasi setelah telah dilakukan metode Gauss-Jordan:");
-                    M.SolusiInterpolasiGaussJordan();
+                    M.tulisInterpolasiGaussJordan();
                     System.out.println();
                 }
                 else if (menu3 == 9){
@@ -423,7 +423,7 @@ public class DriverMatriks {
                 if(menu3 == 1){
                     M.bacaMatriksRegresi();
                     System.out.println("Matriks Regresi setelah telah dilakukan metode Gauss:");
-                    M.SolusiRegresiGauss();
+                    M.tulisRegresiGauss();
                     System.out.println();
                 }
                 else if (menu3 == 2){
@@ -432,7 +432,7 @@ public class DriverMatriks {
                     M.tulisMatriks();
                     System.out.println();
                     System.out.println("Matriks Regresi setelah telah dilakukan metode Gauss:");
-                    M.SolusiRegresiGauss();
+                    M.tulisRegresiGauss();
                     System.out.println();
                 }
             }
@@ -441,7 +441,7 @@ public class DriverMatriks {
                 if(menu3 == 1){
                     M.bacaMatriksRegresi();
                     System.out.println("Matriks Regresi setelah telah dilakukan metode Gauss-Jordan:");
-                    M.SolusiRegresiGaussJordan();
+                    M.tulisRegresiGaussJordan();
                     System.out.println();
                 }
                 else if (menu3 == 2){
@@ -449,7 +449,7 @@ public class DriverMatriks {
                     System.out.println("Matriks Awal untuk Regresi");
                     M.tulisMatriks();
                     System.out.println("Matriks Regresi setelah telah dilakukan metode Gauss-Jordan:");
-                    M.SolusiRegresiGaussJordan();
+                    M.tulisRegresiGaussJordan();
                     System.out.println();
                 }
                 else if (menu3 == 9){

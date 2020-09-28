@@ -370,7 +370,7 @@ public class matriks {
     } 
     public int indeksPivot(int i){
         //Mengembalikan indeks pivot point pada baris i
-        //Dengan asumsi bukan baris yang berisi 0 semua (isBarisNol = false)
+        //Dengan asumsi bukan baris yang berisi 0 semua (isBarNol = false)
         int k = 1;
         boolean cek = true;
 
@@ -380,7 +380,7 @@ public class matriks {
             } else {
                 cek = false;
             }
-        } //
+        }
         return k;
     }
     public float pangkat(float x, int i) {
@@ -410,6 +410,23 @@ public class matriks {
             }
             System.out.println(this.Mat[i][Kol]);
         }
+    }
+
+    public void Transpose(){
+        int i,j;
+        float temp;
+        int brs = Brs;
+        int kol = Kol;
+
+        for (i = 1; i<=Brs/2; i++){
+            for (j = 1; j <= Kol/2; j++){
+                temp = this.Mat[i][j];
+                this.Mat[i][j] = this.Mat[j][i];
+                this.Mat[j][i] = temp;
+            }
+        }
+        Brs = kol;
+        Kol = brs;
     }
 
     public void TukarBaris(int a, int b) {
@@ -494,5 +511,146 @@ public class matriks {
             
         }
         det = det * faktor;
+    }
+
+    public void tulisGauss(){
+        int i,j,k,l,x;
+		boolean found = true;
+		String NamaFile="HasilGauss.txt";
+		String newline="\r\n";
+
+		try
+        {
+			FileWriter namewriter = new FileWriter(NamaFile);
+			BufferedWriter writer = new BufferedWriter(namewriter);
+
+			for (x = 1; x <= Brs; x++)
+			{
+				for (j = 1; j < Kol; j++){
+					writer.append(String.valueOf(this.Mat[x][j]) + " ");
+				}
+				writer.append(String.valueOf(this.Mat[x][Kol]));
+				writer.append(newline);
+			}
+			writer.append(newline);
+
+			for (i = Brs; i >= 1;i--){
+				j = indeksPivot(i);
+				for (k = indeksPivot(i+1)-1; k > indeksPivot(i); k--){
+					this.Temp[k][Kol+1] = -1;
+				}
+				this.Temp[j][Kol] = this.Mat[i][Kol];
+			}
+
+			i = Brs;
+			while (i >= 1 & found){
+				if (isBarNol(i) & this.Mat[i][Kol] != 0){
+					found = false;
+				} else if (isBarNol(i) & this.Mat[i][Kol] == 0){
+					i -= 1;
+				} else {
+					j = indeksPivot(i);
+					for (k = Kol -1;k > j;k--){
+						if (this.Temp[k][Kol+1] == -1){
+							this.Temp[j][k] = this.Mat[i][k];
+						} else {
+							this.Temp[j][Kol] = this.Temp[j][Kol] - (this.Temp[k][Kol])*(this.Mat[i][k]);
+							for (l = k + 1;l < Kol;l++){
+								this.Temp[j][l] = this.Temp[j][l] - (this.Temp[k][l])*(this.Mat[i][k]);
+							}
+						}
+					}
+					i -= 1;
+				}
+			}
+
+			if (found){
+				for (i = Kol-1; i >= 1;i--){
+					if (this.Temp[i][Kol+1] == -1){
+						System.out.println("x" + i + " adalah variabel bebas");
+						writer.append("x" + Integer.toString(i) + " adalah variabel bebas/r/n");
+                    } 
+                    else {
+						System.out.print("x" + i + " = " + this.Temp[i][Kol]);
+						writer.append("x" + Integer.toString(i) + " = " + String.valueOf(this.Temp[i][Kol]));
+						for (j = i+1;j < Kol;j++){
+							if (this.Temp[i][j] != 0){
+								System.out.print(" -(" + this.Temp[i][j] + ")x" + j);
+								writer.append(" -(" + String.valueOf(this.Temp[i][j]) + ")x" + Integer.toString(j));
+							}
+						}
+						System.out.println();
+						writer.append(newline);
+					}
+				}
+            } 
+            else {
+				System.out.println("Persamaan ini tidak memiliki solusi\n");
+				writer.append("Persamaan ini tidak memiliki solusi\r\n");
+			}
+
+			writer.close();
+		}
+
+		catch(IOException ex) {
+            System.out.println("File '"+ NamaFile + "' gagal dibuat!");}
+    }
+    public void tulisGaussJordan(){
+        int k = 1;
+        int i = Brs;
+        int j, x;
+        boolean found = true;
+		String NamaFile="HasilGaussJordan.txt";
+		String newline="\r\n";
+
+		try
+        {
+			FileWriter namewriter = new FileWriter(NamaFile);
+			BufferedWriter writer = new BufferedWriter(namewriter);
+
+			for (x = 1; x <= Brs; x++)
+			{
+				for (j = 1; j < Kol; j++){
+					writer.append(String.valueOf(this.Mat[x][j]) + " ");
+				}
+				writer.append(String.valueOf(this.Mat[x][Kol]));
+				writer.append(newline);
+			}
+			writer.append(newline);
+
+			while (i >= 1 & found){
+				if (isBarNol(i) & this.Mat[i][Kol] != 0){
+					found = false;
+					System.out.println("Persamaan tidak memiliki Solusi!");
+					writer.append("Persamaan tidak memiliki Solusi!\r\n");
+                } 
+                else if (isBarNol(i) & this.Mat[i][Kol] == 0){
+					i -= 1;
+                } 
+                else {
+					j = indeksPivot(i);
+
+					for (k = indeksPivot(i + 1) - 1;k > indeksPivot(i);k--){
+						System.out.println("x" + k + " adalah variabel bebas");
+						writer.append("x" + Integer.toString(k) + " adalah variabel bebas\r\n");
+					}
+					System.out.print("x" + j + " = " + this.Mat[i][Kol]);
+					writer.append("x" + Integer.toString(j) + " = " + String.valueOf(this.Mat[i][Kol]));
+					for (k = j + 1;k < Kol;k++){
+						if (this.Mat[i][k] != 0){
+							System.out.print(" -(" + this.Mat[i][k] + ")x" + k);
+							writer.append(" -(" + String.valueOf(this.Mat[i][k]) + ")x" + Integer.toString(k));
+						}
+					}
+					System.out.println();
+					writer.append(newline);
+					i -= 1;
+				}
+			}
+			writer.close();
+		}
+		catch(IOException ex) {
+            System.out.println("File '"+ NamaFile + "' gagal dibuat!");}
+
     }
 }
