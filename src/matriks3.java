@@ -99,6 +99,28 @@ public class matriks3 {
 			}
 
 		}
+		catch (IOException e) {
+
+			e.printStackTrace();
+			System.out.println("Ada kesalahan pada file eksternal.");
+
+		} finally {
+
+			try {
+
+				if (br != null)
+					br.close();
+
+				if (fr != null)
+					fr.close();
+
+			} catch (IOException ex) {
+
+				ex.printStackTrace();
+
+			}
+
+		}
 	}
     void bacaFileExtInterpolasi(){
 		BufferedReader br = null;
@@ -177,6 +199,28 @@ public class matriks3 {
 				}
 				Kol=2;
 				Brs=i;
+			}
+
+		}
+		catch (IOException e) {
+
+			e.printStackTrace();
+			System.out.println("Ada kesalahan pada file eksternal.");
+
+		} finally {
+
+			try {
+
+				if (br != null)
+					br.close();
+
+				if (fr != null)
+					fr.close();
+
+			} catch (IOException ex) {
+
+				ex.printStackTrace();
+
 			}
 
 		}
