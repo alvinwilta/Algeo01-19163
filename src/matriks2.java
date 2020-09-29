@@ -175,7 +175,7 @@ public class matriks2 {
         int j;
         Gauss();
         while (i >= 1){
-            while (isBarisNol(i)){
+            while (isBarNol(i)){
                 i--;
             }
             j = indeksPivot(i);

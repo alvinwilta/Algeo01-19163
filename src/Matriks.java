@@ -346,7 +346,7 @@ public class matriks {
             int k = i+1;
             int l;
             float factor;
-    
+
             while (k <= Brs){
                 factor = this.Mat[k][j];
                 for (l = 1;l <= Kol;l++){
@@ -670,5 +670,46 @@ public class matriks {
         }
         
         
+    }
+    public void Gauss() {
+        int i = 1;
+        int j = 1;
+        float temp;
+        while (i <= Brs & j < Kol){
+            while (isKolNol(i,j)){
+                // untuk skip kolom yang isinya nol semua
+                j += 1;
+            }
+            if (j < Kol){
+                TukarBaris(i,indeksTakNol(j,i));
+                //meletakkan baris taknol terbawah ke baris paling atas (jika baris paling atas taknol, tukar dengan dirinya)
+                buatLeadingOne(i);
+                //baris paling 'atas' dibuat menjadi leading one
+                buatKolomNolBawah(j,i);
+                // (j,i) karena di prosedur buatKolomNolBawah formatnya (kolom,baris)
+                i++;
+                j++;
+            }
+        }
+
+    }
+    public void GaussJordan() {
+        int i = Brs;
+        //dimulai dari bawah karena baris paling atas tidak perlu disentuh
+        int j;
+        Gauss();
+        while (i >= 1){
+            while (isBarNol(i)){
+                i--;
+            }
+            j = indeksPivot(i);
+            buatKolomNolAtas(i,j);
+            i--;
+        }
+    }
+
+    public void DeterminanReduksi() {
+        Gauss();
+        det = kaliDiagonal();
     }
 }
