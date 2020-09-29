@@ -145,5 +145,17 @@ public class matriks2 {
         }
     }
 
+    /* BATASAN LATEST VER */
+    boolean isMatriksNol() {
+        int i;
+        boolean nol = true;
+        for (i = 1; i <= Brs; i++) {
+            nol = (nol && isBarNol(i));
+        }
+        return nol;
+    }
+    void Gauss() {
+        if
+    }
 }
 
