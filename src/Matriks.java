@@ -28,6 +28,7 @@ public class matriks {
     /* Konstruktor matriks, membuat matriks berukuran IdxMax x IdxMax,
     kemudian mengisinya dengan 0 dan inisialisasi Baris dan Kolom efektif*/
         int i, j;
+        int Brs, Kol;
 
         for (i = 1; i < IdxMax; i++) {
             for (j = 1; j < IdxMax; j++) {
@@ -441,9 +442,6 @@ public class matriks {
         det = det * (-1);
     }
 
-    public void inverse() {
-    }
-
     public boolean isSquare() {
         return (Brs==Kol);
     }
@@ -651,6 +649,26 @@ public class matriks {
 		}
 		catch(IOException ex) {
             System.out.println("File '"+ NamaFile + "' gagal dibuat!");}
-
+        
+    }
+    public void InverseReduksi(){
+        int i,j;
+        int brs,kol; //baris dan kolom setelah menambah matriks identitas
+        brs= Brs*2;
+        kol= Kol*2;
+        for (i=1; i<=Brs; i++){
+            for (j=1; j<=Kol; j++){
+                this.Temp[i][j]=this.Mat[i][j];
+            }
+        }
+        for (i=Brs; i<=brs; i++){
+            for (j=Kol; j<=Kol; j++){
+                if (i==j){
+                    this.Temp[i][j]=1;
+                }
+            }
+        }
+        
+        
     }
 }
