@@ -146,16 +146,48 @@ public class matriks2 {
     }
 
     /* BATASAN LATEST VER */
-    boolean isMatriksNol() {
-        int i;
-        boolean nol = true;
-        for (i = 1; i <= Brs; i++) {
-            nol = (nol && isBarNol(i));
-        }
-        return nol;
-    }
+
     void Gauss() {
-        if
+        int i = 1;
+        int j = 1;
+        float temp;
+        while (i <= Brs & j < Kol){
+            while (isKolNol(i,j)){
+                // untuk skip kolom yang isinya nol semua
+                j += 1;
+            }
+            if (j < Kol){
+                TukarBaris(i,indeksTakNol(j,i));
+                //meletakkan baris taknol terbawah ke baris paling atas (jika baris paling atas taknol, tukar dengan dirinya)
+                buatLeadingOne(i);
+                //baris paling 'atas' dibuat menjadi leading one
+                buatKolomNolBawah(j,i);
+                // (j,i) karena di prosedur buatKolomNolBawah formatnya (kolom,baris)
+                i++;
+                j++;
+            }
+        }
+
     }
+    void GaussJordan() {
+        int i = Brs;
+        //dimulai dari bawah karena baris paling atas tidak perlu disentuh
+        int j;
+        Gauss();
+        while (i >= 1){
+            while (isBarisNol(i)){
+                i--;
+            }
+            j = indeksPivot(i);
+            buatKolomNolAtas(i,j);
+            i--;
+        }
+    }
+
+    void DeterminanReduksi() {
+        Gauss();
+        det = kaliDiagonal;
+    }
+
 }
 
