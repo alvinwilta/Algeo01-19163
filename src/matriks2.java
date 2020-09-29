@@ -186,8 +186,24 @@ public class matriks2 {
 
     void DeterminanReduksi() {
         Gauss();
-        det = kaliDiagonal;
+        det = kaliDiagonal();
     }
 
+    float Kofaktor(int i, int j, int MaxKol) {
+        int k;
+        float sum = 0;
+        // Penghitungan kofaktor baris pertama
+        // Asumsi: semua matriks yang ingin dikofaktor berbentuk matriks persegi (nxn)
+        if (MaxKol-1>2) {
+            for (k = j; k <= MaxKol; k++) {
+                sum += Kofaktor(i+1, j+1, MaxKol-1);
+            }
+        } else {
+            return ((Mat[i][j])*((Mat[i+1][j+1]*Mat[i+2][j+2])-(Mat[i+1][j+2]*Mat[i+2][j+1])));
+        }
+        if (MaxKol==Kol) {
+            return (Mat[i][j]*sum);
+        }
+    }
 }
 
