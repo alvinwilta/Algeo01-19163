@@ -104,7 +104,7 @@ public class DriverMatriks {
 
     public static void main (String[] args){
 
-        matriks M = new matriks();
+        Matriks M = new matriks();
 
         MenuUtama();
         if (menu1 == 1){

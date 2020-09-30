@@ -54,7 +54,6 @@ public class matriks {
         return -1;
         }
     
-    
     public void bacaUkuranMatriks(){
         //Menerima input banyaknya baris dan banyaknya kolom dari suatu matriks
         System.out.print("Masukan banyaknya baris : ");
@@ -848,13 +847,27 @@ public class matriks {
 
     public float Crammer(){
         int i,j;
+        double XU, XS;
+
+        //Matriks Baru Linear hasil
+        Matriks hsl = new Matriks();
+        hsl.Brs = this.Brs;
+        hsl.Kol = this.Kol - 1;
+
+        //Matriks Baru Utama sebelum operasi
         Matriks MU = new Matriks();
-        MU.Brs = this.Brs - 1;
+        MU.Brs = this.Brs;
         MU.Kol = this.Kol - 1;
 
-        Matriks MU = new Matriks();
-        MU.Brs = this.Brs - 1;
-        MU.Kol = this.Kol - 1;
+        //Matriks Baru Utama untuk operasi
+        Matriks MO = new Matriks();
+        MO.Brs = this.Brs;
+        MO.Kol = this.Kol - 1;
+
+        //Matriks baru menampung konstanta
+        Matriks K = new Matriks();
+        K.Brs = this.Brs;
+        K.Kol = 1;
 
 
         for (i=IdxBrsMin; i<=MU.Brs; i++){
@@ -862,8 +875,33 @@ public class matriks {
                 MU.Elmt(i, j) = this.Mat[i][j]; 
             }
         }
-        for (i=IdxBrsMin; i<=MU.Brs; i++){
-            MU.Elmt(i, j) = this.Mat[i][j];
+        for (i=IdxBrsMin; i<=K.Brs; i++){
+            K.Elmt(i, j) = this.Mat[i][j];
         }
+        for (i=IdxBrsMin; i<=MU.Brs; i++){
+            for (j=IdxKolMin; j<=MU.Kol; j++){
+                this.Mat[i][j] = 0 ; 
+                this.Brs = MU.Brs;
+                this.Kol = MU.Kol;
+            }
+        }
+        for (i=IdxBrsMin; i<=MU.Brs; i++){
+            for (j=IdxKolMin; j<=MU.Kol; j++){
+                this.Mat[i][j] = MU.Elmt(i,j); 
+        }
+
+        for (i=IdxBrsMin; i<=MU.Brs; i++){
+            for (j=IdxKolMin; j<=MU.Kol; j++){
+                this.Mat[i][j] = MU.Elmt(i,j); 
+        }
+        XU=bacaDeterminant();
+
+        for(j=IdxKolMin; j<=MU.Kol; j++){
+            for(i=IdxBrsMin; i<=MU.Brs;i++){
+                MO.Elmt(i,j) = 
+            }
+        }
+        
+        
     }
 }
