@@ -2,20 +2,21 @@ import java.io.FileReader;
 import java.util.Scanner;
 
 
-public class matriks03 {
+public class matriks3 {
 	int IdxMax = 15;
     //Atribut
     int Brs;
     int Kol;
     float[][] Mat = new float[IdxMax][IdxMax];
-    float[][] Temp = new float[IdxMax][IdxMax];
+    float[][] Tampung = new float[IdxMax][IdxMax];
     int IdxBrsMin = 1;
     int IdxKolMin = 1;
 
     //Scanner
-    Scanner input = new Scanner(System.in);
+    Scanner keyboard = new Scanner(System.in);
+    private boolean solution;
 
-    public void matriks(){
+    void matriks(){
     /* Konstruktor matriks, membuat matriks berukuran IdxMax x IdxMax
     dan mengatur semua nilai dari entri matriks bernilai 0*/
         int i,j;
@@ -36,25 +37,24 @@ public class matriks03 {
     }
     return -1;
     }
-    
     public double Elmt(int row, int col){
 		return this.Mat[row][col];
     }
     
-    public void TukarBaris(int a, int b) {
+    void TukarBaris(int a, int b) {
         for (int i=1;i<=this.Kol;i++) {
             this.Mat[0][i] = this.Mat[a][i];
             this.Mat[a][i] = this.Mat[b][i];
             this.Mat[b][i] = this.Mat[0][i];
         }
     }
-    public void TambahBaris(int a, int b, double x) {
+    void TambahBaris(int a, int b, double x) {
         for (int i=1;i<=this.Kol;i++) {
             this.Mat[a][i] = (float) (this.Mat[a][i] + this.Mat[b][i] * x);
         }
     }
     
-    public void KaliBaris(int a, double x) {
+    void KaliBaris(int a, double x) {
         for (int i=1;i<=this.Kol;i++) {
             this.Mat[a][i] = (float) (this.Mat[a][i] * x);
         }
@@ -71,19 +71,19 @@ public class matriks03 {
         }
         return (x);
     }
-    public void bacaUkuranMatriksInterpolasi(){
+    void bacaUkuranMatriksInterpolasi(){
         //Menerima input banyaknya baris dan banyaknya kolom dari suatu matriks
             System.out.print("Masukan banyaknya baris : ");
-            Brs = input.nextInt();
+            Brs = keyboard.nextInt();
             Kol = 2;
         }
-    public void bacaMatriksInterpolasi(){
+    void bacaMatriksInterpolasi(){
         int i,j;
 
         bacaUkuranMatriksInterpolasi();
         for (i = 1; i <= Brs; i++){
             for (j = 1; j <= Kol; j++){
-                this.Mat[i][j] = input.nextFloat();
+                this.Mat[i][j] = keyboard.nextFloat();
             }
         }
 
@@ -138,7 +138,7 @@ public class matriks03 {
         }
         return ret;
     }
-    public void bacaInverse(){
+    void bacaInverse(){
 
         if (this.bacaDeterminant() == 0) {
             System.out.println("Matriks ini tidak memiliki invers.");
@@ -198,16 +198,16 @@ public class matriks03 {
         }
     }
 
-    public void bacaUkuranMatriks(){
+    void bacaUkuranMatriks(){
     //Menerima input banyaknya baris dan banyaknya kolom dari suatu matriks
         System.out.print("Masukan banyaknya baris : ");
-        Brs = input.nextInt();
+        Brs = keyboard.nextInt();
         System.out.print("Masukan banyaknya kolom : ");
-        Kol = input.nextInt();
+        Kol = keyboard.nextInt();
     }
     
     
-    public void bacaFileExtInterpolasi() throws Exception {
+    void bacaFileExtInterpolasi() throws Exception {
         Scanner in = new Scanner (System.in);
         String namaFile = in.nextLine();
         namaFile = "../test/" + namaFile + ".txt";
@@ -248,23 +248,10 @@ public class matriks03 {
             x++;
         }
     }
-    public void tulisInterpolasi () {
-        for (int i = Brs ; i <= this.Brs ; i++  ) {
-          float temp, hsl;
-          temp =  this.Mat[i][1];
-          hsl = this.Mat[i][2];
-          for (int j = this.IdxKolMin ; j <= this.Kol ; j++) {
-            if (j != this.Kol) {
-              this.Mat[i][j] = (float) (Math.pow(temp, j - 1));
-            } else {
-              this.Mat[i][j] = hsl;
-            }
-          }
-        }
-      }
+    
     
       //FUNGSI LANJUTAN
-      public void matriksInterpolasi()
+      void matriksInterpolasi()
     {
         int i,j;
         float x,y;
@@ -284,7 +271,7 @@ public class matriks03 {
         }
         Kol = Brs+1;
     }
-    public void matriksInterpolasiExt() throws Exception
+    void matriksInterpolasiExt() throws Exception
     {
         int i,j;
         float x,y;
@@ -304,6 +291,184 @@ public class matriks03 {
         }
         Kol = Brs+1;
     }
+    void tulisCramer() {
+        Matriks persegi = new Matriks();
+        persegi.Brs = this.Brs;
+        persegi.Kol = this.Kol - 1;
+        if (this.Brs != this.Kol - 1) {
+            System.out.println("Tidak bisa diselesaikan dengan kaidah Cramer!");
+            this.solution = false;
+        }
+    }
+    //Fungsi untuk mengembalikan determinan matriks persegi yang akan digunakan untuk kofaktor
+    public double DetEx(int a, int b) {
+        Matriks ret = new Matriks();
+        ret.Brs = this.Brs - 1;
+        ret.Kol = this.Kol - 1;
+        int x = 1, y = 1;
+        for (int i = 1; i <= this.Brs; i++) {
+            if (i == a) continue;
+            for (int j = 1; j <= this.Kol; j++) {
+                if (j == b) continue;
+                ret.Mat[x][y++] = this.Mat[i][j];
+            }
+            y = 1;
+            x++;
+        }
+        return ret.Determinan();
+    }
+
+    //Fungsi untuk menhasilkan matriks kofaktor
+    public Matriks Kofaktor() {
+        Matriks ret = new Matriks();
+        ret.Brs = this.Brs;
+        ret.Kol = this.Kol;
+        for (int i = 1; i <= ret.Brs; i++) {
+            for (int j = 1; j <= ret.Kol; j++) {
+                Double cur = 1.0;
+                if ((i + j) % 2 == 1) cur *= -1;
+                ret.Mat[i][j] = (float) (cur * DetEx(i, j));
+                if (ret.Mat[i][j] != ret.Mat[i][j]) ret.Mat[i][j] = 0;
+            }
+        }
+        return ret;
+    }
+    public Matriks Transpose() {
+        Matriks Tr = new Matriks();
+        Tr.Brs = this.Kol;
+        Tr.Kol = this.Brs;
+
+        for(int i = 1; i <= this.Kol ; i++) {
+            for(int j=1; j <= this.Brs ; j++) {
+                Tr.Mat[i][j] = this.Mat[j][i];
+            }
+        }
+        return Tr;
+    }
+    
+    public Matriks buatAdjoin() {
+        Matriks ret = this.Kofaktor();
+        return ret.Transpose();
+    }
+    
+    void tulisInterpolasi(){
+        // proses menghitung interpolasi
+        for (int i = 1; i <= this.Brs; i++) {
+            for (int j = 1; j < this.Kol; j++) {
+                this.Mat[i][j] = (float) java.lang.Math.pow(this.Mat[i][j],j-1);
+            }
+        }
+
+        this.GaussJordan();
+
+        System.out.printf("y= ");
+        System.out.printf("%.1f ", this.Mat[1][this.Kol]);
+        for (int i = 2; i <= this.Brs; i++){
+            if (0 != this.Mat[i][this.Kol]){
+                if (this.Mat[i][this.Kol] >= 0){
+                    System.out.printf("+");
+                }
+                System.out.printf("%.1fx^%d ", this.Mat[i][this.Kol], i-1);
+            }
+        }
+        System.out.printf("\n");
+    }
+    
+    void SolusiInterpolasiGauss() throws Exception{
+		int i,j,k,l;
+		int m,n;
+		float sum,x;
+		String s,s2,stemp;
+
+			for (i = 1; i <= Brs; i++)
+			{
+				for (j = 1; j < Kol; j++){
+					String.valueOf(this.Mat[i][j]) + " ");
+				}
+				String.valueOf(this.Mat[i][Kol]));
+			}
+
+			for (i = Brs; i >= 1;i--){
+				j = indeksPivot(i);
+				for (k = indeksPivot(i+1)-1; k > indeksPivot(i); k--){
+					this.Tampung[k][Kol+1] = -1;
+				}
+				this.Tampung[j][Kol] = this.Mat[i][Kol];
+			}
+
+			for (i = Brs; i >= 1;i--){
+				j = indeksPivot(i);
+				for (k = Kol -1;k > j;k--){
+					if (this.Tampung[k][Kol+1] == -1){
+						this.Tampung[j][k] = this.Mat[i][k];
+					} else {
+						this.Tampung[j][Kol] = this.Tampung[j][Kol] - (this.Tampung[k][Kol])*(this.Mat[i][k]);
+						for (l = k + 1;l < Kol;l++){
+							this.Tampung[j][l] = this.Tampung[j][l] - (this.Tampung[k][l])*(this.Mat[i][k]);
+						}
+					}
+				}
+			}
+			sum = 0;
+			m = 0;
+			n = 0;
+			System.out.print("Masukkan nilai x = ");
+			x = keyboard.nextFloat();
+			s = "f(x) = ";
+			System.out.print("f(x) = ");
+			for (i=1;i<=(Kol-1);i++)
+			{
+				if(this.Tampung[i][Kol] != 0)
+				{
+					m++;
+				}
+			}
+			for (i=1;i<=(Kol-1);i++)
+			{
+				if (this.Tampung[i][Kol] != 0)
+				{
+					n++;
+					if(i == 1)
+					{
+						sum += this.Tampung[i][Kol];
+						stemp = String.valueOf(this.Tampung[i][Kol]);
+						s = s + stemp;
+						System.out.print(this.Tampung[i][Kol]);
+					} else if (i==2)
+					{
+						sum += this.Tampung[i][Kol] * x;
+						stemp = String.valueOf(this.Tampung[i][Kol]);
+						s = s + stemp +"x";
+						System.out.print(this.Tampung[i][Kol]+"x");
+					} else
+					{
+						sum += this.Tampung[i][Kol] * pangkat(x,i-1);
+						System.out.print(this.Tampung[i][Kol]+ "x^"+i);
+						stemp = String.valueOf(this.Mat[i][Kol]);
+						s = s + stemp + "x^";
+						stemp = String.valueOf(i);
+						s = s + stemp;
+					}
+					if (m==n)
+					{
+						System.out.println();
+					} else
+					{
+						System.out.print(" + ");
+						s = s + " + ";
+					}
+
+				}
+			}
+			System.out.println("f(" + x + ") = "+sum);
+			stemp = String.valueOf(x);
+			s2 = "f(";
+			s2 += stemp;
+			s2 += ") = ";
+			stemp = String.valueOf(sum);
+			s2 += sum;
+	}
+
 }
 
 
