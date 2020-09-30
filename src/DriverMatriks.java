@@ -248,7 +248,7 @@ public class DriverMatriks {
                 MenuInput();
                 if (menu3 == 1){
                     M.bacaMatriksDeterminan();
-                    M.DeterminanReduksi();
+                    M.bacaDeterminant();
                     System.out.println();
                     System.out.println("Determinan setelah telah dilakukan metode Reduksi:");
                     M.tulisDeterminanReduksi();
@@ -258,7 +258,7 @@ public class DriverMatriks {
                     System.out.println("Matriks Awal untuk Hitung Determinan:");
                     M.tulisMatriks();
                     System.out.println();
-                    M.DeterminanReduksi();
+                    M.bacaDeterminant();
                     System.out.println();
                     System.out.println("Determinan setelah telah dilakukan metode Reduksi:");
                     M.tulisDeterminanReduksi();

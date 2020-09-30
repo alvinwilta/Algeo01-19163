@@ -401,6 +401,13 @@ public class matriks {
         }
     }
 
+    public void TukarBaris(int a, int b) {
+        for (int i=1;i<=this.Kol;i++) {
+            this.Mat[0][i] = this.Mat[a][i];
+            this.Mat[a][i] = this.Mat[b][i];
+            this.Mat[b][i] = this.Mat[0][i];
+        }
+    }
 
     public void buatKolomNolBawah(int j, int i){
         //Pivot di M[i][j]
@@ -615,11 +622,6 @@ public class matriks {
         }
     }
 
-    public void DeterminanReduksi() {
-        Gauss();
-        det = det * kaliDiagonal();
-    }
-
     public void tulisGauss(){
         int i,j,k,l,x;
 		boolean found = true;
@@ -702,6 +704,7 @@ public class matriks {
 		catch(IOException ex) {
             System.out.println("File '"+ NamaFile + "' gagal dibuat!");}
     }
+
     public void tulisGaussJordan(){
         int k = 1;
         int i = Brs;
@@ -760,27 +763,7 @@ public class matriks {
             System.out.println("File '"+ NamaFile + "' gagal dibuat!");}
         
     }
-    public void InverseReduksi(){
-        int i,j;
-        int brs,kol; //baris dan kolom setelah menambah matriks identitas
-        brs= Brs*2;
-        kol= Kol*2;
-        for (i=1; i<=Brs; i++){
-            for (j=1; j<=Kol; j++){
-                this.Temp[i][j]=this.Mat[i][j];
-            }
-        }
-        for (i=Brs; i<=brs; i++){
-            for (j=Kol; j<=Kol; j++){
-                if (i==j){
-                    this.Temp[i][j]=1;
-                }
-            }
-        }
-        Gauss();
-        GaussJordan();
-        
-    }
+
     public void Gauss() {
         int i = 1;
         int j = 1;
@@ -801,7 +784,6 @@ public class matriks {
                 j++;
             }
         }
-
     }
     public void GaussJordan() {
         int i = Brs;
@@ -856,5 +838,32 @@ public class matriks {
             this.Mat[i][Brs+1] = y;
         }
         Kol = Brs+1;
+    }
+
+    public void tulisDeterminanReduksi(){
+        double x;
+        value = bacaDeterminant();
+        System.out.printf("Determinan Matriks: %.2f", value);
+    }
+
+    public float Crammer(){
+        int i,j;
+        Matriks MU = new Matriks();
+        MU.Brs = this.Brs - 1;
+        MU.Kol = this.Kol - 1;
+
+        Matriks MU = new Matriks();
+        MU.Brs = this.Brs - 1;
+        MU.Kol = this.Kol - 1;
+
+
+        for (i=IdxBrsMin; i<=MU.Brs; i++){
+            for (j=IdxKolMin; j<=MU.Kol; j++){
+                MU.Elmt(i, j) = this.Mat[i][j]; 
+            }
+        }
+        for (i=IdxBrsMin; i<=MU.Brs; i++){
+            MU.Elmt(i, j) = this.Mat[i][j];
+        }
     }
 }
