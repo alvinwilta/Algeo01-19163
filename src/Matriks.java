@@ -869,4 +869,133 @@ public class matriks {
     public void tulisCrammer(){
         
     }
+    float DeterminanKofaktor(matriks m,int n) {
+        // m adalah matriks yang ingin dicari determinannya
+        // n adalah ukuran matriks
+        // fungsi ini mengeluarkan float determinan dengan cara kofaktor
+        float det=0;
+        int p, h, k, i, j,
+        matriks temp = new matriks();
+        temp.Brs = n;
+        temp.Kol = n;
+        if(n==1) {
+            return m.Mat[0][0];
+        } else if(n==2) {
+            det=(m.Mat[0][0]*m.Mat[1][1]-m.Mat[0][1]*m.Mat[1][0]);
+            return det;
+        } else {
+            for(p=0;p<n;p++) {
+                h = 0;
+                k = 0;
+                for(i=1;i<n;i++) {
+                    for( j=0;j<n;j++) {
+                        if(j==p) {
+                            continue;
+                        }
+                        temp.Mat[h][k] = m.Mat[i][j];
+                        k++;
+                        if(k==n-1) {
+                            h++;
+                            k = 0;
+                        }
+                    }
+                }
+                det=det+m.Mat[0][p]*pangkat(-1,p)*DeterminanKofaktor(temp,n-1);
+            }
+            return det;
+        }
+    }
+    void tulisInterpolasiGauss() throws Exception{
+		int i,j,k,l,m,n;
+		float sum,x;
+		String s,s2,stemp;
+
+			for (i = 1; i <= Brs; i++)
+			{
+				for (j = 1; j < Kol; j++){
+					String.valueOf(this.Mat[i][j] + " ");
+				}
+				String.valueOf(this.Mat[i][Kol]);
+			}
+
+			for (i = Brs; i >= 1;i--){
+				j = indeksPivot(i);
+				for (k = indeksPivot(i+1)-1; k > indeksPivot(i); k--){
+					this.Tampung[k][Kol+1] = -1;
+				}
+				this.Tampung[j][Kol] = this.Mat[i][Kol];
+			}
+
+			for (i = Brs; i >= 1;i--){
+				j = indeksPivot(i);
+				for (k = Kol -1;k > j;k--){
+					if (this.Tampung[k][Kol+1] == -1){
+						this.Tampung[j][k] = this.Mat[i][k];
+					} else {
+						this.Tampung[j][Kol] = this.Tampung[j][Kol] - (this.Tampung[k][Kol])*(this.Mat[i][k]);
+						for (l = k + 1;l < Kol;l++){
+							this.Tampung[j][l] = this.Tampung[j][l] - (this.Tampung[k][l])*(this.Mat[i][k]);
+						}
+					}
+				}
+			}
+			sum = 0;
+			m = 0;
+			n = 0;
+			System.out.print("Masukkan nilai x = ");
+			x = keyboard.nextFloat();
+			s = "f(x) = ";
+			System.out.print("f(x) = ");
+			for (i=1;i<=(Kol-1);i++)
+			{
+				if(this.Tampung[i][Kol] != 0)
+				{
+					m++;
+				}
+			}
+			for (i=1;i<=(Kol-1);i++)
+			{
+				if (this.Tampung[i][Kol] != 0)
+				{
+					n++;
+					if(i == 1)
+					{
+						sum += this.Tampung[i][Kol];
+						stemp = String.valueOf(this.Tampung[i][Kol]);
+						s = s + stemp;
+						System.out.print(this.Tampung[i][Kol]);
+					} else if (i==2)
+					{
+						sum += this.Tampung[i][Kol] * x;
+						stemp = String.valueOf(this.Tampung[i][Kol]);
+						s = s + stemp +"x";
+						System.out.print(this.Tampung[i][Kol]+"x");
+					} else
+					{
+						sum += this.Tampung[i][Kol] * Pangkat(x,i-1);
+						System.out.print(this.Tampung[i][Kol]+ "x^"+i);
+						stemp = String.valueOf(this.Mat[i][Kol]);
+						s = s + stemp + "x^";
+						stemp = String.valueOf(i);
+						s = s + stemp;
+					}
+					if (m==n)
+					{
+						System.out.println();
+					} else
+					{
+						System.out.print(" + ");
+						s = s + " + ";
+					}
+
+				}
+			}
+			System.out.println("f(" + x + ") = "+sum);
+			stemp = String.valueOf(x);
+			s2 = "f(";
+			s2 += stemp;
+			s2 += ") = ";
+			stemp = String.valueOf(sum);
+			s2 += sum;
+	}
 }

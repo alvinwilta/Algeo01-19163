@@ -8,12 +8,12 @@ public class matriks3 {
     int Brs;
     int Kol;
     float[][] Mat = new float[IdxMax][IdxMax];
-    float[][] Tampung = new float[IdxMax][IdxMax];
+    float[][] Temp = new float[IdxMax][IdxMax];
     int IdxBrsMin = 1;
     int IdxKolMin = 1;
 
     //Scanner
-    Scanner keyboard = new Scanner(System.in);
+    Scanner input = new Scanner(System.in);
     private boolean solution;
     
 
@@ -78,7 +78,7 @@ public class matriks3 {
     void bacaUkuranMatriksInterpolasi(){
         //Menerima input banyaknya baris dan banyaknya kolom dari suatu matriks
             System.out.print("Masukan banyaknya baris : ");
-            Brs = keyboard.nextInt();
+            Brs = input.nextInt();
             Kol = 2;
         }
     void bacaMatriksInterpolasi(){
@@ -87,7 +87,7 @@ public class matriks3 {
         bacaUkuranMatriksInterpolasi();
         for (i = 1; i <= Brs; i++){
             for (j = 1; j <= Kol; j++){
-                this.Mat[i][j] = keyboard.nextFloat();
+                this.Mat[i][j] = input.nextFloat();
             }
         }
 
@@ -189,9 +189,9 @@ public class matriks3 {
     void bacaUkuranMatriks(){
     //Menerima input banyaknya baris dan banyaknya kolom dari suatu matriks
         System.out.print("Masukan banyaknya baris : ");
-        Brs = keyboard.nextInt();
+        Brs = input.nextInt();
         System.out.print("Masukan banyaknya kolom : ");
-        Kol = keyboard.nextInt();
+        Kol = input.nextInt();
     }
     
     
@@ -403,7 +403,7 @@ public class matriks3 {
         System.out.printf("\n");
     }
 
-    void SolusiInterpolasiGauss() throws Exception{
+    void tulisInterpolasiGauss() throws Exception{
 		int i,j,k,l,m,n;
 		float sum,x;
 		String s,s2,stemp;
@@ -419,20 +419,20 @@ public class matriks3 {
 			for (i = Brs; i >= 1;i--){
 				j = indeksPivot(i);
 				for (k = indeksPivot(i+1)-1; k > indeksPivot(i); k--){
-					this.Tampung[k][Kol+1] = -1;
+					this.Temp[k][Kol+1] = -1;
 				}
-				this.Tampung[j][Kol] = this.Mat[i][Kol];
+				this.Temp[j][Kol] = this.Mat[i][Kol];
 			}
 
 			for (i = Brs; i >= 1;i--){
 				j = indeksPivot(i);
 				for (k = Kol -1;k > j;k--){
-					if (this.Tampung[k][Kol+1] == -1){
-						this.Tampung[j][k] = this.Mat[i][k];
+					if (this.Temp[k][Kol+1] == -1){
+						this.Temp[j][k] = this.Mat[i][k];
 					} else {
-						this.Tampung[j][Kol] = this.Tampung[j][Kol] - (this.Tampung[k][Kol])*(this.Mat[i][k]);
+						this.Temp[j][Kol] = this.Temp[j][Kol] - (this.Temp[k][Kol])*(this.Mat[i][k]);
 						for (l = k + 1;l < Kol;l++){
-							this.Tampung[j][l] = this.Tampung[j][l] - (this.Tampung[k][l])*(this.Mat[i][k]);
+							this.Temp[j][l] = this.Temp[j][l] - (this.Temp[k][l])*(this.Mat[i][k]);
 						}
 					}
 				}
@@ -441,37 +441,37 @@ public class matriks3 {
 			m = 0;
 			n = 0;
 			System.out.print("Masukkan nilai x = ");
-			x = keyboard.nextFloat();
+			x = input.nextFloat();
 			s = "f(x) = ";
 			System.out.print("f(x) = ");
 			for (i=1;i<=(Kol-1);i++)
 			{
-				if(this.Tampung[i][Kol] != 0)
+				if(this.Temp[i][Kol] != 0)
 				{
 					m++;
 				}
 			}
 			for (i=1;i<=(Kol-1);i++)
 			{
-				if (this.Tampung[i][Kol] != 0)
+				if (this.Temp[i][Kol] != 0)
 				{
 					n++;
 					if(i == 1)
 					{
-						sum += this.Tampung[i][Kol];
-						stemp = String.valueOf(this.Tampung[i][Kol]);
+						sum += this.Temp[i][Kol];
+						stemp = String.valueOf(this.Temp[i][Kol]);
 						s = s + stemp;
-						System.out.print(this.Tampung[i][Kol]);
+						System.out.print(this.Temp[i][Kol]);
 					} else if (i==2)
 					{
-						sum += this.Tampung[i][Kol] * x;
-						stemp = String.valueOf(this.Tampung[i][Kol]);
+						sum += this.Temp[i][Kol] * x;
+						stemp = String.valueOf(this.Temp[i][Kol]);
 						s = s + stemp +"x";
-						System.out.print(this.Tampung[i][Kol]+"x");
+						System.out.print(this.Temp[i][Kol]+"x");
 					} else
 					{
-						sum += this.Tampung[i][Kol] * Pangkat(x,i-1);
-						System.out.print(this.Tampung[i][Kol]+ "x^"+i);
+						sum += this.Temp[i][Kol] * Pangkat(x,i-1);
+						System.out.print(this.Temp[i][Kol]+ "x^"+i);
 						stemp = String.valueOf(this.Mat[i][Kol]);
 						s = s + stemp + "x^";
 						stemp = String.valueOf(i);
