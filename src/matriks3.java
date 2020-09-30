@@ -2,7 +2,7 @@ import java.io.FileReader;
 import java.util.Scanner;
 
 
-public class matriks03 {
+public class matriks3 {
 	int IdxMax = 15;
     //Atribut
     int Brs;
@@ -40,8 +40,8 @@ public class matriks03 {
     }
     return -1;
     }
-    public double Elmt(int row, int col){
-		return this.Mat[row][col];
+    public double Elmt(int Brs, int Kol){
+		return this.Mat[Brs][Kol];
     }
     
     void TukarBaris(int a, int b) {
