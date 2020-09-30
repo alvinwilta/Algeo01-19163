@@ -145,6 +145,7 @@ public class DriverMatriks {
                 MenuInput();
                 if(menu3 == 1){
                     M.bacaMatriksSPLGauss();
+                    M.Gauss();
                     M.GaussJordan();
                     System.out.println();
                     System.out.println("Matriks SPL Setelah dilakukan metode Gauss-Jordan:");
@@ -156,6 +157,7 @@ public class DriverMatriks {
                     M.bacaMatriksSPLExt();
                     System.out.println("Matriks SPL Awal:");
                     M.tulisMatriks();
+                    M.Gauss();
                     M.GaussJordan();
                     System.out.println();
                     System.out.println("Matriks SPL Setelah dilakukan metode Gauss-Jordan:");

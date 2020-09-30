@@ -8,14 +8,14 @@ public class matriks03 {
     int Brs;
     int Kol;
     float[][] Mat = new float[IdxMax][IdxMax];
-    float[][] Tampung = new float[IdxMax][IdxMax];
+    float[][] Temp = new float[IdxMax][IdxMax];
     int IdxBrsMin = 1;
     int IdxKolMin = 1;
 
     //Scanner
-    Scanner keyboard = new Scanner(System.in);
+    Scanner input = new Scanner(System.in);
 
-    void matriks(){
+    public void matriks(){
     /* Konstruktor matriks, membuat matriks berukuran IdxMax x IdxMax
     dan mengatur semua nilai dari entri matriks bernilai 0*/
         int i,j;
@@ -36,24 +36,25 @@ public class matriks03 {
     }
     return -1;
     }
+    
     public double Elmt(int row, int col){
 		return this.Mat[row][col];
     }
     
-    void TukarBaris(int a, int b) {
+    public void TukarBaris(int a, int b) {
         for (int i=1;i<=this.Kol;i++) {
             this.Mat[0][i] = this.Mat[a][i];
             this.Mat[a][i] = this.Mat[b][i];
             this.Mat[b][i] = this.Mat[0][i];
         }
     }
-    void TambahBaris(int a, int b, double x) {
+    public void TambahBaris(int a, int b, double x) {
         for (int i=1;i<=this.Kol;i++) {
             this.Mat[a][i] = (float) (this.Mat[a][i] + this.Mat[b][i] * x);
         }
     }
     
-    void KaliBaris(int a, double x) {
+    public void KaliBaris(int a, double x) {
         for (int i=1;i<=this.Kol;i++) {
             this.Mat[a][i] = (float) (this.Mat[a][i] * x);
         }
@@ -70,19 +71,19 @@ public class matriks03 {
         }
         return (x);
     }
-    void bacaUkuranMatriksInterpolasi(){
+    public void bacaUkuranMatriksInterpolasi(){
         //Menerima input banyaknya baris dan banyaknya kolom dari suatu matriks
             System.out.print("Masukan banyaknya baris : ");
-            Brs = keyboard.nextInt();
+            Brs = input.nextInt();
             Kol = 2;
         }
-    void bacaMatriksInterpolasi(){
+    public void bacaMatriksInterpolasi(){
         int i,j;
 
         bacaUkuranMatriksInterpolasi();
         for (i = 1; i <= Brs; i++){
             for (j = 1; j <= Kol; j++){
-                this.Mat[i][j] = keyboard.nextFloat();
+                this.Mat[i][j] = input.nextFloat();
             }
         }
 
@@ -137,7 +138,7 @@ public class matriks03 {
         }
         return ret;
     }
-    void bacaInverse(){
+    public void bacaInverse(){
 
         if (this.bacaDeterminant() == 0) {
             System.out.println("Matriks ini tidak memiliki invers.");
@@ -197,16 +198,16 @@ public class matriks03 {
         }
     }
 
-    void bacaUkuranMatriks(){
+    public void bacaUkuranMatriks(){
     //Menerima input banyaknya baris dan banyaknya kolom dari suatu matriks
         System.out.print("Masukan banyaknya baris : ");
-        Brs = keyboard.nextInt();
+        Brs = input.nextInt();
         System.out.print("Masukan banyaknya kolom : ");
-        Kol = keyboard.nextInt();
+        Kol = input.nextInt();
     }
     
     
-    void bacaFileExtInterpolasi() throws Exception {
+    public void bacaFileExtInterpolasi() throws Exception {
         Scanner in = new Scanner (System.in);
         String namaFile = in.nextLine();
         namaFile = "../test/" + namaFile + ".txt";
@@ -247,7 +248,7 @@ public class matriks03 {
             x++;
         }
     }
-    void tulisInterpolasi () {
+    public void tulisInterpolasi () {
         for (int i = Brs ; i <= this.Brs ; i++  ) {
           float temp, hsl;
           temp =  this.Mat[i][1];
@@ -263,7 +264,7 @@ public class matriks03 {
       }
     
       //FUNGSI LANJUTAN
-      void matriksInterpolasi()
+      public void matriksInterpolasi()
     {
         int i,j;
         float x,y;
@@ -283,7 +284,7 @@ public class matriks03 {
         }
         Kol = Brs+1;
     }
-    void matriksInterpolasiExt() throws Exception
+    public void matriksInterpolasiExt() throws Exception
     {
         int i,j;
         float x,y;
