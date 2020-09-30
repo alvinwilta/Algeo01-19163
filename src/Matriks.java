@@ -347,7 +347,7 @@ public class matriks {
             return;
         }
 
-        matriks M2 = new matriks();
+        Matriks M2 = new Matriks();
         M2.Brs = this.Brs;
         M2.Kol = this.Kol;
         for(int i=1; i<=this.Brs; i++){
