@@ -308,7 +308,7 @@ public class matriks {
     }
     public double bacaDeterminant() {
         double ret = 1;
-        Matriks M2 = new Matriks();
+        matriks M2 = new matriks();
         M2.Brs = this.Brs;
         M2.Kol = this.Kol;
         for(int i=1; i<=this.Brs; i++){
@@ -461,10 +461,10 @@ public class matriks {
         return x;
     }
 
-    public static Matriks interpolate(Matriks func, int deg) {
+    public static matriks interpolate(matriks func, int deg) {
 	
 		
-		Matriks A = new Matriks();
+		matriks A = new matriks();
 		A.Solution_type = 4;
 		
 		for (int i = 1; i <= deg+1; i++){
@@ -815,22 +815,22 @@ public class matriks {
         double XU, XS;
 
         //Matriks Baru Linear hasil
-        Matriks hsl = new Matriks();
+        matriks hsl = new matriks();
         hsl.Brs = this.Brs;
         hsl.Kol = this.Kol - 1;
 
         //Matriks Baru Utama sebelum operasi
-        Matriks MU = new Matriks();
+        matriks MU = new matriks();
         MU.Brs = this.Brs;
         MU.Kol = this.Kol - 1;
 
         //Matriks Baru Utama untuk operasi
-        Matriks MO = new Matriks();
+        matriks MO = new matriks();
         MO.Brs = this.Brs;
         MO.Kol = this.Kol - 1;
 
         //Matriks baru menampung konstanta
-        Matriks K = new Matriks();
+        matriks K = new matriks();
         K.Brs = this.Brs;
         K.Kol = 1;
 
