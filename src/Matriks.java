@@ -824,11 +824,6 @@ public class matriks {
         MU.Brs = this.Brs;
         MU.Kol = this.Kol - 1;
 
-        //Matriks Baru Utama untuk operasi
-        matriks MO = new matriks();
-        MO.Brs = this.Brs;
-        MO.Kol = this.Kol - 1;
-
         //Matriks baru menampung konstanta
         matriks K = new matriks();
         K.Brs = this.Brs;
@@ -863,10 +858,15 @@ public class matriks {
 
         for(j=IdxKolMin; j<=MU.Kol; j++){
             for(i=IdxBrsMin; i<=MU.Brs;i++){
-                MO.Elmt(i,j) = 
+                this.Mat[i][j] = K.Elmt(i,j);
+                XS = bacaDeterminant();
+                hsl.Elmt(i,1) = XS/XU;
+                this.Mat[i][j] = MU.Elmt(i,j);
             }
         }
-        
+        return hsl;
+    }
+    public void tulisCrammer(){
         
     }
 }
