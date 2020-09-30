@@ -189,19 +189,42 @@ public class matriks2 {
         det = kaliDiagonal();
     }
 
-
-
-    float Kofaktor(int MaxKol) {
-        int i,j;
-        float[][] tempkof = new float[MaxKol][MaxKol];
-        for (j=1;j<=MaxKol;j++) {
-
+    float DeterminanKofaktor(matriks m,int n) {
+        // m adalah matriks yang ingin dicari determinannya
+        // n adalah ukuran matriks
+        // fungsi ini mengeluarkan float determinan dengan cara kofaktor
+        float det=0;
+        int p, h, k, i, j,
+        matriks temp = new matriks();
+        temp.Brs = n;
+        temp.Kol = n;
+        if(n==1) {
+            return m.Mat[0][0];
+        } else if(n==2) {
+            det=(m.Mat[0][0]*m.Mat[1][1]-m.Mat[0][1]*m.Mat[1][0]);
+            return det;
+        } else {
+            for(p=0;p<n;p++) {
+                h = 0;
+                k = 0;
+                for(i=1;i<n;i++) {
+                    for( j=0;j<n;j++) {
+                        if(j==p) {
+                            continue;
+                        }
+                        temp.Mat[h][k] = m.Mat[i][j];
+                        k++;
+                        if(k==n-1) {
+                            h++;
+                            k = 0;
+                        }
+                    }
+                }
+                det=det+m.Mat[0][p]*pangkat(-1,p)*DeterminanKofaktor(temp,n-1);
+            }
+            return det;
         }
     }
-    float MinorKecil(int i, int j, int Kolom) {
-        if (Kolom-1>2) {
 
-        }
-    }
 }
 
