@@ -502,7 +502,13 @@ public class matriks3 {
 			s2 += stemp;
 			s2 += ") = ";
 			stemp = String.valueOf(sum);
-			s2 += sum;
+            s2 += sum;
+            try {
+                tulisInterpolasiGauss();
+            }
+            catch(IOException e) {
+                e.printStackTrace();
+            }
 	}
 
 }

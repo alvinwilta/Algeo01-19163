@@ -44,7 +44,7 @@ public class matriks {
         Brs = 0;
         Kol = 0;
     }
-    public void method() throws Exception{  
+    public void method() throws IOException{  
         System.out.println("Tidaak!! Error...");  
     }  
 
@@ -308,7 +308,7 @@ public class matriks {
 		}
     }
     
-    public void bacaFileExtInterpolasi() throws Exception {
+    public void bacaFileExtInterpolasi() throws IOException {
         Scanner in = new Scanner (System.in);
         String namaFile = in.nextLine();
         namaFile = "../test/" + namaFile + ".txt";
@@ -347,6 +347,12 @@ public class matriks {
             }
             this.Mat[x][n + 2] = b;
             x++;
+        }
+        try {
+            bacaFileExtInterpolasi();
+        }
+        catch(IOException e) {
+            e.printStackTrace();
         }
     }
     public void tulisInterpolasi () {
@@ -467,6 +473,12 @@ public class matriks {
         return ret;
     }
 
+    public void InverseMatriksSPL(){
+
+    }
+    public void tulisInverseMatriksSPL(){
+
+    }
     public void bacaInverse(){
 
         if (this.bacaDeterminant() == 0) {
@@ -693,7 +705,7 @@ public class matriks {
         int kolom = 1;
         int j;
         boolean nol = true;
-        while (nol == true) {
+        while ((nol == true) && (kolom<= Kol)) {
             if (this.Mat[i][kolom] != 0) {
                 nol = false;
             } else {
@@ -907,7 +919,7 @@ public class matriks {
         }
         Kol = Brs+1;
     }
-    public void matriksInterpolasiExt() throws Exception
+    public void matriksInterpolasiExt() throws IOException
     {
         int i,j;
         float x,y;
@@ -959,7 +971,7 @@ public class matriks {
             }
         }
         for (i=IdxBrsMin; i<=K.Brs; i++){
-            this.K[i][j] = this.Mat[i][j];
+            this.K[i][1] = this.Mat[i][this.Kol];
         }
         for (i=IdxBrsMin; i<=MU.Brs; i++){
             for (j=IdxKolMin; j<=MU.Kol; j++){
@@ -1028,10 +1040,6 @@ public class matriks {
         if (this.solution==false){
             System.out.println("Tidak Dapat Diselesaikan dgn Metode Cramer");
         }
-        else{
-
-        }
-        
     }
     public void tulisDeterminanReduksi(){
         int i,j,k,l,x;
@@ -1057,7 +1065,7 @@ public class matriks {
 			}
             writer.append(newline);
             System.out.printf("Determinan Matriks: %.2f \n", value);
-            writer.append("Determinan Matriks:" + String.valueOf(value) + "/r/n");
+            writer.append("Determinan Matriks:" + String.valueOf(value) + "\r\n");
             writer.close();
 		}
 
@@ -1079,7 +1087,7 @@ public class matriks {
             y = 1;
             x++;
         }
-        return M.Determinan();
+        return 0;
     }
 
     public matriks Kofaktor() {
@@ -1136,8 +1144,9 @@ public class matriks {
     public void tulisDeterminanKofaktor(){
         int i,j,k,l,x;
 		String NamaFile="HasilDeterminanKofaktor.txt";
-		String newline="\r\n";
-        float value = DeterminanKofaktor(Kofaktor(), this.Brs);
+        String newline="\r\n";
+        matriks M = Kofaktor();
+        float value = DeterminanKofaktor(M, M.Brs);
         try
         {
 			FileWriter namewriter = new FileWriter(NamaFile);
@@ -1153,7 +1162,8 @@ public class matriks {
 				}
 				writer.append(String.valueOf(this.Mat[x][Kol]));
 				writer.append(newline);
-			}
+            }
+            DeterminanKofaktor(M, Brs);
             writer.append(newline);
             System.out.printf("Determinan Matriks:");
             System.out.printf("%.2f", value);
@@ -1166,7 +1176,7 @@ public class matriks {
         }
     }
 
-    void tulisInterpolasiGauss() throws Exception{
+    void tulisInterpolasiGauss() throws IOException{
 		int i,j,k,l,m,n;
 		float sum,x;
 		String s,s2,stemp;
@@ -1257,6 +1267,12 @@ public class matriks {
 			s2 += stemp;
 			s2 += ") = ";
 			stemp = String.valueOf(sum);
-			s2 += sum;
+            s2 += sum;
+            try {
+                tulisInterpolasiGauss();
+            }
+            catch(IOException e) {
+                e.printStackTrace();
+            }
 	}
 }
