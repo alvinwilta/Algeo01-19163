@@ -28,7 +28,7 @@ public class matriks {
     int IdxKolMin = 1;
     int SPLUKol = 0;
     int SPLUBrs = 0;
-    int hslBRS =0;
+    int hslBRS = 0;
     //Scanner
     Scanner input = new Scanner(System.in);
     private boolean solution;
@@ -289,7 +289,7 @@ public class matriks {
 				if (min){
 					this.Mat [i][j]=(this.Mat [i][j])*-1;
 				}
-				Brs=i;
+				Brs = i;
 			}
 
 		}
@@ -571,7 +571,7 @@ public class matriks {
             }
         }
     }
-    
+
     public double bacaDeterminantKofaktor(int Brs) {
         int D = 0;  
         int sign = -1;  
@@ -1184,7 +1184,7 @@ public class matriks {
 			FileWriter namewriter = new FileWriter(NamaFile);
             BufferedWriter writer = new BufferedWriter(namewriter);
 
-            if(bacaDeterminantKofaktor()==0){
+            if(bacaDeterminantKofaktor(this.Brs)==0){
                 System.out.println("Matriks tidak memiliki balikan:");
                 writer.append("Matriks tidak memiliki balikan:");
                 writer.close();
@@ -1289,6 +1289,58 @@ public class matriks {
         return X;
     }
 
+    public float bacaDeterminant(){
+        int size = Brs;
+        int i,j;
+        float result = 1;
+        float minus, minuss;
+        int swapped = 0;
+
+        while (size > 0){
+            boolean swap = false;
+            i = 1;
+            if (this.Mat[size][size] == 0){
+                while ((i <= size) && (!swap)){
+                    if (this.Mat[i][size] == 0){
+                        i++;
+                    }
+                    else{
+                        swap = true;
+                    }
+                }
+            }
+            if ((i == size) && (size > 1)){
+                return 0;
+            }
+            else if (swap){
+                for (j = 1; j <= size; j++){
+                    float temp = this.Mat[size][j];
+                    this.Mat[size][j] = this.Mat[i][j];
+                    this.Mat[i][j] = temp;
+                }
+            }
+            for (i = 1; i <= size; i++){
+                for (j = 1; j<=size; j++){
+                    this.Mat[i][j] = this.Mat[i][j] - (this.Mat[size][j]*(this.Mat[i][size]/this.Mat[size][size]));
+                }
+            }
+            result = result * this.Mat[size][size];
+            if (swap){
+                swapped++;
+            }
+            size--;
+        }
+        minus = swapped % 2 ;
+        if (minus == 0){
+            minuss = 1;
+        }
+        else{
+            minuss = -1;
+        }
+        float finalresult = (result * minuss);
+        return finalresult;
+    }
+
     public void InverseKofaktor(){
         //Rumus: 1/Det(A) * Transpose (Kofaktor A)
         int i,j;
@@ -1302,7 +1354,7 @@ public class matriks {
         }
         M1.Kofaktor();
         M1.Transpose();
-        double A = M1.bacaDeterminantKofaktor();
+        double A = M1.bacaDeterminantKofaktor(this.Brs);
         Double B = Double.valueOf(A);
         float C = B.floatValue();
 
