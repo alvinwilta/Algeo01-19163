@@ -234,14 +234,21 @@ public class matriks2 {
         // Rumusnya adalah: hasil = (X^T X)^-1 .X^T .y
         int i,j,k; // indeks matriks
         float[] hasil = new float[var];
-        float[][] XM = new float[M.Kol][var];
-        float[][] XT = new float[M.Kol][M.Brs];
+        float[][] XM = new float[var][var];
+        float[][] XT = new float[var][M.Brs];
+        float[][] X = new float[M.Brs][var];
         float[] y = new float[var];
         // ASSIGN NILAI KE DALAM MATRIKS TEMPORARY
         XT = M.Transpose(); // intinya matriks XT itu isinya transpose dari matriks M
-        for (i=0;i<=M.Brs;i++) {
+        for (i=0;i<M.Brs;i++) {
+            for (j=0;j<var;j++) {
+                X[i][j] = M.Mat[i][j];
+            }
+        }
+        for (i=0;i<M.Brs;i++) {
             y[i] = M.Mat[i][1];     // ASSIGN NILAI Y
             XT[0][i] = 1;           // MENGESET NILAI BIAS
+            X[i][0] = 1;            // MENGESET NILAI BIAS
         }
         // PERKALIAN MATRIKS ke-1
         for(i=0;i<M.Kol;i++) {
