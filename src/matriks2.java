@@ -226,5 +226,51 @@ public class matriks2 {
         }
     }
 
+    float[] MultipleLinearRegression(matriks M, int var) {
+        // M adalah matriksnya dengan syarat variabel dependen di kolom pertama, diikuti dengan variabel independen
+        // var adalah jumlah variabelnya (dependen dan independen)
+        // outputnya berupa array, dengan format [A0, A1, A2,...,An] dan
+        // equation untuk MLR adalah Y = A0 + A1X1 + A2X2 + ... + AnXn + error (tidak dihitung errornya)
+        // Rumusnya adalah: hasil = (X^T X)^-1 .X^T .y
+        int i,j,k; // indeks matriks
+        float[] hasil = new float[var];
+        float[][] XM = new float[M.Kol][var];
+        float[][] XT = new float[M.Kol][M.Brs];
+        float[] y = new float[var];
+        // ASSIGN NILAI KE DALAM MATRIKS TEMPORARY
+        XT = M.Transpose(); // intinya matriks XT itu isinya transpose dari matriks M
+        for (i=0;i<=M.Brs;i++) {
+            y[i] = M.Mat[i][1];     // ASSIGN NILAI Y
+            XT[0][i] = 1;           // MENGESET NILAI BIAS
+        }
+        // PERKALIAN MATRIKS ke-1
+        for(i=0;i<M.Kol;i++) {
+            for (j = 0;j<M.Kol;j++) {
+                XM[i][j] = 0;
+                for (k = 0;k<M.Brs;k++) {
+                    XM[i][j] += XT[i][k] * M.Mat[k][j];
+                }
+            }
+        }
+        // INVERS HASIL MATRIKS
+        XM.InverseMatriksSPL();
+        // PERKALIAN MATRIKS ke-2
+        for(i=0;i<var;i++) {
+            for (j = 0;j<var;j++) {
+                XM[i][j] = 0;
+                for (k = 0;k<M.Brs;k++) {
+                    XM[i][j] += XM[i][k] * XT[k][j];
+                }
+            }
+        }
+        // PERKALIAN MATRIKS ke-3
+        for (i=0;i<var;i++) {
+            for (j=0;j<var;j++) {
+                hasil[i] = XM[j][i]*y[j];
+            }
+        }
+        return hasil;
+    }
+
 }
 
