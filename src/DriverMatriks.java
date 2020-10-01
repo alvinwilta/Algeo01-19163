@@ -374,7 +374,7 @@ public class DriverMatriks {
                 if(menu3 == 1){
                     M.matriksInterpolasi();
                     System.out.println("Matriks Interpolasi setelah telah dilakukan metode Gauss:");
-                    //M.tulisInterpolasiGauss();
+                    M.tulisInterpolasiGauss();
                     System.out.println();
                 }
                 else if (menu3 == 2){

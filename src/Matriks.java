@@ -383,7 +383,8 @@ public class matriks {
                 this.Mat[i][j] = input.nextFloat();
             }
         }
-        i, j = 0;
+        i = 0;
+        j = 0;
         for (i = IdxBrsMin; i <= Brs; i++){
             for (j = IdxKolMin; j< Kol; j++){
                 this.SPLU[i][1]= this.Mat[i][j];
@@ -634,21 +635,7 @@ public class matriks {
         }
         return x;
     }
-/*
-    public static matriks interpolate(matriks func, int deg) {
-		matriks A = new matriks();
-		A.Solution_type = 4;
-		
-		for (int i = 1; i <= deg+1; i++){
-			A.Mat[i][1] = 1;					// asign 1 to all first column
-			A.Mat[i][2] = func.Elmt(i,1); // copy the value of func into second column
-            for (int j = 3; j <= deg+1; j++){
-                A.Mat[i][j] = (float) java.lang.Math.pow(A.Elmt(i, 2), j - 1);
-            }
-		}
-		return A;
-    }
-*/
+
     public float kaliDiagonal() {
         float hasil = Mat[0][0];
         int i;
@@ -954,7 +941,7 @@ public class matriks {
         }
         Kol = Brs+1;
     }
-    public void matriksInterpolasiExt() throws IOException{
+    public void matriksInterpolasiExt() throws Exception{
     try
     {
         int i,j;
