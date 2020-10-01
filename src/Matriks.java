@@ -942,7 +942,7 @@ public class matriks {
             BufferedWriter writer = new BufferedWriter(namewriter);
             
                 for (i = IdxBrsMin; i<= hslBRS; i++){
-                    writer.append("x"+ String.valueOf(i)+ " = "String.valueOf(this.hsl[i][1]));
+                    writer.append("x"+ String.valueOf(i)+ " = "+ String.valueOf(this.hsl[i][1]));
                     writer.append(newline);
                     System.out.printf("x");
                     System.out.printf("%d",i);
@@ -975,7 +975,7 @@ public class matriks {
         }
         Kol = Brs+1;
     }
-    public void matriksInterpolasiExt() throws Exception{
+    public void matriksInterpolasiExt(){
     try
     {
         int i,j;
@@ -1112,7 +1112,7 @@ public class matriks {
             writer.append("Matriks Setelah OBE");
             writer.append(newline);
             for (x = 1; x <= Brs; x++){
-                writer.append("x" + String.valueOf(i) + "= " + String.valueOf(this.hsl[x][1]) + " ");
+                writer.append("x" + String.valueOf(x) + "= " + String.valueOf(this.hsl[x][1]) + " ");
                 System.out.printf("%.2f ", this.hsl[x][1]);
 				writer.append(newline);
 			    }
@@ -1257,17 +1257,23 @@ public class matriks {
         }
     }
 
-    void tulisInterpolasiGauss() throws IOException{
+    void tulisInterpolasiGauss(){
 		int i,j,k,l,m,n;
 		float sum,x;
         String s,s2,stemp;
+        String NamaFile="HasilDeterminanKofaktor.txt";
+        String newline="\r\n";
         try{
+            FileWriter namewriter = new FileWriter(NamaFile);
+            BufferedWriter writer = new BufferedWriter(namewriter);
+
 			for (i = 1; i <= Brs; i++)
 			{
 				for (j = 1; j < Kol; j++){
-					String.valueOf(this.Mat[i][j] + " ");
+                    String.valueOf(this.Mat[i][j] + " ");
+                    writer.append(String.valueOf(this.Mat[i][j]) + " ");
 				}
-				String.valueOf(this.Mat[i][Kol]);
+				writer.append(String.valueOf(this.Mat[i][Kol]));
 			}
 
 			for (i = Brs; i >= 1;i--){
@@ -1297,7 +1303,8 @@ public class matriks {
 			System.out.print("Masukkan nilai x = ");
 			x = input.nextFloat();
 			s = "f(x) = ";
-			System.out.print("f(x) = ");
+            System.out.print("f(x) = ");
+            writer.append("f(x) = ");
 			for (i=1;i<=(Kol-1);i++)
 			{
 				if(this.Temp[i][Kol] != 0)
@@ -1315,13 +1322,15 @@ public class matriks {
 						sum += this.Temp[i][Kol];
 						stemp = String.valueOf(this.Temp[i][Kol]);
 						s = s + stemp;
-						System.out.print(this.Temp[i][Kol]);
+                        System.out.print(this.Temp[i][Kol]);
+                        writer.append(s);
 					} else if (i==2)
 					{
 						sum += this.Temp[i][Kol] * x;
 						stemp = String.valueOf(this.Temp[i][Kol]);
 						s = s + stemp +"x";
-						System.out.print(this.Temp[i][Kol]+"x");
+                        System.out.print(this.Temp[i][Kol]+"x");
+                        writer.append(s);
 					} else
 					{
 						sum += this.Temp[i][Kol] * pangkat(x,i-1);
@@ -1329,17 +1338,19 @@ public class matriks {
 						stemp = String.valueOf(this.Mat[i][Kol]);
 						s = s + stemp + "x^";
 						stemp = String.valueOf(i);
-						s = s + stemp;
+                        s = s + stemp;
+                        writer.append(s);
 					}
 					if (m==n)
 					{
-						System.out.println();
+                        System.out.println();
+                        writer.append(newline);
 					} else
 					{
 						System.out.print(" + ");
-						s = s + " + ";
+                        s = s + " + ";
+                        writer.append(s);
 					}
-
 				}
 			}
 			System.out.println("f(" + x + ") = "+sum);
@@ -1349,9 +1360,12 @@ public class matriks {
 			s2 += ") = ";
 			stemp = String.valueOf(sum);
             s2 += sum;
+            writer.append(s2);
+            writer.close();
         }
-        catch(IOException ex) {
-            System.out.println("File '"+ NamaFile + "' gagal dibuat!");
+        catch (IOException e) {
+			e.printStackTrace();
+            System.out.println("Ada kesalahan pada file eksternal.");
         }
 	}
 }

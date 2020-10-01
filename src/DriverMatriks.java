@@ -45,7 +45,6 @@ public class DriverMatriks {
         System.out.println("-----Pilih metode di bawah ini:-----");
         System.out.println();
         System.out.println("1. Metode eliminasi Gauss");
-        System.out.println("2. Metode eliminasi Gauss-Jordan");
         System.out.println("9. Kembali");
         System.out.println("0. Menu Utama");
         System.out.println("Masukkan Input di bawah ini:\n");
@@ -376,31 +375,14 @@ public class DriverMatriks {
                     System.out.println("Matriks Interpolasi setelah telah dilakukan metode Gauss:");
                     M.tulisInterpolasiGauss();
                     System.out.println();
-                }
+                    }
                 else if (menu3 == 2){
-                    //M.matriksInterpolasiExt();
+                    M.matriksInterpolasiExt();
                     System.out.println();
                     System.out.println("Matriks Interpolasi setelah telah dilakukan metode Gauss:");
-                    //M.tulisInterpolasiGauss();
+                    M.tulisInterpolasiGauss();
                     System.out.println();
-                }
-            }
-            else if (menu2 == 2){
-                MenuInput();
-                /*
-                if(menu3 == 1){
-                    M.bacaMatriksInterpolasi();
-                    System.out.println("Matriks Interpolasi setelah telah dilakukan metode Gauss-Jordan:");
-                    M.tulisInterpolasiGaussJordan();
-                    System.out.println();
-                }
-                else if (menu3 == 2){
-                    M.bacaMatriksInterpolasiExt();
-                    System.out.println("Matriks Awal untuk Interpolasi");
-                    M.tulisMatriks();
-                    System.out.println("Matriks Interpolasi setelah telah dilakukan metode Gauss-Jordan:");
-                    M.tulisInterpolasiGaussJordan();
-                    System.out.println();
+                    }
                 }
                 else if (menu3 == 9){
                     MenuPilihanInterpolasi();
@@ -411,7 +393,6 @@ public class DriverMatriks {
                 else{
                     MenuInput();
                 }
-                */
             }
             else if ((menu2 == 9)||(menu2 == 0)){
                 MenuUtama();
