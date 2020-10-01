@@ -567,22 +567,22 @@ public class matriks {
         }
     }
     public double bacaDeterminant() {
-        int i, j;
-		double hasil = 1;
-
-		for (i = 1; i <= this.Brs; i++) {
-			double BrsLead = this.Mat[i][i];
-
-			hasil *= BrsLead;
-			for (j = i + 1; j <= this.Brs; j++) {
-				double KolLead = this.Mat[j][i];
-
-				this.TambahBaris(j, i, -KolLead/BrsLead);
-			}
-		}
-		
-		return hasil;
-	}
+        int D = 0;  
+        int sign = -1;  
+            if (n == 1) 
+                return Mat[0][0]; 
+          
+            for (int f = 0; f < n; f++) 
+            { 
+                Kofaktor();
+                D += sign * Mat[0][f]  
+                   * bacaDeterminant(n-1); 
+          
+                sign = -sign; 
+            } 
+          
+            return D; 
+        } 
 	
     public void InverseMatriksSPL(){
         int i,j,k;
@@ -614,7 +614,7 @@ public class matriks {
         }
     }
     public void bacaInverse(){
-        if (this.bacaDeterminant() == 0) {
+        if (this.bacaDeterminant(Brs) == 0) {
             System.out.println("Matriks ini tidak memiliki invers.");
             return;
         }
