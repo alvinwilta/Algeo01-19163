@@ -616,7 +616,7 @@ public class matriks {
         Brs = SPLUBrs;
         Kol = SPLUKol;
         bacaInverse();
-        if (this.bacaDeterminant() != 0){
+        if (bacaDeterminant() != 0){
             for (i=IdxBrsMin;i<=Brs;i++){
                 for(j=IdxKolMin;j<=1;j++){
                     sum = 0;
@@ -1116,45 +1116,27 @@ public class matriks {
             this.solution = false;
         }
 
-        //Matriks Baru Linear hasil
-        matriks hsl = new matriks();
-        hsl.Brs = this.Brs;
-        hsl.Kol = this.Kol - 1;
-
-        //Matriks Baru Utama sebelum operasi
-        matriks MU = new matriks();
-        MU.Brs = this.Brs;
-        MU.Kol = this.Kol - 1;
-
-        //Matriks baru menampung konstanta
-        matriks K = new matriks();
-        K.Brs = this.Brs;
-        K.Kol = 1;
-
-
-        for (i=IdxBrsMin; i<=MU.Brs; i++){
-            for (j=IdxKolMin; j<=MU.Kol; j++){
+        for (i=IdxBrsMin; i<=Brs; i++){
+            for (j=IdxKolMin; j<=Kol-1; j++){
                 this.MU[i][j] = this.Mat[i][j]; 
             }
         }
-        for (i=IdxBrsMin; i<=K.Brs; i++){
-            this.K[i][1] = this.Mat[i][this.Kol];
+        for (i=IdxBrsMin; i<=Brs; i++){
+            this.K[i][1] = this.Mat[i][Kol];
         }
-        for (i=IdxBrsMin; i<=MU.Brs; i++){
-            for (j=IdxKolMin; j<=MU.Kol; j++){
+        for (i=IdxBrsMin; i<=Brs; i++){
+            for (j=IdxKolMin; j<=Kol-1; j++){
                 this.Mat[i][j] = 0 ; 
-                this.Brs = MU.Brs;
-                this.Kol = MU.Kol;
             }
         }
-        for (i=IdxBrsMin; i<=MU.Brs; i++){
-            for (j=IdxKolMin; j<=MU.Kol; j++){
+        for (i=IdxBrsMin; i<=Brs; i++){
+            for (j=IdxKolMin; j<=Kol-1; j++){
                 this.Mat[i][j] = this.MU[i][j]; 
             }
         }
 
-        for (i=IdxBrsMin; i<=MU.Brs; i++){
-            for (j=IdxKolMin; j<=MU.Kol; j++){
+        for (i=IdxBrsMin; i<=Brs; i++){
+            for (j=IdxKolMin; j<=Kol-1; j++){
                 this.Mat[i][j] = this.MU[i][j]; 
             }
         }
@@ -1162,8 +1144,8 @@ public class matriks {
         Double D = Double.valueOf(xu);
         float XU = D.floatValue();
 
-        for(j=IdxKolMin; j<=MU.Kol; j++){
-            for(i=IdxBrsMin; i<=MU.Brs;i++){
+        for(j=IdxKolMin; j<=Kol-1; j++){
+            for(i=IdxBrsMin; i<=Brs;i++){
                 this.Mat[i][j] = this.K[i][j];
                 double xs = bacaDeterminant();
                 Double S = Double.valueOf(xs);
@@ -1212,6 +1194,13 @@ public class matriks {
         {
 			FileWriter namewriter = new FileWriter(NamaFile);
             BufferedWriter writer = new BufferedWriter(namewriter);
+
+            if(bacaDeterminant()==0){
+                System.out.println("Matriks tidak memiliki balikan:");
+                writer.append("Matriks tidak memiliki balikan:");
+                writer.close();
+
+            }
             
             System.out.println("Hasil Inverse Kofaktor:");
             writer.append("Hasil Inverse Kofaktor");
