@@ -28,6 +28,7 @@ public class matriks {
     int IdxKolMin = 1;
     int SPLUKol = 0;
     int SPLUBrs = 0;
+    int hslBRS =0;
     //Scanner
     Scanner input = new Scanner(System.in);
     private boolean solution;
@@ -494,26 +495,31 @@ public class matriks {
     public void InverseMatriksSPL(){
         int i,j,k;
         int Brs, Kol;
+        int sum;
 
         for (i = 1; i < IdxMax; i++) {
             for (j = 1; j < IdxMax; j++) {
                 this.Mat[i][j] = this.SPLU[i][j];
             }
         }
-        i, j, k = IdxBrsMin;
+        i = 1;
+        j = 1;
+        k = 1;
         Brs = SPLUBrs;
         Kol = SPLUKol;
         bacaInverse();
         if (this.bacaDeterminant() != 0){
             for (i=IdxBrsMin;i<=Brs;i++){
-                for(j=IdxKolMin;j<=Kol;j++){
-                    this.hsl[i][1]=(this.
+                for(j=IdxKolMin;j<=1;j++){
+                    sum = 0;
+                    for (k=IdxKolMin; k <= Kol; k++){
+                        sum+= this.Mat[i][k] = this.SPLU[k][1];
+                    }
+                    this.hsl[i][1] = sum;
+                    hslBRS++;
                 }
             }
         }
-    }
-    public void tulisInverseMatriksSPL(){
-
     }
     public void bacaInverse(){
 
@@ -921,6 +927,34 @@ public class matriks {
         
     }
 
+    public void tulisInverseMatriksSPL(){
+        int i,j;
+        String NamaFile="HasilMatriksSPLInverse.txt";
+		String newline="\r\n";
+        if (this.bacaDeterminant() == 0) {
+            System.out.println("Matriks ini tidak memiliki invers.");
+            return;
+        }
+        else{
+            try
+            {
+            FileWriter namewriter = new FileWriter(NamaFile);
+            BufferedWriter writer = new BufferedWriter(namewriter);
+            
+                for (i = IdxBrsMin; i<= hslBRS; i++){
+                    writer.append("x"+ String.valueOf(i)+ " = "String.valueOf(this.hsl[i][1]));
+                    writer.append(newline);
+                    System.out.printf("x");
+                    System.out.printf("%d",i);
+                    System.out.printf(" = ");
+                    System.out.printf("%.2f\n",this.hsl[i][1]);
+                }
+            }
+            catch(IOException ex) {
+                System.out.println("File '"+ NamaFile + "' gagal dibuat!");
+            }
+        }
+    }
     public void matriksInterpolasi()
     {
         int i,j;
