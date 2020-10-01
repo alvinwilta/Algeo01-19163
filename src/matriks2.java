@@ -279,5 +279,28 @@ public class matriks2 {
         return hasil;
     }
 
+    void bacaMatriksRegresi() {
+        int i,j;
+        System.out.println("Masukkan jumlah variabel peubah:");
+        this.Kol = input.nextInt();
+        System.out.println("Masukkan berapa banyak data yang ingin dimasukkan:");
+        this.Brs = input.nextInt();
+        System.out.println("Masukkan data-data tersebut dengan urutan yi x1i x2i x3i ... xni");
+        System.out.println("(Perhatikan bahwa y berada pada paling depan matriks)");
+        for (i = 1; i <= Brs; i++) {
+            for (j = 1; j <= (Kol+1); j++) {
+                this.Mat[i][j] = input.nextFloat();
+            }
+        }
+        this.XK = new float[Kol];
+        // tolong buat array public untuk nyimpen xk, gaperlu alokasi memori, cukup deklarasiin
+        // public float[] XK
+        System.out.println("Masukkan data-data xk");
+        for (i = 1; i<= Kol; i++) {
+            this.XK[i] = input.nextFloat();
+        }
+    }
+
+
 }
 
