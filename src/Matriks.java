@@ -567,39 +567,23 @@ public class matriks {
         }
     }
     public double bacaDeterminant() {
-        double ret = 1;
-        matriks M2 = new matriks();
-        M2.Brs = this.Brs;
-        M2.Kol = this.Kol;
-        for(int i=1; i<=this.Brs; i++){
-            for(int j=1; j<=this.Kol; j++){
-                M2.Mat[i][j] = this.Mat[i][j];
-            }
-        }
+        int i, j;
+		double hasil = 1;
 
-        for (int i=1;i<=M2.Brs;i++) {
-            if (M2.Mat[i][i] == 0) {
-                for (int j=i+1;j<=M2.Brs;j++) {
-                    if (M2.Mat[j][i] != 0) {
-                        M2.TukarBaris(i, j);
-                        ret *= -1;
-                        break;
-                    }
-                }
-            }
-            if (M2.Mat[i][i] == 0) continue;
-            ret *= M2.Mat[i][i];
-            M2.KaliBaris(i, 1/M2.Mat[i][i]);
-            for (int j=i+1;j<=M2.Brs;j++) {
-                M2.TambahBaris(j, i, -1 * M2.Mat[j][i] / M2.Mat[i][i]);
-            }
-        }
-        for (int i=1;i<=M2.Brs;i++) {
-            ret *= M2.Mat[i][i];
-        }
-        return ret;
-    }
+		for (i = 1; i <= this.Brs; i++) {
+			double BrsLead = this.Mat[i][i];
 
+			hasil *= BrsLead;
+			for (j = i + 1; j <= this.Brs; j++) {
+				double KolLead = this.Mat[j][i];
+
+				this.TambahBaris(j, i, -KolLead/BrsLead);
+			}
+		}
+		
+		return hasil;
+	}
+	
     public void InverseMatriksSPL(){
         int i,j,k;
         int Brs, Kol;
