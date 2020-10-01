@@ -312,6 +312,114 @@ public class matriks {
 
 		}
     }
+    public void bacaFileExtBalikan(){
+		BufferedReader br = null;
+		FileReader fr = null;
+		int x,dgt,i,d,j;
+		float temp,dtemp;
+		boolean dec,min;
+
+		try {
+
+			//br = new BufferedReader(new FileReader(FILENAME));
+			fr = new FileReader("matriksBalikan.txt");
+			br = new BufferedReader(fr);
+
+			String sCurrentLine;
+
+			sCurrentLine = br.readLine();
+
+			if ((sCurrentLine) == null){
+				System.out.println("File Kosong");
+			}
+			else{
+				i=0;
+				j=0;
+				Kol = 0;
+				min=false;
+
+				while ((sCurrentLine) != null){						//asumsikan antar elemen matriks pada file eksternal hanya dipisahkan satu spasi
+					if (min){
+						this.Mat [i][j]=(this.Mat [i][j])*(-1);
+					}
+					dec = false;
+					min = false;
+					j = 1;
+					temp = 0;
+					dgt = 1;
+					i++;
+					for (x=0;x<=(sCurrentLine.length())-1;x++){
+						if ((sCurrentLine.charAt(x))!= ' '){
+							if ((sCurrentLine.charAt(x))== '.'){
+								dec=true;
+								dgt=1;
+							}
+							else if ((sCurrentLine.charAt(x))== '-'){
+								min=true;
+							}
+							else
+							{
+								dtemp=(sCurrentLine.charAt(x))-'0';
+								if (dec){
+									for (d=1;d<=dgt;d++){
+										dtemp=dtemp/10;
+									}
+									dgt++;
+									temp=temp+dtemp;
+									this.Mat[i][j] = temp;
+								}
+								else{
+									temp=(temp*10)+dtemp;
+									this.Mat[i][j] = temp;
+								}
+							}
+						}
+						else{
+							dec = false;
+							temp = 0;
+							if (min){
+								this.Mat [i][j]=(this.Mat [i][j])*-1;
+							}
+							j++;
+							min=false;
+						}
+					}
+					sCurrentLine = br.readLine();
+					if (j>Kol){
+						Kol = j;
+					}
+				}
+				if (min){
+					this.Mat [i][j]=(this.Mat [i][j])*-1;
+				}
+				Brs=i;
+			}
+
+		}
+
+		catch (IOException e) {
+
+			e.printStackTrace();
+			System.out.println("Ada kesalahan pada file eksternal.");
+
+		} finally {
+
+			try {
+
+				if (br != null)
+					br.close();
+
+				if (fr != null)
+					fr.close();
+
+			} catch (IOException ex) {
+
+				ex.printStackTrace();
+
+			}
+
+		}
+    }
     
     public void bacaFileExtInterpolasi() throws IOException {
         Scanner in = new Scanner (System.in);
@@ -522,7 +630,6 @@ public class matriks {
         }
     }
     public void bacaInverse(){
-
         if (this.bacaDeterminant() == 0) {
             System.out.println("Matriks ini tidak memiliki invers.");
             return;
@@ -1075,7 +1182,7 @@ public class matriks {
 			FileWriter namewriter = new FileWriter(NamaFile);
             BufferedWriter writer = new BufferedWriter(namewriter);
             
-            System.out.printf("Hasil Inverse Reduksi:");
+            System.out.println("Hasil Inverse Reduksi:");
             writer.append("Hasil Inverse Reduksi");
             writer.append(newline);
 			for (x = 1; x <= Brs; x++)
@@ -1084,7 +1191,7 @@ public class matriks {
                     writer.append(String.valueOf(this.Mat[x][j]) + " ");
                     System.out.printf("%.2f ", this.Mat[x][j]);
                 }
-                System.out.printf("%.2f", this.Mat[x][Kol]);
+                System.out.printf("%.2f\n", this.Mat[x][Kol]);
 				writer.append(String.valueOf(this.Mat[x][Kol]));
 				writer.append(newline);
 			}
@@ -1096,6 +1203,38 @@ public class matriks {
             System.out.println("File '"+ NamaFile + "' gagal dibuat!");
         }
     }
+
+    void tulisInverseKofaktor(){
+        int i,j,k,l,x;
+		String NamaFile="HasilInverseKofaktor.txt";
+		String newline="\r\n";
+        try
+        {
+			FileWriter namewriter = new FileWriter(NamaFile);
+            BufferedWriter writer = new BufferedWriter(namewriter);
+            
+            System.out.println("Hasil Inverse Kofaktor:");
+            writer.append("Hasil Inverse Kofaktor");
+            writer.append(newline);
+			for (x = 1; x <= Brs; x++)
+			{
+				for (j = 1; j < Kol; j++){
+                    writer.append(String.valueOf(this.Mat[x][j]) + " ");
+                    System.out.printf("%.2f ", this.Mat[x][j]);
+                }
+                System.out.printf("%.2f\n", this.Mat[x][Kol]);
+				writer.append(String.valueOf(this.Mat[x][Kol]));
+				writer.append(newline);
+			}
+            writer.append(newline);
+            writer.close();
+		}
+
+		catch(IOException ex) {
+            System.out.println("File '"+ NamaFile + "' gagal dibuat!");
+        }
+    }
+
     public void tulisCrammer() {
         int i,j,k,l,x;
 		String NamaFile="HasilCrammer.txt";
@@ -1168,7 +1307,32 @@ public class matriks {
             y = 1;
             x++;
         }
-        return 0;
+        double X = M.bacaDeterminant();
+        return X;
+    }
+
+    public void InverseKofaktor(){
+        //Rumus: 1/Det(A) * Transpose (Kofaktor A)
+        int i,j;
+        matriks M1 = new matriks();
+        M1.Brs = this.Brs;
+        M1.Kol = this.Kol;
+        for (i=IdxBrsMin; i<=Brs; i++){
+            for (j=IdxKolMin; j<=Kol; j++){
+                M1.Mat[i][j] = this.Mat[i][j];
+            }
+        }
+        M1.Kofaktor();
+        M1.Transpose();
+        double A = M1.bacaDeterminant();
+        Double B = Double.valueOf(A);
+        float C = B.floatValue();
+
+        for (i=IdxBrsMin; i<=Brs; i++){
+            for (j=IdxKolMin; j<=Kol; j++){
+               this.Mat[i][j] =  M1.Mat[i][j]/C;
+            }
+        }
     }
 
     public matriks Kofaktor() {

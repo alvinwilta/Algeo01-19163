@@ -319,7 +319,7 @@ public class DriverMatriks {
                     M.tulisInverseReduksi();
                 }
                 else if (menu3 == 2){
-                    //M.bacaFileExtBalikan();
+                    M.bacaFileExtBalikan();
                     System.out.println("Matriks Awal untuk Inverse Reduksi");
                     M.tulisMatriks();
                     System.out.println();
@@ -329,7 +329,6 @@ public class DriverMatriks {
                 }
             }
             else if (menu2 == 2){
-                /*
                 MenuInput();
                 if (menu3 == 1){
                     M.bacaMatriksBalikan();
@@ -355,9 +354,7 @@ public class DriverMatriks {
                 }
                 else{
                     MenuInput();
-                }
-                */
-                
+                }                
             }
             else if ((menu2 == 9)||(menu2 == 0)){
                 MenuUtama();
@@ -382,7 +379,6 @@ public class DriverMatriks {
                     System.out.println("Matriks Interpolasi setelah telah dilakukan metode Gauss:");
                     M.tulisInterpolasiGauss();
                     System.out.println();
-                    }
                 }
                 else if (menu3 == 9){
                     MenuPilihanInterpolasi();
@@ -401,8 +397,8 @@ public class DriverMatriks {
                 MenuPilihanInterpolasi();
             }
         }
+        /*
         else if (menu1 == 5){
-            /*
             MenuPilihanRegresi();
             if (menu2 == 1){
                 MenuInput();
@@ -454,8 +450,9 @@ public class DriverMatriks {
             else{
                 MenuPilihanRegresi();
             }
-            */
+        
         }
+        */
         else if (menu1 == 6){
             Keluar();
         }

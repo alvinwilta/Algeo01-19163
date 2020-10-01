@@ -384,7 +384,7 @@ public class matriks3 {
         Kol = brs;
     }
     
-    public float buatAdjoin() {
+    public matriks buatAdjoin() {
         matriks M = this.Kofaktor();
         return M.Transpose();
     }

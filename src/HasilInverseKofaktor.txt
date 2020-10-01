@@ -1,0 +1,6 @@
+Hasil Inverse Kofaktor
+Infinity Infinity -Infinity -Infinity Infinity
+Infinity Infinity -Infinity -Infinity -Infinity
+Infinity -Infinity Infinity Infinity Infinity
+Infinity Infinity -Infinity Infinity Infinity
+
