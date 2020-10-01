@@ -178,6 +178,7 @@ public class DriverMatriks {
             else if (menu2 == 3){
                 MenuInput();
                 if(menu3 == 1){
+                    M.bacaMatriksSPLGauss();
                     M.bacaMatriksBalikanSPL();
                     M.InverseMatriksSPL();
                     System.out.println();
@@ -190,6 +191,7 @@ public class DriverMatriks {
                     M.bacaMatriksSPLExt();
                     System.out.println("Matriks Awal:");
                     M.tulisMatriks();
+                    M.bacaMatriksBalikanSPL();
                     M.InverseMatriksSPL();
                     System.out.println();
                     System.out.println("Matriks SPL Setelah dilakukan metode Inverse:");

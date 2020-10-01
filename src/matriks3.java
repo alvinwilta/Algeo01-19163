@@ -512,6 +512,3 @@ public class matriks3 {
 	}
 
 }
-
-
-

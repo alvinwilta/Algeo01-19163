@@ -21,9 +21,13 @@ public class matriks {
     public float[][] M2 = new float[IdxMax][IdxMax];
     public float[][] MU = new float[IdxMax][IdxMax];
     public float[][] K = new float[IdxMax][IdxMax];
+    public float[][] SPLU = new float[IdxMax][IdxMax];
+    public float[][] SPLK = new float[IdxMax][IdxMax];
 
     int IdxBrsMin = 1;
     int IdxKolMin = 1;
+    int SPLUKol = 0;
+    int SPLUBrs = 0;
     //Scanner
     Scanner input = new Scanner(System.in);
     private boolean solution;
@@ -379,6 +383,19 @@ public class matriks {
                 this.Mat[i][j] = input.nextFloat();
             }
         }
+        i, j = 0;
+        for (i = IdxBrsMin; i <= Brs; i++){
+            for (j = IdxKolMin; j< Kol; j++){
+                this.SPLU[i][1]= this.Mat[i][j];
+            }
+        }
+        this.SPLUKol = j;
+        this.SPLUBrs = i;
+
+        i = 0;
+        for (i = IdxBrsMin; i <= Brs; i++){
+            this.SPLK[i][1]= this.Mat[i][Kol];
+        }
     }
     public void bacaMatriksBalikan() {
         int i, j;
@@ -474,7 +491,25 @@ public class matriks {
     }
 
     public void InverseMatriksSPL(){
+        int i,j,k;
+        int Brs, Kol;
 
+        for (i = 1; i < IdxMax; i++) {
+            for (j = 1; j < IdxMax; j++) {
+                this.Mat[i][j] = this.SPLU[i][j];
+            }
+        }
+        i, j, k = IdxBrsMin;
+        Brs = SPLUBrs;
+        Kol = SPLUKol;
+        bacaInverse();
+        if (this.bacaDeterminant() != 0){
+            for (i=IdxBrsMin;i<=Brs;i++){
+                for(j=IdxKolMin;j<=Kol;j++){
+                    this.hsl[i][1]=(this.
+                }
+            }
+        }
     }
     public void tulisInverseMatriksSPL(){
 
@@ -919,7 +954,8 @@ public class matriks {
         }
         Kol = Brs+1;
     }
-    public void matriksInterpolasiExt() throws IOException
+    public void matriksInterpolasiExt() throws IOException{
+    try
     {
         int i,j;
         float x,y;
@@ -940,6 +976,9 @@ public class matriks {
             this.Mat[i][Brs+1] = y;
         }
         Kol = Brs+1;
+        }
+        catch(IOException ex) {
+            System.out.println("Matriks gagal dibuat!");}
     }
 
 
@@ -1037,8 +1076,29 @@ public class matriks {
         }
     }
     public void tulisCrammer() {
+        int i,j,k,l,x;
+		String NamaFile="HasilCrammer.txt";
+		String newline="\r\n";
         if (this.solution==false){
             System.out.println("Tidak Dapat Diselesaikan dgn Metode Cramer");
+        }
+        else{
+            try{
+            FileWriter namewriter = new FileWriter(NamaFile);
+            BufferedWriter writer = new BufferedWriter(namewriter);
+
+            System.out.println("Matriks setelah OBE");
+            writer.append("Matriks Setelah OBE");
+            writer.append(newline);
+            for (x = 1; x <= Brs; x++){
+                writer.append("x" + String.valueOf(i) + "= " + String.valueOf(this.hsl[x][1]) + " ");
+                System.out.printf("%.2f ", this.hsl[x][1]);
+				writer.append(newline);
+			    }
+            }
+            catch(IOException ex) {
+                System.out.println("File '"+ NamaFile + "' gagal dibuat!");
+            }
         }
     }
     public void tulisDeterminanReduksi(){
@@ -1179,8 +1239,8 @@ public class matriks {
     void tulisInterpolasiGauss() throws IOException{
 		int i,j,k,l,m,n;
 		float sum,x;
-		String s,s2,stemp;
-
+        String s,s2,stemp;
+        try{
 			for (i = 1; i <= Brs; i++)
 			{
 				for (j = 1; j < Kol; j++){
@@ -1268,11 +1328,9 @@ public class matriks {
 			s2 += ") = ";
 			stemp = String.valueOf(sum);
             s2 += sum;
-            try {
-                tulisInterpolasiGauss();
-            }
-            catch(IOException e) {
-                e.printStackTrace();
-            }
+        }
+        catch(IOException ex) {
+            System.out.println("File '"+ NamaFile + "' gagal dibuat!");
+        }
 	}
 }
