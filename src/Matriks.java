@@ -13,7 +13,7 @@ public class matriks {
     //Atribut indeks
     public int Brs;
     public int Kol;
-    public float det;
+    public float det = 1;
     // Deklarasi Matriks
     public float[][] Mat = new float[IdxMax][IdxMax];
     public float[][] Temp = new float[IdxMax][IdxMax];
@@ -56,6 +56,11 @@ public class matriks {
     //Selektor Elemen
     public double Elmt(int row, int col){
         return this.Mat[row][col];
+    }
+
+    public void DeterminanReduksi() {
+        Gauss();
+        det = det * kaliDiagonal();
     }
 
     void KaliBaris(int p, double r) {
@@ -566,7 +571,7 @@ public class matriks {
             }
         }
     }
-    public double bacaDeterminant() {
+    public double bacaDeterminant(int n ) {
         int D = 0;  
         int sign = -1;  
             if (n == 1) 
@@ -678,6 +683,7 @@ public class matriks {
             this.Mat[a][i] = this.Mat[b][i];
             this.Mat[b][i] = this.Mat[0][i];
         }
+        det = det * -1;
     }
 
     public void buatKolomNolBawah(int j, int i){
@@ -1237,10 +1243,11 @@ public class matriks {
     public void tulisDeterminanReduksi(){
         int i,j,k,l,x;
 		String NamaFile="HasilDeterminanReduksi.txt";
-		String newline="\r\n";
-        double Value = bacaDeterminant();
+        String newline="\r\n";
+        DeterminanReduksi();
+        /*double Value = bacaDeterminant();
         Double D = Double.valueOf(Value);
-        float value = D.floatValue();
+        float value = D.floatValue();*/
         try
         {
 			FileWriter namewriter = new FileWriter(NamaFile);
@@ -1257,8 +1264,8 @@ public class matriks {
 				writer.append(newline);
 			}
             writer.append(newline);
-            System.out.printf("Determinan Matriks: %.2f \n", value);
-            writer.append("Determinan Matriks:" + String.valueOf(value) + "\r\n");
+            System.out.printf("Determinan Matriks: %.2f \n", det);
+            writer.append("Determinan Matriks:" + String.valueOf(det) + "\r\n");
             writer.close();
 		}
 
