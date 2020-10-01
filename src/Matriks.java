@@ -571,24 +571,23 @@ public class matriks {
             }
         }
     }
-    public double bacaDeterminant(int n ) {
+    
+    public double bacaDeterminantKofaktor(int Brs) {
         int D = 0;  
         int sign = -1;  
-            if (n == 1) 
-                return Mat[0][0]; 
+            if (Brs == 1) 
+                return this.Mat[0][0]; 
           
-            for (int f = 0; f < n; f++) 
+            for (int f = 0; f < Brs; f++) 
             { 
                 Kofaktor();
-                D += sign * Mat[0][f]  
-                   * bacaDeterminant(n-1); 
+                D += sign * Mat[0][f]  * bacaDeterminantKofaktor(Brs-1); 
           
                 sign = -sign; 
             } 
-          
             return D; 
-        } 
-	
+            
+    } 
     public void InverseMatriksSPL(){
         int i,j,k;
         int Brs, Kol;
@@ -619,7 +618,7 @@ public class matriks {
         }
     }
     public void bacaInverse(){
-        if (this.bacaDeterminant(Brs) == 0) {
+        if (this.bacaDeterminant() == 0) {
             System.out.println("Matriks ini tidak memiliki invers.");
             return;
         }
@@ -1185,7 +1184,7 @@ public class matriks {
 			FileWriter namewriter = new FileWriter(NamaFile);
             BufferedWriter writer = new BufferedWriter(namewriter);
 
-            if(bacaDeterminant()==0){
+            if(bacaDeterminantKofaktor()==0){
                 System.out.println("Matriks tidak memiliki balikan:");
                 writer.append("Matriks tidak memiliki balikan:");
                 writer.close();
@@ -1244,10 +1243,9 @@ public class matriks {
         int i,j,k,l,x;
 		String NamaFile="HasilDeterminanReduksi.txt";
         String newline="\r\n";
-        DeterminanReduksi();
-        /*double Value = bacaDeterminant();
+        double Value = bacaDeterminant();
         Double D = Double.valueOf(Value);
-        float value = D.floatValue();*/
+        float value = D.floatValue();
         try
         {
 			FileWriter namewriter = new FileWriter(NamaFile);
@@ -1304,7 +1302,7 @@ public class matriks {
         }
         M1.Kofaktor();
         M1.Transpose();
-        double A = M1.bacaDeterminant();
+        double A = M1.bacaDeterminantKofaktor();
         Double B = Double.valueOf(A);
         float C = B.floatValue();
 
