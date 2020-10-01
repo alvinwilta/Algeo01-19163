@@ -370,15 +370,13 @@ public class DriverMatriks {
             if (menu2 == 1){
                 MenuInput();
                 if(menu3 == 1){
-                    M.bacaMatriksInterpolasi();
+                    M.matriksInterpolasi();
                     System.out.println("Matriks Interpolasi setelah telah dilakukan metode Gauss:");
                     M.tulisInterpolasiGauss();
                     System.out.println();
                 }
                 else if (menu3 == 2){
-                    M.bacaMatriksInterpolasiExt();
-                    System.out.println("Matriks Awal untuk Interpolasi");
-                    M.tulisMatriks();
+                    M.matriksInterpolasiExt()
                     System.out.println();
                     System.out.println("Matriks Interpolasi setelah telah dilakukan metode Gauss:");
                     M.tulisInterpolasiGauss();

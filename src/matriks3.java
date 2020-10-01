@@ -34,6 +34,10 @@ public class matriks3 {
         Kol = 0;
     }
 //Fungsi yang mengembalikan indeks angka 1 paling kiri dari baris a
+    public void method() throws Exception{  
+        System.out.println("Tidaak!! Error...");  
+    }  
+
     public int LeftestOneKoef(int a) {
     for (int i=1;i<=this.Kol;i++) {
         if (Math.abs(this.Mat[a][i]-1) <= 0.0001) return i;
@@ -84,7 +88,7 @@ public class matriks3 {
     void bacaMatriksInterpolasi(){
         int i,j;
 
-        bacaUkuranMatriksInterpolasi();
+        bacaUkuranmatriksInterpolasi();
         for (i = 1; i <= Brs; i++){
             for (j = 1; j <= Kol; j++){
                 this.Mat[i][j] = input.nextFloat();
@@ -95,7 +99,7 @@ public class matriks3 {
 
     public double BacaDeterminant() {
         double dou = 1;
-        Matriks M = new Matriks();
+        matriks M = new matriks();
         M.Brs = this.Brs;
         M.Kol = this.Kol;
         for(int i=1; i<=this.Brs; i++){
@@ -129,11 +133,11 @@ public class matriks3 {
     void BacaInverse(){
 
         if (this.BacaDeterminant() == 0) {
-            System.out.println("Matriks ini tidak memiliki invers.");
+            System.out.println("matriks ini tidak memiliki invers.");
             return;
         }
 
-        Matriks M = new Matriks();
+        matriks M = new matriks();
         M.Brs = this.Brs;
         M.Kol = this.Kol;
         for(int i=1; i<=this.Brs; i++){
@@ -186,7 +190,7 @@ public class matriks3 {
         }
     }
 
-    void bacaUkuranMatriks(){
+    void bacaUkuranmatriks(){
     //Menerima input banyaknya baris dan banyaknya kolom dari suatu matriks
         System.out.print("Masukan banyaknya baris : ");
         Brs = input.nextInt();
@@ -281,7 +285,7 @@ public class matriks3 {
             }
     
       //FUNGSI LANJUTAN
-      void matriksInterpolasi()
+      public void matriksInterpolasi()
     {
         int i,j;
         float x,y;
@@ -301,7 +305,7 @@ public class matriks3 {
         }
         Kol = Brs+1;
     }
-    void matriksInterpolasiExt() throws Exception
+    public void matriksInterpolasiExt() throws Exception
     {
         int i,j;
         float x,y;
@@ -322,7 +326,7 @@ public class matriks3 {
         Kol = Brs+1;
     }
     void tulisCramer() {
-        Matriks sqr = new Matriks();
+        matriks sqr = new matriks();
         sqr.Brs = this.Brs;
         sqr.Kol = this.Kol - 1;
         if (this.Brs != this.Kol - 1) {
@@ -332,7 +336,7 @@ public class matriks3 {
     }
     //Fungsi untuk mengembalikan determinan matriks persegi yang akan digunakan untuk kofaktor
     public double DetEx(int a, int b) {
-        Matriks M = new Matriks();
+        matriks M = new matriks();
         M.Brs = this.Brs - 1;
         M.Kol = this.Kol - 1;
         int x = 1, y = 1;
@@ -349,8 +353,8 @@ public class matriks3 {
     }
 
     //Fungsi untuk menhasilkan matriks kofaktor
-    public Matriks Kofaktor() {
-        Matriks M = new Matriks();
+    public float Kofaktor() {
+        matriks M = new matriks();
         M.Brs = this.Brs;
         M.Kol = this.Kol;
         for (int i = 1; i <= M.Brs; i++) {
@@ -363,21 +367,25 @@ public class matriks3 {
         }
         return M;
     }
-    public Matriks Transpose() {
-        Matriks M = new Matriks();
-        M.Brs = this.Kol;
-        M.Kol = this.Brs;
+    public void Transpose(){
+        int i,j;
+        float temp;
+        int brs = Brs;
+        int kol = Kol;
 
-        for(int i = 1; i <= this.Kol ; i++) {
-            for(int j=1; j <= this.Brs ; j++) {
-                M.Mat[i][j] = this.Mat[j][i];
+        for (i = 1; i<=Brs/2; i++){
+            for (j = 1; j <= Kol/2; j++){
+                temp = this.Mat[i][j];
+                this.Mat[i][j] = this.Mat[j][i];
+                this.Mat[j][i] = temp;
             }
         }
-        return M;
+        Brs = kol;
+        Kol = brs;
     }
     
-    public Matriks buatAdjoin() {
-        Matriks M = this.Kofaktor();
+    public float buatAdjoin() {
+        matriks M = this.Kofaktor();
         return M.Transpose();
     }
     

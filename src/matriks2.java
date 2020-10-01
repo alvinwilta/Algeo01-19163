@@ -194,7 +194,7 @@ public class matriks2 {
         // n adalah ukuran matriks
         // fungsi ini mengeluarkan float determinan dengan cara kofaktor
         float det=0;
-        int p, h, k, i, j,
+        int p, h, k, i, j;
         matriks temp = new matriks();
         temp.Brs = n;
         temp.Kol = n;
