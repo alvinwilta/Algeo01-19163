@@ -56,7 +56,6 @@ public class DriverMatriks {
         System.out.println("-----Pilih metode di bawah ini:-----");
         System.out.println();
         System.out.println("1. Metode eliminasi Gauss");
-        System.out.println("2. Metode eliminasi Gauss-Jordan");
         System.out.println("9. Kembali");
         System.out.println("0. Menu Utama");
         System.out.println("Masukkan Input di bawah ini:\n");
@@ -397,52 +396,13 @@ public class DriverMatriks {
                 MenuPilihanInterpolasi();
             }
         }
-        /*
         else if (menu1 == 5){
             MenuPilihanRegresi();
             if (menu2 == 1){
-                MenuInput();
-                if(menu3 == 1){
-                    M.bacaMatriksRegresi();
-                    System.out.println("Matriks Regresi setelah telah dilakukan metode Gauss:");
-                    M.tulisRegresiGauss();
-                    System.out.println();
-                }
-                else if (menu3 == 2){
-                    M.bacaMatriksRegresiExt();
-                    System.out.println("Matriks Awal untuk Regresi");
-                    M.tulisMatriks();
-                    System.out.println();
-                    System.out.println("Matriks Regresi setelah telah dilakukan metode Gauss:");
-                    M.tulisRegresiGauss();
-                    System.out.println();
-                }
-            }
-            else if (menu2 == 2){
-                MenuInput();
-                if(menu3 == 1){
-                    M.bacaMatriksRegresi();
-                    System.out.println("Matriks Regresi setelah telah dilakukan metode Gauss-Jordan:");
-                    M.tulisRegresiGaussJordan();
-                    System.out.println();
-                }
-                else if (menu3 == 2){
-                    M.bacaMatriksRegresiExt();
-                    System.out.println("Matriks Awal untuk Regresi");
-                    M.tulisMatriks();
-                    System.out.println("Matriks Regresi setelah telah dilakukan metode Gauss-Jordan:");
-                    M.tulisRegresiGaussJordan();
-                    System.out.println();
-                }
-                else if (menu3 == 9){
-                    MenuPilihanRegresi();
-                }
-                else if (menu3 == 0){
-                    MenuUtama();
-                }
-                else{
-                    MenuInput();
-                }
+                M.bacaMatriksRegresi();
+                System.out.println("Matriks Regresi setelah telah dilakukan metode Gauss:");
+                M.tulisRegresi();
+                System.out.println();
             }
             else if ((menu2 == 9)||(menu2 == 0)){
                 MenuUtama();
@@ -452,7 +412,6 @@ public class DriverMatriks {
             }
         
         }
-        */
         else if (menu1 == 6){
             Keluar();
         }

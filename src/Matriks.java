@@ -515,16 +515,6 @@ public class matriks {
             }
         }
     }
-    public void bacaMatriksRegresi() {
-        int i, j;
-
-        bacaUkuranMatriks ();
-        for (i = 1; i <= Brs; i++) {
-            for (j = 1; j <= Kol; j++) {
-                this.Mat[i][j] = input.nextFloat();
-            }
-        }
-    }
     public void bacaUkuranMatriksInterpolasi(){
         //Menerima input banyaknya baris dan banyaknya kolom dari suatu matriks
             System.out.print("Masukan banyaknya baris : ");
@@ -610,6 +600,66 @@ public class matriks {
             }
         }
     }
+    public void bacaInverse() {
+        // Membuat matriks identitas
+        matriks M2 = new matriks();
+        M2.Brs = this.Brs;
+        M2.Kol = this.Kol;
+        for(int i=1; i<=this.Brs; i++){
+            for(int j=1; j<=this.Kol; j++){
+                if(i==j) {
+                M2.Mat[i][j] = 1;
+                }else {
+                M2.Mat[i][j] = 0;
+                }
+            }
+        }
+        matriks M3 = new matriks();
+        M3.Brs = this.Brs + M2.Brs;
+        M3.Kol = this.Kol + M2.Kol;
+        for (int i = 1; i <= M3.Brs; i++) {
+            for (int j = 1; j <= M3.Kol; j++) {
+                if (j <= this.Kol) {
+                    M3.Mat[i][j] = this.Mat[i][j];
+                } else {
+                    M3.Mat[i][j] = M2.Mat[i][j - this.Kol];
+                }
+            }
+        }
+
+        M3.GaussJordan();
+
+        matriks N = new matriks();
+        N.Brs = this.Brs;
+        N.Kol = this.Kol;
+        for (int i = 1; i <= N.Brs; i++) {
+            for (int j = 1; j <= N.Kol; j++) {
+                N.Mat[i][j] = M3.Mat[i][j];
+            }
+        }
+
+        boolean sama = (N.Mat[1][1]==M2.Mat[1][1]);
+        int a = 1;
+        int b = 1;
+        while ((a <= N.Brs)&&(sama)) {
+            while ((b <= N.Kol) && (sama)) {
+                sama = sama && (N.Mat[a][b]==M2.Mat[a][b]);
+            }
+        }
+
+        if (sama) {
+            for(int i=1; i<=this.Brs; i++){
+                for(int j=1; j<=this.Kol; j++){
+                    this.Mat[i][j] = M3.Mat[i][j + this.Kol];
+                }
+            }
+        this.solution = true;
+
+        } else {
+            this.solution = false;
+        }
+    }
+    /*
     public void bacaInverse(){
         matriks M2 = new matriks();
         M2.Brs = this.Brs;
@@ -663,6 +713,7 @@ public class matriks {
             }
         }
     }
+    */
 
     public void TukarBaris(int a, int b) {
         for (int i=1;i<=this.Kol;i++) {
@@ -1134,7 +1185,7 @@ public class matriks {
 			FileWriter namewriter = new FileWriter(NamaFile);
             BufferedWriter writer = new BufferedWriter(namewriter);
 
-            if(bacaDeterminantKofaktor(this.Brs)==0){
+            if((bacaDeterminantKofaktor(this.Brs)==0)&&(this.solution==false)){
                 System.out.println("Matriks tidak memiliki balikan:");
                 writer.append("Matriks tidak memiliki balikan:");
                 writer.close();
@@ -1543,5 +1594,90 @@ public class matriks {
 			e.printStackTrace();
             System.out.println("Ada kesalahan pada file eksternal.");
         }
-	}
+    }
+    float[] MultipleLinearRegression(matriks M, int var) {
+        // M adalah matriksnya dengan syarat variabel dependen di kolom pertama, diikuti dengan variabel independen
+        // var adalah jumlah variabelnya (dependen dan independen)
+        // outputnya berupa array, dengan format [A0, A1, A2,...,An] dan
+        // equation untuk MLR adalah Y = A0 + A1X1 + A2X2 + ... + AnXn + error (tidak dihitung errornya)
+        // Rumusnya adalah: hasil = (X^T X)^-1 .X^T .y
+        int i,j,k; // indeks matriks
+        float[] hasil = new float[var];
+
+        matriks XM = new matriks ();
+        XM.Brs = var; XM.Kol = var;
+
+        matriks X = new matriks ();
+        X.Brs = Brs; X.Kol = var;
+
+        matriks XT = new matriks ();
+        XT.Brs = M.Brs; XT.Kol = var;
+
+        float[] y = new float[var];
+        // ASSIGN NILAI KE DALAM MATRIKS TEMPORARY
+        for (i=0;i<M.Brs;i++) {
+            for (j=0;j<M.Kol;j++) {
+                XT.Mat[i][j] = M.Mat[j][i];
+            }
+        }
+        for (i=0;i<M.Brs;i++) {
+            for (j=0;j<var;j++) {
+                X.Mat[i][j] = M.Mat[i][j];
+            }
+        }
+        for (i=0;i<M.Brs;i++) {
+            y[i] = M.Mat[i][1];     // ASSIGN NILAI Y
+            XT.Mat[0][i] = 1;           // MENGESET NILAI BIAS
+            X.Mat[i][0] = 1;            // MENGESET NILAI BIAS
+        }
+        // PERKALIAN MATRIKS ke-1
+        for(i=0;i<M.Kol;i++) {
+            for (j = 0;j<M.Kol;j++) {
+                XM.Mat[i][j] = 0;
+                for (k = 0;k<M.Brs;k++) {
+                    XM.Mat[i][j] += XT.Mat[i][k] * M.Mat[k][j];
+                }
+            }
+        }
+        // INVERS HASIL MATRIKS
+        XM.InverseMatriksSPL();
+        // PERKALIAN MATRIKS ke-2
+        for(i=0;i<var;i++) {
+            for (j = 0;j<var;j++) {
+                XM.Mat[i][j] = 0;
+                for (k = 0;k<M.Brs;k++) {
+                    XM.Mat[i][j] += XM.Mat[i][k] * XT.Mat[k][j];
+                }
+            }
+        }
+        // PERKALIAN MATRIKS ke-3
+        for (i=0;i<var;i++) {
+            for (j=0;j<var;j++) {
+                hasil[i] = XM.Mat[j][i]*y[j];
+            }
+        }
+        return hasil;
+    }
+
+    void bacaMatriksRegresi() {
+        int i,j;
+        System.out.println("Masukkan jumlah variabel peubah:");
+        this.Kol = input.nextInt();
+        System.out.println("Masukkan berapa banyak data yang ingin dimasukkan:");
+        this.Brs = input.nextInt();
+        System.out.println("Masukkan data-data tersebut dengan urutan yi x1i x2i x3i ... xni");
+        System.out.println("(Perhatikan bahwa y berada pada paling depan matriks)");
+        for (i = 1; i <= Brs; i++) {
+            for (j = 1; j <= (Kol+1); j++) {
+                this.Mat[i][j] = input.nextFloat();
+            }
+        }
+        float [] XK = new float[Kol];
+        // tolong buat array public untuk nyimpen xk, gaperlu alokasi memori, cukup deklarasiin
+        // public float[] XK
+        System.out.println("Masukkan data-data xk");
+        for (i = 1; i<= Kol; i++) {
+            XK[i] = input.nextFloat();
+        }
+    }
 }
