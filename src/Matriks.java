@@ -19,8 +19,6 @@ public class matriks {
     public float[][] Temp = new float[IdxMax][IdxMax];
     public float[][] hsl = new float[IdxMax][IdxMax];
     public float[][] M2 = new float[IdxMax][IdxMax];
-    public float[][] MU = new float[IdxMax][IdxMax];
-    public float[][] K = new float[IdxMax][IdxMax];
     public float[][] SPLU = new float[IdxMax][IdxMax];
     public float[][] SPLK = new float[IdxMax][IdxMax];
 
@@ -1096,46 +1094,40 @@ public class matriks {
 
     public void Crammer(){
         int i,j;
+        float xu, xs;
+        matriks MU = new matriks();
+        matriks K = new matriks();
+        MU.Brs = this.Brs;
+        MU.Kol = this.Kol - 1;
+        K.Brs = 1;
+        K.Kol = this.Brs;
+
         if (this.Brs != this.Kol - 1) {
             this.solution = false;
         }
         else{
+            this.solution = true;
             for (i=IdxBrsMin; i<=Brs; i++){
-                for (j=IdxKolMin; j<=Kol-1; j++){
-                    this.MU[i][j] = this.Mat[i][j]; 
+                for (j=1 ; j<=Kol-1; j++){
+                    MU.Mat[i][j] = this.Mat[i][j]; 
                 }
             }
             for (i=IdxBrsMin; i<=Brs; i++){
-                this.K[i][1] = this.Mat[i][Kol];
+                K.Mat[i][1] = this.Mat[i][Kol];
             }
-            for (i=IdxBrsMin; i<=Brs; i++){
-                for (j=IdxKolMin; j<=Kol-1; j++){
-                    this.Mat[i][j] = 0 ; 
-                }
-            }
-            for (i=IdxBrsMin; i<=Brs; i++){
-                for (j=IdxKolMin; j<=Kol-1; j++){
-                    this.Mat[i][j] = this.MU[i][j]; 
-                }
-            }
+
+            xu = MU.bacaDeterminant();
     
-            for (i=IdxBrsMin; i<=Brs; i++){
-                for (j=IdxKolMin; j<=Kol-1; j++){
-                    this.Mat[i][j] = this.MU[i][j]; 
-                }
-            }
-            float xu = this.bacaDeterminant();
-    
-            for(j=IdxKolMin; j<=Kol-1; j++){
+            for(j=IdxKolMin; j<=MU.Kol; j++){
                 for(i=IdxBrsMin; i<=Brs;i++){
-                    this.Mat[i][j] = this.K[i][j];
+                    MU.Mat[i][j] = K.Mat[i][j];
                 }
-                float xs = this.bacaDeterminant();
-                this.hsl[i][1] = xs/xu;
-                i = 1;
-                for(i=IdxBrsMin; i<=Brs;i++){
-                    this.Mat[i][j] = this.MU[i][j];
+                xs = MU.bacaDeterminant();
+                this.hsl[1][j] = xs/xu;
+                for(i=IdxBrsMin; i<=Brs; i++){
+                    MU.Mat[i][j] = this.Mat[i][j];
                 }
+                xs = 0;
             }
         }
     }
@@ -1209,11 +1201,11 @@ public class matriks {
     }
 
     public void tulisCrammer() {
-        int i,j,k,x;
+        int x;
 		String NamaFile="HasilCrammer.txt";
 		String newline="\r\n";
-        if (bacaDeterminant() == 0){
-            System.out.println("Tidak Dapat Diselesaikan dgn Metode Cramer");
+        if (this.solution == false){
+            System.out.println("Tidak Dapat Diselesaikan dgn Metode Crammer");
         }
         else{
             try{
@@ -1224,8 +1216,9 @@ public class matriks {
             writer.append("Matriks Setelah OBE");
             writer.append(newline);
             for (x = 1; x <= Brs; x++){
-                writer.append("x" + String.valueOf(x) + "= " + String.valueOf(this.hsl[x][1]) + " ");
-                System.out.printf("%.2f ", this.hsl[x][1]);
+                writer.append("x" + String.valueOf(x) + " = " + String.valueOf(this.hsl[x][1]) + " ");
+                System.out.printf("x%d = ", x);
+                System.out.printf("%.2f\n", this.hsl[1][x]);
 				writer.append(newline);
 			    }
             }
