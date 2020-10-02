@@ -21,6 +21,7 @@ public class matriks {
     public float[][] M2 = new float[IdxMax][IdxMax];
     public float[][] SPLU = new float[IdxMax][IdxMax];
     public float[][] SPLK = new float[IdxMax][IdxMax];
+    public float[] Regresi = new float[IdxMax];
 
     int IdxBrsMin = 1;
     int IdxKolMin = 1;
@@ -1678,6 +1679,13 @@ public class matriks {
         System.out.println("Masukkan data-data xk");
         for (i = 1; i<= Kol; i++) {
             XK[i] = input.nextFloat();
+        }
+    }
+    void tulisRegresi(float[] regresi) {
+        int i;
+        System.out.println("Berikut ini adalah hasil prediktor dari normal equation");
+        for (i=0;i<regresi.length; i++) {
+            System.out.println("x" + i + " = " + regresi[i]);
         }
     }
 }
