@@ -887,7 +887,7 @@ public class matriks {
     public void Gauss(){
         int i,j,k;
         float c;
-        for (i=1; i<Brs; i++){
+        for (i=1; i<=Brs; i++){
             for (j=i+1; j<=Brs; j++){
                 c= this.Mat[j][i]/this.Mat[i][i];
                 for (k=1;k<=Kol;k++){
@@ -898,17 +898,23 @@ public class matriks {
     }
     
     public void GaussJordan() {
-        int i = Brs;
-        //dimulai dari bawah karena baris paling atas tidak perlu disentuh
-        int j;
-        Gauss();
-        while (i >= 1){
-            while (isBarNol(i)){
-                i--;
+        int i,j,k;
+        float c;
+        for (i=1; i<=Brs; i++){
+            for (j=1; j<=Brs; j++){
+                if (i!=j){
+                    c= this.Mat[j][i]/this.Mat[i][i];
+                    for (k=1;k<=Kol;k++){
+                        this.Mat[j][k] = this.Mat[j][k] - c*this.Mat[i][k];
+                    }
+                }
+                else{
+                    float faktor = this.Mat[i][j];
+                    for (k = 1; k<=Kol; k++) {
+                        this.Mat[i][k] = this.Mat[i][k]/faktor;
+                    }
+                }
             }
-            j = indeksPivot(i);
-            buatKolomNolAtas(i,j);
-            i--;
         }
     }
 
