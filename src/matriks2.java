@@ -302,5 +302,13 @@ public class matriks2 {
     }
 
 
+    void tulisRegresi(float[] regresi) {
+        int i;
+        System.out.println("Berikut ini adalah hasil prediktor dari normal equation");
+        for (i=0;i<regresi.length; i++) {
+            System.out.println("x" + i + " = " + regresi[i]);
+        }
+    }
+
 }
 
