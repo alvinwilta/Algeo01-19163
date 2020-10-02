@@ -611,11 +611,6 @@ public class matriks {
         }
     }
     public void bacaInverse(){
-        if (this.bacaDeterminant() == 0) {
-            System.out.println("Matriks ini tidak memiliki invers.");
-            return;
-        }
-
         matriks M2 = new matriks();
         M2.Brs = this.Brs;
         M2.Kol = this.Kol;
@@ -1127,36 +1122,41 @@ public class matriks {
                 for(i=IdxBrsMin; i<=Brs; i++){
                     MU.Mat[i][j] = this.Mat[i][j];
                 }
-                xs = 0;
             }
         }
     }
     void tulisInverseReduksi(){
         int i,j,k,l,x;
 		String NamaFile="HasilInverseReduksi.txt";
-		String newline="\r\n";
+        String newline="\r\n";
         try
         {
 			FileWriter namewriter = new FileWriter(NamaFile);
             BufferedWriter writer = new BufferedWriter(namewriter);
-            
-            System.out.println("Hasil Inverse Reduksi:");
-            writer.append("Hasil Inverse Reduksi");
-            writer.append(newline);
-			for (x = 1; x <= Brs; x++)
-			{
-				for (j = 1; j < Kol; j++){
-                    writer.append(String.valueOf(this.Mat[x][j]) + " ");
-                    System.out.printf("%.2f ", this.Mat[x][j]);
-                }
-                System.out.printf("%.2f\n", this.Mat[x][Kol]);
-				writer.append(String.valueOf(this.Mat[x][Kol]));
-				writer.append(newline);
-			}
-            writer.append(newline);
-            writer.close();
-		}
 
+            if(bacaDeterminantKofaktor(this.Brs)==0){
+                System.out.println("Matriks tidak memiliki balikan:");
+                writer.append("Matriks tidak memiliki balikan:");
+                writer.close();
+            }
+            else{
+                System.out.println("Hasil Inverse Reduksi:");
+                writer.append("Hasil Inverse Reduksi");
+                writer.append(newline);
+                for (x = 1; x <= Brs; x++)
+                {
+                    for (j = 1; j < Kol; j++){
+                        writer.append(String.valueOf(this.Mat[x][j]) + " ");
+                        System.out.printf("%.2f ", this.Mat[x][j]);
+                    }
+                    System.out.printf("%.2f\n", this.Mat[x][Kol]);
+                    writer.append(String.valueOf(this.Mat[x][Kol]));
+                    writer.append(newline);
+                }
+                writer.append(newline);
+                writer.close();
+            }
+		}
 		catch(IOException ex) {
             System.out.println("File '"+ NamaFile + "' gagal dibuat!");
         }
@@ -1175,9 +1175,8 @@ public class matriks {
                 System.out.println("Matriks tidak memiliki balikan:");
                 writer.append("Matriks tidak memiliki balikan:");
                 writer.close();
-
             }
-            
+            else{
             System.out.println("Hasil Inverse Kofaktor:");
             writer.append("Hasil Inverse Kofaktor");
             writer.append(newline);
@@ -1193,6 +1192,7 @@ public class matriks {
 			}
             writer.append(newline);
             writer.close();
+            }
 		}
 
 		catch(IOException ex) {
