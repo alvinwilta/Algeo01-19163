@@ -884,6 +884,19 @@ public class matriks {
         det = det * faktor;
     }
 
+    public void Gauss(){
+        int i,j,k;
+        float c;
+        for (i=1; i<Brs; i++){
+            for (j=i+1; j<=Brs; j++){
+                c= this.Mat[j][i]/this.Mat[i][i];
+                for (k=1;k<=Kol;k++){
+                    this.Mat[j][k] = this.Mat[j][k] - c*this.Mat[i][k];
+                }
+            }
+        }
+    }
+    /*
     public void Gauss() {
         int i = 1;
         int j = 1;
@@ -906,6 +919,7 @@ public class matriks {
         }
 
     }
+    */
     public void GaussJordan() {
         int i = Brs;
         //dimulai dari bawah karena baris paling atas tidak perlu disentuh
