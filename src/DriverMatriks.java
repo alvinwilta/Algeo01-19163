@@ -81,6 +81,8 @@ public class DriverMatriks {
         System.out.println();
         System.out.println("1. Reduksi Baris (OBE)");
         System.out.println("2. Metode Kofaktor");
+        System.out.println("9. Kembali");
+        System.out.println("0. Menu Utama");
         System.out.println("Masukkan Input di bawah ini:\n");
         menu2 = input.nextInt();
     }
@@ -248,7 +250,7 @@ public class DriverMatriks {
                 MenuInput();
                 if (menu3 == 1){
                     M.bacaMatriksDeterminan();
-                    M.DeterminanReduksi();
+                    M.bacaDeterminant();
                     System.out.println();
                     System.out.println("Determinan setelah telah dilakukan metode Reduksi:");
                     M.tulisDeterminanReduksi();
@@ -258,7 +260,7 @@ public class DriverMatriks {
                     System.out.println("Matriks Awal untuk Hitung Determinan:");
                     M.tulisMatriks();
                     System.out.println();
-                    M.DeterminanReduksi();
+                    M.bacaDeterminant();
                     System.out.println();
                     System.out.println("Determinan setelah telah dilakukan metode Reduksi:");
                     M.tulisDeterminanReduksi();

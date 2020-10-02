@@ -1,0 +1,6 @@
+Matriks Awal
+1.0 4.0 7.0
+3.0 0.0 8.0
+0.0 2.0 3.0
+
+Determinan Matriks:0.0/r/n

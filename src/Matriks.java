@@ -58,11 +58,6 @@ public class matriks {
         return this.Mat[row][col];
     }
 
-    public void DeterminanReduksi() {
-        Gauss();
-        det = det * kaliDiagonal();
-    }
-
     void KaliBaris(int p, double r) {
         for (int i=1;i<=this.Kol;i++) {
             this.Mat[p][i] = (float) (this.Mat[p][i] * r);
@@ -1104,43 +1099,43 @@ public class matriks {
         if (this.Brs != this.Kol - 1) {
             this.solution = false;
         }
-
-        for (i=IdxBrsMin; i<=Brs; i++){
-            for (j=IdxKolMin; j<=Kol-1; j++){
-                this.MU[i][j] = this.Mat[i][j]; 
+        else{
+            for (i=IdxBrsMin; i<=Brs; i++){
+                for (j=IdxKolMin; j<=Kol-1; j++){
+                    this.MU[i][j] = this.Mat[i][j]; 
+                }
             }
-        }
-        for (i=IdxBrsMin; i<=Brs; i++){
-            this.K[i][1] = this.Mat[i][Kol];
-        }
-        for (i=IdxBrsMin; i<=Brs; i++){
-            for (j=IdxKolMin; j<=Kol-1; j++){
-                this.Mat[i][j] = 0 ; 
+            for (i=IdxBrsMin; i<=Brs; i++){
+                this.K[i][1] = this.Mat[i][Kol];
             }
-        }
-        for (i=IdxBrsMin; i<=Brs; i++){
-            for (j=IdxKolMin; j<=Kol-1; j++){
-                this.Mat[i][j] = this.MU[i][j]; 
+            for (i=IdxBrsMin; i<=Brs; i++){
+                for (j=IdxKolMin; j<=Kol-1; j++){
+                    this.Mat[i][j] = 0 ; 
+                }
             }
-        }
-
-        for (i=IdxBrsMin; i<=Brs; i++){
-            for (j=IdxKolMin; j<=Kol-1; j++){
-                this.Mat[i][j] = this.MU[i][j]; 
+            for (i=IdxBrsMin; i<=Brs; i++){
+                for (j=IdxKolMin; j<=Kol-1; j++){
+                    this.Mat[i][j] = this.MU[i][j]; 
+                }
             }
-        }
-        double xu = bacaDeterminant();
-        Double D = Double.valueOf(xu);
-        float XU = D.floatValue();
-
-        for(j=IdxKolMin; j<=Kol-1; j++){
-            for(i=IdxBrsMin; i<=Brs;i++){
-                this.Mat[i][j] = this.K[i][j];
-                double xs = bacaDeterminant();
-                Double S = Double.valueOf(xs);
-                float XS = S.floatValue();
-                this.hsl[i][1] = XS/XU;
-                this.Mat[i][j] = this.MU[i][j];
+    
+            for (i=IdxBrsMin; i<=Brs; i++){
+                for (j=IdxKolMin; j<=Kol-1; j++){
+                    this.Mat[i][j] = this.MU[i][j]; 
+                }
+            }
+            float xu = this.bacaDeterminant();
+    
+            for(j=IdxKolMin; j<=Kol-1; j++){
+                for(i=IdxBrsMin; i<=Brs;i++){
+                    this.Mat[i][j] = this.K[i][j];
+                }
+                float xs = this.bacaDeterminant();
+                this.hsl[i][1] = xs/xu;
+                i = 1;
+                for(i=IdxBrsMin; i<=Brs;i++){
+                    this.Mat[i][j] = this.MU[i][j];
+                }
             }
         }
     }
@@ -1214,10 +1209,10 @@ public class matriks {
     }
 
     public void tulisCrammer() {
-        int i,j,k,l,x;
+        int i,j,k,x;
 		String NamaFile="HasilCrammer.txt";
 		String newline="\r\n";
-        if (this.solution==false){
+        if (bacaDeterminant() == 0){
             System.out.println("Tidak Dapat Diselesaikan dgn Metode Cramer");
         }
         else{
@@ -1243,9 +1238,7 @@ public class matriks {
         int i,j,k,l,x;
 		String NamaFile="HasilDeterminanReduksi.txt";
         String newline="\r\n";
-        double Value = bacaDeterminant();
-        Double D = Double.valueOf(Value);
-        float value = D.floatValue();
+        float det = bacaDeterminant();
         try
         {
 			FileWriter namewriter = new FileWriter(NamaFile);
@@ -1290,55 +1283,51 @@ public class matriks {
     }
 
     public float bacaDeterminant(){
-        int size = Brs;
-        int i,j;
+        int size = this.Brs;
+        float[][] m = new float[Brs][Brs];
+        int i, j;
+    
+        for (i = 0; i < size; i++){
+            for (j = 0; j < size; j++){
+                m[i][j] = this.Mat[i+1][j+1];
+            }
+        }
+    
         float result = 1;
-        float minus, minuss;
         int swapped = 0;
-
+    
         while (size > 0){
             boolean swap = false;
-            i = 1;
-            if (this.Mat[size][size] == 0){
-                while ((i <= size) && (!swap)){
-                    if (this.Mat[i][size] == 0){
+            i = 0;
+            if (m[size-1][size-1] == 0){
+                while (i < (size-1) && (!swap)){
+                    if (m[i][size-1] == 0){
                         i++;
-                    }
-                    else{
+                    } else {
                         swap = true;
                     }
                 }
             }
-            if ((i == size) && (size > 1)){
+            if (i == (size-1) && (size > 1)){
                 return 0;
-            }
-            else if (swap){
-                for (j = 1; j <= size; j++){
-                    float temp = this.Mat[size][j];
-                    this.Mat[size][j] = this.Mat[i][j];
-                    this.Mat[i][j] = temp;
+            } else if (swap){
+                for(j = 0; j < size; j++){
+                    float temp = m[size-1][j];
+                    m[size-1][j] = m[i][j];
+                    m[i][j] = temp;
                 }
             }
-            for (i = 1; i <= size; i++){
-                for (j = 1; j<=size; j++){
-                    this.Mat[i][j] = this.Mat[i][j] - (this.Mat[size][j]*(this.Mat[i][size]/this.Mat[size][size]));
+            for (i = 0; i < (size-1); i++){
+                for(j=0; j<size; j++){
+                    m[i][j] -= m[size-1][j]*(m[i][size-1]/m[size-1][size-1]);
                 }
             }
-            result = result * this.Mat[size][size];
-            if (swap){
-                swapped++;
-            }
+            result *= m[size-1][size-1];
+            swapped = (swapped+(swap ? 1 : 0))%2;
             size--;
         }
-        minus = swapped % 2 ;
-        if (minus == 0){
-            minuss = 1;
-        }
-        else{
-            minuss = -1;
-        }
-        float finalresult = (result * minuss);
-        return finalresult;
+        float finalresult = (result*(swapped==0 ? 1.0f : -1.0f));
+        return ((finalresult < 1 && finalresult > -1) ? 0.0f : finalresult);
     }
 
     public void InverseKofaktor(){
