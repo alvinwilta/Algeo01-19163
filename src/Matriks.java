@@ -869,7 +869,7 @@ public class matriks {
         int kolom = 1;
         int j;
         boolean nol = true;
-        while ((nol == true) && (kolom<= Kol)) {
+        while ((nol == true) && (kolom <= Kol)) {
             if (this.Mat[i][kolom] != 0) {
                 nol = false;
             } else {
@@ -881,18 +881,19 @@ public class matriks {
             this.Mat[i][j] = this.Mat[i][j]/faktor;
             
         }
-        det = det * faktor;
     }
 
     public void Gauss(){
         int i,j,k;
         float c;
-        for (i=1; i<=Brs; i++){
+        buatLeadingOne(1);
+        for (i=1; i<Brs; i++){
             for (j=i+1; j<=Brs; j++){
                 c= this.Mat[j][i]/this.Mat[i][i];
                 for (k=1;k<=Kol;k++){
                     this.Mat[j][k] = this.Mat[j][k] - c*this.Mat[i][k];
                 }
+                buatLeadingOne(j);
             }
         }
     }
