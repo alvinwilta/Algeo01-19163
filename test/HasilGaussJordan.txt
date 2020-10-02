@@ -1,0 +1,33 @@
+NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN
+NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN
+NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN
+NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN
+NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN
+NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN
+NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN
+NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN
+NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN
+NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN
+NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN
+NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN
+
+x9 adalah variabel bebas
+x8 adalah variabel bebas
+x7 adalah variabel bebas
+x6 adalah variabel bebas
+x5 adalah variabel bebas
+x4 adalah variabel bebas
+x3 adalah variabel bebas
+x2 adalah variabel bebas
+x1 = NaN -(NaN)x2 -(NaN)x3 -(NaN)x4 -(NaN)x5 -(NaN)x6 -(NaN)x7 -(NaN)x8 -(NaN)x9
+x1 = NaN -(NaN)x2 -(NaN)x3 -(NaN)x4 -(NaN)x5 -(NaN)x6 -(NaN)x7 -(NaN)x8 -(NaN)x9
+x1 = NaN -(NaN)x2 -(NaN)x3 -(NaN)x4 -(NaN)x5 -(NaN)x6 -(NaN)x7 -(NaN)x8 -(NaN)x9
+x1 = NaN -(NaN)x2 -(NaN)x3 -(NaN)x4 -(NaN)x5 -(NaN)x6 -(NaN)x7 -(NaN)x8 -(NaN)x9
+x1 = NaN -(NaN)x2 -(NaN)x3 -(NaN)x4 -(NaN)x5 -(NaN)x6 -(NaN)x7 -(NaN)x8 -(NaN)x9
+x1 = NaN -(NaN)x2 -(NaN)x3 -(NaN)x4 -(NaN)x5 -(NaN)x6 -(NaN)x7 -(NaN)x8 -(NaN)x9
+x1 = NaN -(NaN)x2 -(NaN)x3 -(NaN)x4 -(NaN)x5 -(NaN)x6 -(NaN)x7 -(NaN)x8 -(NaN)x9
+x1 = NaN -(NaN)x2 -(NaN)x3 -(NaN)x4 -(NaN)x5 -(NaN)x6 -(NaN)x7 -(NaN)x8 -(NaN)x9
+x1 = NaN -(NaN)x2 -(NaN)x3 -(NaN)x4 -(NaN)x5 -(NaN)x6 -(NaN)x7 -(NaN)x8 -(NaN)x9
+x1 = NaN -(NaN)x2 -(NaN)x3 -(NaN)x4 -(NaN)x5 -(NaN)x6 -(NaN)x7 -(NaN)x8 -(NaN)x9
+x1 = NaN -(NaN)x2 -(NaN)x3 -(NaN)x4 -(NaN)x5 -(NaN)x6 -(NaN)x7 -(NaN)x8 -(NaN)x9
+x1 = NaN -(NaN)x2 -(NaN)x3 -(NaN)x4 -(NaN)x5 -(NaN)x6 -(NaN)x7 -(NaN)x8 -(NaN)x9
