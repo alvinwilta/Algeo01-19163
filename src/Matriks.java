@@ -884,47 +884,40 @@ public class matriks {
     }
 
     public void Gauss() {
-        int i,j,k;
+        int i = 1;
+        int j = 1;
         float temp;
-        i = 1;
-        j = 1;
-
         while (i <= Brs & j < Kol){
-            while (isKolNol(j,i)){
+            while (isKolNol(i,j)){
+                // untuk skip kolom yang isinya nol semua
                 j += 1;
             }
-
             if (j < Kol){
-                tukarBaris(i,indeksTakNol(j,i));
+                TukarBaris(i,indeksTakNol(j,i));
+                //meletakkan baris taknol terbawah ke baris paling atas (jika baris paling atas taknol, tukar dengan dirinya)
                 buatLeadingOne(i);
+                //baris paling 'atas' dibuat menjadi leading one
                 buatKolomNolBawah(j,i);
-
-                i += 1;
-                j += 1;
+                // (j,i) karena di prosedur buatKolomNolBawah formatnya (kolom,baris)
+                i++;
+                j++;
             }
         }
 
-        for (i = 1;i <= Brs; i++){
-            for (j = 1;j <= Kol;j++){
-                if (this.Mat[i][j] == -0){
-                    this.Mat[i][j] = 0;
-                }
-            }
-        }
     }
     public void GaussJordan() {
-        this.Gauss();
-		for (int i = this.Brs; i > 1; i--) {
-			if (!this.isBrsKosong(i)) {
-				int idxFirst = this.ambilIdxPer(i);
-				for (int j = i - 1; j >= 1; j--) {
-					if (!this.isBarisNol(j)) {
-						double k = (-1) * this.Mat[j][idxFirst];
-						this.TambahBaris(j, i, k);
-					}
-				}
-			}
-		}
+        int i = Brs;
+        //dimulai dari bawah karena baris paling atas tidak perlu disentuh
+        int j;
+        Gauss();
+        while (i >= 1){
+            while (isBarNol(i)){
+                i--;
+            }
+            j = indeksPivot(i);
+            buatKolomNolAtas(i,j);
+            i--;
+        }
     }
 
     public void tulisGauss(){
