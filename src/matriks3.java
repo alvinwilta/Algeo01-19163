@@ -510,5 +510,65 @@ public class matriks3 {
                 e.printStackTrace();
             }
 	}
+	void Gauss() {
+		int i,j,k;
+        float temp;
+        i = 1;
+        j = 1;
+
+        while (i <= Brs & j < Kol){
+            while (isKolNol(j,i)){
+                j += 1;
+            }
+
+            if (j < Kol){
+                tukarBaris(i,indeksTakNol(j,i));
+                buatLeadingPoint(i,j);
+                buatKolomNolBawah(j,i);
+
+                i += 1;
+                j += 1;
+            }
+        }
+
+        for (i = 1;i <= Brs; i++){
+            for (j = 1;j <= Kol;j++){
+                if (this.Mat[i][j] == -0){
+                    this.Mat[i][j] = 0;
+                }
+            }
+        }
+    }
+    void gaussJordan() {
+		this.Gauss();
+		for (int i = this.Brs; i > 1; i--) {
+			if (!this.isBrsKosong(i)) {
+				int idxFirst = this.ambilIdxPer(i);
+				for (int j = i - 1; j >= 1; j--) {
+					if (!this.isBarisNol(j)) {
+						double k = (-1) * this.Mat[j][idxFirst];
+						this.TambahBaris(j, i, k);
+					}
+				}
+			}
+		}
+    }
+    int ambilIdxPer(int iBrs) {
+		// return indeks kolom tidak nol pertama
+		boolean found = false;
+		int i = 1;
+		while ((i <= this.Kol) && !found) {
+			if (this.Mat[iBrs][i] != 0) {
+				found = true;
+			} else {
+				i++;
+			}
+		}
+		if (found) {
+			return i;
+		} else {
+			return this.Kol;
+		}
+	}
 
 }
