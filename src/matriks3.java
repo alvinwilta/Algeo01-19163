@@ -523,10 +523,11 @@ public class matriks3 {
 
             if (j < Kol){
                 tukarBaris(i,indeksTakNol(j,i));
-                buatLeadingOne(i,j);
+                buatLeadingOne(i);
                 buatKolomNolBawah(j,i);
-                i++;
-                j++;
+
+                i += 1;
+                j += 1;
             }
         }
 

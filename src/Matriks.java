@@ -883,31 +883,27 @@ public class matriks {
         det = det * faktor;
     }
 
-
     public void Gauss() {
-		int i,j,k;
-		float temp;
-		i = 1;
-		j = 1;
-		while (i <= Brs & j < Kol){
-			while (isKolNol(j,i)){
-				j += 1;
-			}
-			if (j < Kol){
-				TukarBaris(i,indeksTakNol(j,i));
-				buatLeadingOne(i,j);
-				buatKolomNolBawah(j,i);
-				i++;
-				j++;
-			}
-		}
-		for (i = 1;i <= Brs; i++){
-			for (j = 1;j <= Kol;j++){
-				if (this.Mat[i][j] == -0){
-					this.Mat[i][j] = 0;
-				}
-			}
-		}
+        int i,j,k;
+        float temp;
+        i = 1;
+        j = 1;
+
+        while (i <= Brs & j < Kol){
+            while (isKolNol(j,i)){
+                j += 1;
+            }
+
+            if (j < Kol){
+                tukarBaris(i,indeksTakNol(j,i));
+                buatLeadingOne(i);
+                buatKolomNolBawah(j,i);
+
+                i += 1;
+                j += 1;
+            }
+        }
+
         for (i = 1;i <= Brs; i++){
             for (j = 1;j <= Kol;j++){
                 if (this.Mat[i][j] == -0){
@@ -916,14 +912,13 @@ public class matriks {
             }
         }
     }
-
     public void GaussJordan() {
         this.Gauss();
 		for (int i = this.Brs; i > 1; i--) {
-			if (!this.isBarNol(i)) {
+			if (!this.isBrsKosong(i)) {
 				int idxFirst = this.ambilIdxPer(i);
 				for (int j = i - 1; j >= 1; j--) {
-					if (!this.isBarNol(j)) {
+					if (!this.isBarisNol(j)) {
 						double k = (-1) * this.Mat[j][idxFirst];
 						this.TambahBaris(j, i, k);
 					}
