@@ -870,7 +870,7 @@ public class matriks {
         int j;
         boolean nol = true;
         while ((nol == true) && (kolom <= Kol)) {
-            if (this.Mat[i][kolom] != 0) {
+            if ((this.Mat[i][kolom] != 0.00)||(this.Mat[i][kolom] != -0.00)) {
                 nol = false;
             } else {
                 kolom++;
@@ -879,21 +879,18 @@ public class matriks {
         float faktor = Mat[i][kolom];
         for (j = kolom; kolom<=Kol; kolom++) {
             this.Mat[i][j] = this.Mat[i][j]/faktor;
-            
         }
     }
 
     public void Gauss(){
         int i,j,k;
         float c;
-        buatLeadingOne(1);
-        for (i=1; i<Brs; i++){
+        for (i=1; i<=Brs; i++){
             for (j=i+1; j<=Brs; j++){
                 c= this.Mat[j][i]/this.Mat[i][i];
                 for (k=1;k<=Kol;k++){
                     this.Mat[j][k] = this.Mat[j][k] - c*this.Mat[i][k];
                 }
-                buatLeadingOne(j);
             }
         }
     }
@@ -977,7 +974,8 @@ public class matriks {
 						writer.append("x" + Integer.toString(i) + " adalah variabel bebas/r/n");
                     } 
                     else {
-						System.out.print("x" + i + " = " + this.Temp[i][Kol]);
+                        System.out.print("x" + i + " = ");
+                        System.out.printf("%.2f\n", this.Temp[i][Kol]);
 						writer.append("x" + Integer.toString(i) + " = " + String.valueOf(this.Temp[i][Kol]));
 						for (j = i+1;j < Kol;j++){
 							if (this.Temp[i][j] != 0){
@@ -985,7 +983,6 @@ public class matriks {
 								writer.append(" -(" + String.valueOf(this.Temp[i][j]) + ")x" + Integer.toString(j));
 							}
 						}
-						System.out.println();
 						writer.append(newline);
 					}
 				}
@@ -1041,7 +1038,8 @@ public class matriks {
 						System.out.println("x" + k + " adalah variabel bebas");
 						writer.append("x" + Integer.toString(k) + " adalah variabel bebas\r\n");
 					}
-					System.out.print("x" + j + " = " + this.Mat[i][Kol]);
+                    System.out.print("x" + j + " = ");
+                    System.out.printf("%.2f\n", this.Mat[i][Kol]);
 					writer.append("x" + Integer.toString(j) + " = " + String.valueOf(this.Mat[i][Kol]));
 					for (k = j + 1;k < Kol;k++){
 						if (this.Mat[i][k] != 0){
