@@ -1681,11 +1681,13 @@ public class matriks {
             XK[i] = input.nextFloat();
         }
     }
-    void tulisRegresi(float[] regresi) {
+    void tulisRegresi() {
         int i;
+        float[] Regresi = new float[this.Kol-1];
+        Regresi = MultipleLinearRegression(this, this.Kol-1);
         System.out.println("Berikut ini adalah hasil prediktor dari normal equation");
-        for (i=0;i<regresi.length; i++) {
-            System.out.println("x" + i + " = " + regresi[i]);
+        for (i=0;i<Regresi.length; i++) {
+            System.out.println("x" + i + " = " + Regresi[i]);
         }
     }
 }
