@@ -126,22 +126,14 @@ public class matriks2 {
         return k;
     }
 
-    void buatLeadingOne(int i) {
+    void buatLeadingOne(int i, int j) {
         // Mengubah matriks pada baris ke-i menjadi leading one
         // ASUMSI BARIS TERSEBUT TIDAK NOL SEMUA
-        int kolom = 1;
-        int j;
-        boolean nol = true;
-        while (nol == true) {
-            if (this.Mat[i][kolom] != 0) {
-                nol = false;
-            } else {
-                kolom++;
-            }
-        }
-        float faktor = Mat[i][kolom];
-        for (j = kolom; kolom<=Kol; kolom++) {
-            this.Mat[i][j] = this.Mat[i][j]/faktor;
+        int k;
+        float factor;
+        factor = this.Mat[i][j];
+        for (k = 1;k <= Kol;k++){
+            this.Mat[i][k] = this.Mat[i][k]/factor;
         }
     }
 
@@ -159,7 +151,7 @@ public class matriks2 {
             if (j < Kol){
                 TukarBaris(i,indeksTakNol(j,i));
                 //meletakkan baris taknol terbawah ke baris paling atas (jika baris paling atas taknol, tukar dengan dirinya)
-                buatLeadingOne(i);
+                buatLeadingOne(i,j);
                 //baris paling 'atas' dibuat menjadi leading one
                 buatKolomNolBawah(j,i);
                 // (j,i) karena di prosedur buatKolomNolBawah formatnya (kolom,baris)
